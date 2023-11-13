@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
     <title>Document</title>
 </head>
 <body>
-    
+    {% if error != null %}
+    <p style="color:red">{{error}}</p>
+    {% endif %}
+    {% if msg != null %}
+    <p style="color:blue">{{msg}}</p>
+    {% endif %}
+    <header>
+        <h1>清掃管理システム</h1>
+        <h3>ダイワロイネットホテル</h3>
+    </header>    
+    <h2>ログイン</h2>
+    <form action="{{url_for('login')}}" method="post" class="form">
+        <p>管理者ID</p>
+        <input type="text" name="adminid" value="{{data.user_name if data is defined else ''}}">
+        <p>パスワード</p>
+        <input type="password" name="password" value="{{data.password if data is defined else ''}}">
+        <input type="submit" value="ログイン" class="button">
+    </form>
 </body>
 </html>
