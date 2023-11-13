@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/employee_register.css')}}">
+    <title>新規従業員登録</title>
+</head>
+<body>
+    <header>
+        <h1 id="head_main">清掃管理システム</h1>
+        <h3 id="head_sub">ダイワロイネットホテル</h3>        
+    <h2>新規従業員登録</h2>
+    <form action={{url_for("confirm_register")}} method="post">
+        従業員ID<br><input type="text" name="employee_id"><br>
+        氏名<br><input type="text" name="name"><br>
+        メールアドレス<br><input type="text" name="mail"><br>
+        営業時間<br>
+        <input type="radio" name="concat" value="A">9:00~15:00<input type="radio" name="concat" value="B">10:00~15:00<br>
+        <button type="submit">登録</button>
+    </form>
+    <button type="submit">戻る</button>
+</body>
