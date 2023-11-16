@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.noclean {
+    font-size: 12px;
+    color: brown;
+}
+
+
+
+* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 767px) {
+
+    div[id$="Buttons"] {
+        display: none; 
+    }
+
+    div[id$="Buttons"] a {
+        font-size: 16px;
+        margin: 5px 0;
+        display: block;
+        color: #333; 
+        background-color: #ccc; 
+        border: 1px solid #999; 
+        padding: 8px 12px;
+        border-radius: 4px; 
+        text-align: center;
+        text-decoration: none; 
+    }
+
+    div[id$="Buttons"] a:hover {
+        background-color: #999; 
+        color: #fff; 
+    }
+} 
