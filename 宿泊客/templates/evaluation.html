@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/evaluation.css')}}">
+    <title>アンケート回答</title>
 </head>
 <body>
-    
+    <header>
+        <h2>ダイワロイネットホテル</h2>
+        <h3>○○○号室</h3>
+    </header>
+    <h4>お部屋の状態についてお伺いいたします</h4>
+    <p class="status">お部屋の状態はいかがでしたか？</p><br>
+    <form>
+        <input type="radio" name="roomCondition" value="1" id="a">
+        <input type="radio" name="roomCondition" value="2" id="b">
+        <input type="radio" name="roomCondition" value="3" id="c">
+        <input type="radio" name="roomCondition" value="4" id="d">
+        <input type="radio" name="roomCondition" value="5" id="e"><br>
+        <p id="radiotext">とても不満　　不満　　　普通　　　良い　　とても良い</p><br>
+        <div class="f">
+            <input type="checkbox" name="list" value="Ture">ナイトウェアが足りなかった<br><br>
+        </div>
+        <div class="f">
+            <input type="checkbox" name="list" value="Ture">スリッパが足りなかった<br><br>
+        </div>
+        <div class="f">
+            <input type="checkbox" name="list" value="Ture">ゴミが残っていた<br><br>
+        </div>
+        <div class="f">
+            <input type="checkbox" name="list" value="Ture">タオルが足りなかった<br><br>
+        </div>
+        <p class="flee">その他お気づきの点や良かったところが<br>ございましたらご記入お願い致します<br></p>
+        <input type="text" name="fleetext" class="fleet" style="width: 300px; height: 250px;" placeholder="例) 浴槽に髪の毛が落ちていた">
+        <input type="submit" value="送信" class="sub">
+    </form>
 </body>
 </html>

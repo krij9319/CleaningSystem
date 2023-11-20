@@ -1,11 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/request.css')}}">
+    <title>要望申請</title>
 </head>
 <body>
-    
+    <header>
+        <h2>ダイワロイネットホテル</h2>
+        <h3>○○○号室</h3>
+    </header>
+    <h2 id="you">要望</h2>
+    <p>本日分のアメニティは清掃時にご用意します。<br>更に追加で欲しい方はご記入ください</p>
+    <br><br>
+    <form>
+        <div class="pull">
+            ナイトウェア　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            バスタオル　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            ミネラルウォーター　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            フェイスタオル　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            ティッシュ　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            粉末緑茶・梅茶　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            トイレットペーパー　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            スリッパ　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            ヘアブラシ　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+            歯ブラシ　　
+            <select>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            個<br>
+        </div>
+        <br>
+        <h3 class="youm">その他要望等あれば<br>ご記入お願いします。<br></h3>
+        <input type="text" name="fleetext" style="width: 300px; height: 250px;" class="fleet">
+        <input type="submit" value="送信" class="sub">
+    </form>
 </body>
 </html>

@@ -1,0 +1,72 @@
+body {
+    height: 1000px;
+    width: 100%;
+    background-image: linear-gradient(0deg, rgba(0, 203, 255, 1), rgba(38, 124, 165, 1) 65%, rgba(11, 31, 155, 1));
+}
+
+.anke{
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	transform: translate(-50%, -40%);
+   
+	
+	
+    margin-bottom: 40px;
+    padding: 25px 20px 35px;
+    border-radius: 20px;
+    background-color: rgba(255,255,255);
+}
+
+.amenity{
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	transform: translate(80%, -40%);
+   
+	
+	
+    margin-bottom: 40px;
+    padding: 25px 20px 35px;
+    border-radius: 20px;
+    background-color: rgba(255,255,255);
+}
+
+h3 {
+    text-align: center;
+    color:white;
+}
+
+h2 {
+    text-align: center;
+    color:white;
+}
+
+p {
+    text-align: center;
+    color: white;
+}
+
+button {
+    border-radius: 100vh;
+    width: 90px;
+    background-color:rgb(247, 200, 75)
+}
+
+.ankm {
+    transform: translate(-23%, 250%);
+    color: white;
+    font-size: 13px;
+}
+
+.amem {
+    transform: translate(23%, 175%);
+    color: white;
+    font-size: 13px;
+}
+
+.amem2 {
+    transform: translate(23%, 185%);
+    color: white;
+    font-size: 13px;
+}
