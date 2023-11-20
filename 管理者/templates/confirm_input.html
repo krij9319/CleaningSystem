@@ -6,6 +6,25 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <h1>清掃管理システム</h1>
+        <h3>ダイワロイネットホテル</h3>
+    </header> 
+    <h2>パスワード変更</h2>
+    {% if error != null %}
+    <p style="color:red">{{error}}</p>
+    {% endif %}
+    <form action="{{url_for('confirm_number')}}" method="post" class="form">
+        <h3>入力したメールアドレスに送られた確認番号を入力し、<br>
+           パスワード変更を完了してください 
+        </h3>
+        <p>確認番号を入力してください</p>
+        <input type="text" name="number"><br>
+        <p>新しいパスワード</p>
+        <input type="password" name="password1"><br>
+        <p>パスワード確認</p>
+        <input type="password" name="password2"><br>
+        <button type="submit">変更</button>
+    </form>
 </body>
 </html>

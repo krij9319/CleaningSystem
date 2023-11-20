@@ -6,6 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <h1>清掃管理システム</h1>
+        <h3>ダイワロイネットホテル</h3>
+    </header>    
+    <h2>新規管理者登録</h2>
+    <form action="{{url_for('register_mail')}}" method="post">
+        管理者ID:<input type="text" name="adminid"><br>
+        氏名:<input type="text" name="name"><br>
+        メールアドレス:<input type="text" name="mail"><br>
+        <button type="submit">メール送信</button>
+    </form>
+    <a href="{{url_for('admintop')}}">戻る</a>    
 </body>
 </html>

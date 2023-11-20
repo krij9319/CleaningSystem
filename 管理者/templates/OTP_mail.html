@@ -6,6 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <h1>清掃管理システム</h1>
+        <h3>ダイワロイネットホテル</h3>
+    </header> 
+    <h2>パスワード変更</h2>
+    {% if error != null %}
+    <p style="color:red">{{error}}</p>
+    {% endif %}
+    <form action="{{url_for('send_number')}}" method="post" class="form">
+        <p>メールアドレスを入力してください</p>
+        <input type="text" name="mail"><br>
+        <button type="submit">メール送信</button>
+    </form>
+    <a href="{{url_for('admintop')}}">戻る</a>
 </body>
 </html>
