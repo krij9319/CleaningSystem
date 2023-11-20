@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/style.css')}}">
+    <title>宿泊客画面</title>
 </head>
 <body>
-    <h1>ダイワロイネットホテル</h1>
+    <header>
+        <h2>ダイワロイネットホテル</h2>
+        <h3>○○○号室</h3>        
+    </header>
+    <br><br><br>
+    <p>本日はご利用頂いただき誠に<br>ありがとうございます。<br>こちらからお部屋の状態についての<br>アンケート、ご要望の申請をお願い<br>しております。</p>
+    <a href="anke-to.html" class="anke">
+        <img src="img/anke-to.png" alt="評価" width="85" height="auto"><br>
+        <button>アンケート</button>
+    </a>
+    <a href="request.html" class="amenity">
+        <img src="img/amenity.png" alt="アメニティ" width="85" height="auto"><br>
+        <button>要望</button>
+    </a>
+    <p class="ankm">お部屋の状態につい<br>てお気づきの点がご<br>ざいましたら評価を<br>お願い致します。</p>
+    <p class="amem">ご要望がありました<br>らこちらからご入力<br>をお願いします。</p>
+    <p class="amem2">※連泊の方のみアメ<br>ニティの追加ができ<br>ます。</p>
 </body>
-</html>
