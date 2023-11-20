@@ -11,19 +11,23 @@
     <p style="color:red">{{error}}</p>
     {% endif %}
     {% if msg != null %}
-    <p style="color:blue">{{msg}}</p>
+    <p style="color:red">{{msg}}</p>
     {% endif %}
     <header>
         <h1>清掃管理システム</h1>
         <h3>ダイワロイネットホテル</h3>
-    </header>    
+    </header>   
+    <div id="pass"> 
+        <a href="{{url_for('otp_mail')}}">パスワード変更はコチラ</a>
+    </div>
     <h2>ログイン</h2>
     <form action="{{url_for('login')}}" method="post" class="form">
         <p>管理者ID</p>
         <input type="text" name="adminid" value="{{data.user_name if data is defined else ''}}">
         <p>パスワード</p>
-        <input type="password" name="password" value="{{data.password if data is defined else ''}}">
-        <input type="submit" value="ログイン" class="button">
+        <input type="password" name="password" value="{{data.password if data is defined else ''}}"><br>
+        <button type="submit" class="button1">ログイン</button>
     </form>
+    <a href="{{url_for('register_form')}}">管理者新規登録</a>
 </body>
 </html>

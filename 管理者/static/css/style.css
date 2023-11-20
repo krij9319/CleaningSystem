@@ -1,0 +1,12 @@
+header {
+    color:#1AA9FB;
+    border-bottom: 3px solid #1AA9FB;
+}
+
+body {
+    text-align: center;
+}
+
+#pass {
+    text-align: right;
+}
