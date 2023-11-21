@@ -21,11 +21,25 @@
         {% if msg != null %}
             <p style="color:red">{{msg}}</p>
         {% endif %}
-        <form action="{{url_for('login')}}" method="post" class="input_form">
-            <input type="text" name="mail" placeholder="メールアドレス"><br>
-            <input type="password" name="password" placeholder="パスワード"><br>
+        <form action="{{url_for('login')}}" method="post" id="fieldPassword" class="input_form">
+            <input type="text" name="mail" placeholder="メールアドレス" class="input1"><br>
+            <input type="password" id="textPassword" name="password" placeholder="パスワード" class="input2">
+            <span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span><br>
             <button type="submit" class="button1">ログイン</button>
         </form>
+        <script language="javascript">
+            function pushHideButton() {
+              var txtPass = document.getElementById("textPassword");
+              var btnEye = document.getElementById("buttonEye");
+              if (txtPass.type === "text") {
+                txtPass.type = "password";
+                btnEye.className = "fa fa-eye";
+              } else {
+                txtPass.type = "text";
+                btnEye.className = "fa fa-eye-slash";
+              }
+            }
+        </script>
         <a href="{{url_for('OTP_mail')}}" class="passlink">パスワードをお忘れの方はこちら</a>
     </div>
 </body>

@@ -6,41 +6,49 @@ html {
 }
 
 header {
-    color: #1AA9FB;
+    color:#1AA9FB;
+    text-align: center;
+    border-bottom: 3px solid #707070;
 }
 
-header h3 {
-    margin-left: 130px;
-}
-
-.titlename {
+header .titlename{
+    color: inherit;
     text-decoration: none;
     font-size: 40px;
-    color:inherit
 }
 
 .login {
     text-align: center;
+}
+
+.login h1{
     margin-top: 50px;
 }
 
-.input_form {
-    margin-top: 80px;
+.login .input_form {
+    margin-top: 50px;
 }
 
-.input_form input {
-    width: 230px;
+.login .input_form input {
+    width: 300px;
     height: 40px;
-    border-width: 3px;
+    border-radius: 5px;
+}
+
+.login .input_form .input2 {
+    margin-left: 24px;
 }
 
 .button1 {
-    margin-top: 25px;
-    background-color: #e2e2e2;
-    border-radius: none;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 100px;
+    height: 30px;
 }
 
-.login .passlink {
+.passlink {
     color: #1AA9FB;
-    margin-top: 100px;
+    text-decoration: none;
+    padding-top: 50px;
 }
