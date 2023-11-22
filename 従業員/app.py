@@ -52,6 +52,9 @@ def OTP_send():
     email = request.form.get('mail')
     otp = mail.generate_otp()
     
+    if email == '':
+        return redirect(url_for('OTP_send_error'))
+    
     db.update_otp(otp, email)
     
     to = email
@@ -60,7 +63,12 @@ def OTP_send():
     
     mail.send_mail(to, subject, body)
     return redirect(url_for('confirm_input'))
-    
+
+# メール送信エラー
+@app.route('/OTP_send_error', methods=['GET'])
+def OTP_send_error():
+    return render_template('OTP_mail_error.html')
+
 # 確認番号
 @app.route('/confirm_input', methods=['GET'])
 def confirm_input():
@@ -130,6 +138,12 @@ def insentive_view():
 @app.route('/insentive_statictics', methods=['GET'])
 def insentive_statictics():
     return render_template('insentive_statictics.html')
-    
+
+# ログアウト
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -11,16 +11,20 @@
         <h4>ダイワロイネットホテル</h4>
     </header>
 
-    <div class="confirm_input">
+    <div class="change_password">
         <h1>パスワード変更</h1>
         <h2>入力したメールアドレスに送られた確認番号を入力してください</h2>
-        <p>確認番号を入力してください</p>
         {% if error != null %}
             <p style="color:red">{{error}}</p>
         {% endif %}
-        <form action="">
+        <form action="{{url_for('change_password')}}" method="post">
+            <p>確認番号を入力してください</p>
             <input type="text" name="otp">
-            <button type="submit" class="button1">次へ</button>
+            <p>新しいパスワードを入力してください</p>
+            <input type="text" name="password1">
+            <p>再入力してください</p>
+            <input type="text" name="password2">
+            <button type="submit" class="button1">変更</button>
         </form>
     </div>
 </body>
