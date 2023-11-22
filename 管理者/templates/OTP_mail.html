@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/OTP_mail.css')}}">
     <title>Document</title>
 </head>
 <body>
     <header>
-        <h1>清掃管理システム</h1>
-        <h3>ダイワロイネットホテル</h3>
-    </header> 
-    <h2>パスワード変更</h2>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
+    </header>   
+    <h3>ログイン</h3>
     {% if error != null %}
     <p style="color:red">{{error}}</p>
     {% endif %}
     <form action="{{url_for('send_number')}}" method="post" class="form">
-        <p>メールアドレスを入力してください</p>
-        <input type="text" name="mail"><br>
-        <button type="submit">メール送信</button>
+        <p class="text">メールアドレスを入力してください</p>
+        <input type="text" name="mail" class="input-mail"><br>
+        <div>
+            <button  class="button2"><a href="{{url_for('admintop')}}" class="aa">戻る</a></button>
+            <button type="submit" class="button1">メール送信</button>
+        </div>    
     </form>
-    <a href="{{url_for('admintop')}}">戻る</a>
 </body>
 </html>
