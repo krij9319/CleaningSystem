@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+header {
+    color:#1AA9FB;
+    text-align: center;
+    border-bottom: 3px solid #707070;
+}
+
+header .titlename{
+    color: inherit;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.list_job {
+    text-align: center;
+}
+
+.button1 {
+    margin-top: 50px;
+    width:170px;
+    height: 50px;
+}
