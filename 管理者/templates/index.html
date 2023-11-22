@@ -14,18 +14,18 @@
     <p style="color:red">{{msg}}</p>
     {% endif %}
     <header>
-        <h1>清掃管理システム</h1>
-        <h3>ダイワロイネットホテル</h3>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
     </header>   
-    <div id="pass"> 
-        <a href="{{url_for('otp_mail')}}">パスワード変更はコチラ</a>
+    <div id="ps"> 
+        <a href="{{url_for('otp_mail')}}" class="pass">パスワード変更はコチラ</a>
     </div>
-    <h2>ログイン</h2>
+    <h3>ログイン</h3>
     <form action="{{url_for('login')}}" method="post" class="form">
-        <p>管理者ID</p>
-        <input type="text" name="adminid" value="{{data.user_name if data is defined else ''}}">
-        <p>パスワード</p>
-        <input type="password" name="password" value="{{data.password if data is defined else ''}}"><br>
+        <p class="te1">管理者ID</p>
+        <input type="text" name="adminid" class="input-text" value="{{data.user_name if data is defined else ''}}">
+        <p class="te2">パスワード</p>
+        <input type="password" name="password" class="input-text" value="{{data.password if data is defined else ''}}"><br>
         <button type="submit" class="button1">ログイン</button>
     </form>
     <a href="{{url_for('register_form')}}">管理者新規登録</a>
