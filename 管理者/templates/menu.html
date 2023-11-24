@@ -10,10 +10,9 @@
         <h1>清掃管理システム</h1>
         <h3>ダイワロイネットホテル</h3>
     </header>
-    <a href="{{url_for("admin_register")}}">管理者登録はこちら</a><br>
-    <a href="{{url_for("room_management")}}">客室管理</a>
-    <a href="{{url_for("shift_management")}}">シフト管理</a>
-    <a href="{{url_for("employee_all")}}">従業員管理</a>
+    <form action="{{url_for('emp')}}" method="get">
+        <button type="submit">従業員登録</button>
+    </form>
     <button href="{{url_for("logout")}}">ログアウト</button>
 </body>
 </html>
