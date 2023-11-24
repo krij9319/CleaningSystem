@@ -148,14 +148,22 @@ def generate_new_number():
         if not number_exists_in_database(new_number):
             return new_number
           
-def employee_list():
-  conneciton = get_connection()
-  cursor = conneciton.cursor()
-  sql = 'SELECT employee_id, name, type FROM employee'
+def insert_emp(id, name, email, concat, otp):
+  sql = 'INSERT INTO employee VALUES (%s, %s, %s, null, null, False, %s, False, %s)'
   
-  cursor.execute(sql)
-  rows = cursor.fetchall()
-  
-  cursor.close()
-  conneciton.close()
-  return rows
+  try :   # 例外処理
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(sql, (id, name, email, concat, otp))
+    count = cursor.rowcount # 更新件数を取得
+    connection.commit()
+
+  except psycopg2.DatabaseError:    # Java でいう catch 失敗した時の処理をここに書く
+    count = 0   # 例外が発生したら 0 を return する。
+
+  finally:  # 成功しようが、失敗しようが、close する。
+    cursor.close()
+    connection.close()
+
+  return count
