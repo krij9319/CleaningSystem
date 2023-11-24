@@ -147,3 +147,15 @@ def generate_new_number():
         new_number = mail.generate_number()
         if not number_exists_in_database(new_number):
             return new_number
+          
+def employee_list():
+  conneciton = get_connection()
+  cursor = conneciton.cursor()
+  sql = 'SELECT employee_id, name, type FROM employee'
+  
+  cursor.execute(sql)
+  rows = cursor.fetchall()
+  
+  cursor.close()
+  conneciton.close()
+  return rows

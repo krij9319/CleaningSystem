@@ -110,5 +110,10 @@ def confirm_number():
         msg = 'パスワードを変更しました。'
         return render_template('index.html', msg=msg)
 
+@app.route('/employeelist')
+def employeelist():
+    employee_list = db.employee_list()
+    return render_template('employee_all.html', employee = employee_list)
+
 if __name__ == '__main__':
     app.run(debug=True)
