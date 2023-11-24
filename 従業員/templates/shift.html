@@ -3,9 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/shift.css')}}">
+    <title>シフト申請</title>
+    
 </head>
 <body>
-    
+<header>
+<a href="{{}}">清掃管理システム</a>
+<h4>ダイワロイネットホテル</h4>
+</header>
+<h1>シフト申請</h1>
+<p class="days">毎月20日まで</p>
+<p class="holiday">休日希望日にチェックしてください</p>
+<div id="currentMonth"></div>
+<div id="header" class="header"></div>
+<div id="calendar" class="calendar"></div>
+<button onclick="location.href='menu.html'">戻る</button>
+<form id="shiftForm">
+<button onclick="submitShift()">申請</button>
+</form>
+
+<script>
+const calendar = document.getElementById('calendar');
+const header = document.getElementById('header');
+const dayNames = ["日", "月", "火", "水", "木", "金", "土"];
+const currentMonthElement = document.getElementById('currentMonth');
+
+function createCalendar(year, month) {
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    currentMonthElement.textContent = `${year}年${month + 1}月`;
+
+    for (let i = 0; i < dayNames.length; i++) {
+        const dayLabel = document.createElement('div');
+        dayLabel.textContent = dayNames[i];
+        header.appendChild(dayLabel);
+    }
+
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.classList.add('day');
+        calendar.appendChild(emptyCell);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const day = document.createElement('div');
+        day.classList.add('day');
+        day.textContent = i;
+        day.addEventListener('click', toggleSelection);
+        calendar.appendChild(day);
+    }
+}
+
+function toggleSelection(event) {
+    event.target.classList.toggle('selected');
+}
+
+function submitShift() {
+    const selectedDays = document.querySelectorAll('.day.selected');
+}
+
+function getFirstDayOfNextMonth() {
+    const currentDate = new Date();
+    const nextMonth = currentDate.getMonth() + 1;
+    const nextYear = currentDate.getFullYear();
+    return new Date(nextYear, nextMonth, 1);
+}
+
+function showNextMonth() {
+    const firstDayOfNextMonth = getFirstDayOfNextMonth();
+    const nextMonth = firstDayOfNextMonth.getMonth();
+    const nextYear = firstDayOfNextMonth.getFullYear();
+
+    calendar.innerHTML = '';
+    header.innerHTML = '';
+    createCalendar(nextYear, nextMonth);
+}
+
+const firstDayOfNextMonth = getFirstDayOfNextMonth();
+const nextMonth = firstDayOfNextMonth.getMonth();
+const nextYear = firstDayOfNextMonth.getFullYear();
+createCalendar(nextYear, nextMonth);
+</script>
 </body>
 </html>

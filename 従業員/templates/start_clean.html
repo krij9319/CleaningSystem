@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .request {
+            margin-top: 20px;
+            background-color: #f0f0f0; 
+            border-radius: 10px; 
+            padding: 10px; 
+            text-align: center; 
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,13 +22,13 @@
 
     <div id="displayButtonNumber"></div>
 
-    <div class = "request">
+    <div class="request">
         要望
     </div>
-    <div class = "start">
+    <div class="start">
         清掃を開始しますか?
     </div>
-    <button onclick="location.href='noclean_all.html'">戻る</button>
+    <button onclick="location.href='menu.html'">戻る</button>
     <button onclick="location.href='clean.html?buttonNumber=' + encodeURIComponent(document.getElementById('displayButtonNumber').textContent)">開始</button>
 
     <script>
@@ -39,7 +48,5 @@
             }
         };
     </script>
-
-
 </body>
 </html>
