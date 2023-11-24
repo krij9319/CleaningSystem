@@ -1,0 +1,69 @@
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+body {
+    text-align: center;
+    color: #707070;
+}
+
+header {
+    color:#1AA9FB;
+    border-bottom: 1px solid #707070;
+}
+
+header p {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0%;
+}
+
+.titlename {
+    text-decoration: none;
+    font-size: 45px;
+    color:inherit;
+    margin-right: 460px;
+    margin-bottom: 5px;
+}
+
+div {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 0px 200px;
+}
+
+.button1 {
+    font-size: 25px;
+    margin-top: 25px;
+    height: 50px;
+    width: 150px;
+}
+
+.button2 {
+    font-size: 25px;
+    margin-top: 25px;
+    width: 100px;
+}
+
+.aa {
+    text-decoration: none;
+}
+
+h3 {
+    margin-top: 5px;
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+.text {
+    font-size: 30px;
+}
+
+.input-mail {
+    font-size: 20px;
+    margin-top: 0%;
+    width: 400px;
+    height: 45px;
+}
