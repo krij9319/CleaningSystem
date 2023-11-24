@@ -48,7 +48,7 @@ def logout():
 @app.route('/admintop', methods=['GET'])
 def admintop():
     if 'user' in session:
-        return render_template('menu.html')   
+        return redirect(url_for('menu'))   
     else :
         return redirect(url_for('index'))   
     
@@ -110,5 +110,30 @@ def confirm_number():
         msg = 'パスワードを変更しました。'
         return render_template('index.html', msg=msg)
 
+@app.route('/menu', methods=['GET'])
+def menu():
+    return render_template('menu.html')
+
+@app.route('/emp', methods=['GET'])
+def emp():
+    return render_template('employee_register.html')
+
+@app.route('/empregi', methods=['POST'])
+def emp_regi():
+    id = request.form.get('employee_id')
+    name = request.form.get('name')
+    email = request.form.get('mail')
+    concat = request.form.get('concat')
+    otp = mail.generate_otp()
+
+    db.insert_emp(id, name, email, concat, otp)
+
+    to = email
+    subject = 'ワンタイムパスワード'
+    body = f'あなたのワンタイムパスワードは{otp}です。'
+    
+    mail.send_mail(to, subject, body)
+    return redirect(url_for('index'))
+    
 if __name__ == '__main__':
     app.run(debug=True)
