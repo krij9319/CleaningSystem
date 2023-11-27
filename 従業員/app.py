@@ -137,10 +137,18 @@ def clean():
 def clean_error():
     return render_template('clean_error.html')
 
-# シフト登録
+# シフト申請
 @app.route('/shift', methods=['GET'])
 def shift():
     return render_template('shift.html')
+
+@app.route('/submit_shift', methods=['POST'])
+def submit_shift():
+    selected_days = request.form.getlist('selected_days[]')
+    return render_template('shift_all.html', selected_days=selected_days)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 # シフト閲覧
 @app.route('/shift_all', methods=['GET'])

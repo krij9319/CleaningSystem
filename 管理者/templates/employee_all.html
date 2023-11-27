@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <h1>清掃管理システム</h1>
+        <h3>ダイワロイネットホテル</h3>
+    </header>
+    <h3>従業員一覧</h3>
+    <button><a href="{{url_for('employee_register')}}">従業員の新規登録</a></button><br>
+    <input type="checkbox" id="check">削除済みの従業員も表示
+    <table>
+        <thead>
+            <tr>
+                <th>従業員ID</th>
+                <th>タイプ</th>
+                <th>氏名</th>
+                <th>評価</th>
+                <th>アンケート</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form>
+                {% for employee in employee %}
+                <tr>
+                    <td>{{ employee[0]}}</td>
+                    <td>{{ employee[2]}}</td>
+                    <td>{{ employee[1]}}</td>
+                    <td>良</td>
+                    <td><button><a href="{{url_for('employee_questionnaire')}}">アンケート</a></button></td>
+                </tr>
+                {% endfor %}
+            </form>
+        </tbody>
+    </table>
+    <p>A 9:00~15:00<br>B 10:00~15:00</p>
+    <button><a href="{{url_for('admintop')}}">戻る</a></button>
 </body>
 </html>
