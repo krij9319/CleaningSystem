@@ -129,13 +129,27 @@ def password_update(password, otp):
   return count
 
 # 未清掃一覧
-def noclean_list():
+def noclean_2f_list():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id FROM guestroom WHERE status = 0"
+    sql = "SELECT room_id FROM guestroom WHERE status = 0 and floors = 2"
     
     cursor.execute(sql)
     rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    return rows
+  
+# 清掃開始
+def request(room_number):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, request_nightwear, request_bathtowel, request_water, request_facetowel, request_tissue, request_tea, request_toiletpaper, request_slipperr, request_hairbrush, request_toothbrush,  content varchar FROM request WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_number,))
+    rows = cursor.fetchall()
+    print(rows)
     
     cursor.close()
     connection.close()

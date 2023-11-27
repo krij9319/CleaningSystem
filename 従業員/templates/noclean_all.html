@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,302 +12,297 @@
         <h3>ダイワロイネットホテル</h3>
     </header>
     
-    <h1 class="noclean">未清掃一覧</h1>
-    <select id="cleaningOptions" name="cleaningOptions" onchange="showButtons()">
-        <option value="option2">2F</option>
-        <option value="option3">3F</option>
-        <option value="option4">4F</option>
-        <option value="option5">5F</option>
-        <option value="option6">6F</option>
-        <option value="option7">7F</option>
-        <option value="option8">8F</option>
-        <option value="option9">9F</option>
-        <option value="option10">10F</option>
-        <option value="option11">11F</option>
-        <option value="option12">すべて</option>
-    </select></br>
+    <div class="hierarchy">
+        <h1 class="noclean">未清掃一覧</h1>
+            <select id="cleaningOptions" name="cleaningOptions" onchange="showButtons()" class="pulldown">
+                <option value="option2">2F</option>
+                <option value="option3">3F</option>
+                <option value="option4">4F</option>
+                <option value="option5">5F</option>
+                <option value="option6">6F</option>
+                <option value="option7">7F</option>
+                <option value="option8">8F</option>
+                <option value="option9">9F</option>
+                <option value="option10">10F</option>
+                <option value="option11">11F</option>
+                <option value="option12">すべて</option>
+            </select></br>
+    </div>
 
 
-    <div id="2FButtons">
+    <div id="2FButtons" style="display:none;" class="noclean_room">
         <a>2F</a></br>
-        <button type="submit" class="2F">201</button>
-        <button type="submit" class="2F">202</button></br>
-        <button type="submit" class="2F">203</button>
-        <button type="submit" class="2F">204</button></br>
-        <button type="submit" class="2F">205</button>
-        <button type="submit" class="2F">206</button></br>
-        <button type="submit" class="2F">207</button>
-        <button type="submit" class="2F">208</button></br>
-        <button type="submit" class="2F">209</button>
-        <button type="submit" class="2F">210</button></br>
-        <button type="submit" class="2F">211</button>
-        <button type="submit" class="2F">212</button></br>
-        <button type="submit" class="2F">213</button>
+        {% for rooms in room %}
+        <form action="{{url_for('start_clean')}}" method="get">
+            <input type="hidden" name="room_number" value="{{rooms[0]}}"><br>
+            <button type="submit" class="button1">{{rooms[0]}}</button><br>
+        </form>
+        {% endfor %}
     </div>
 
 
-    <div id="3FButtons" style="display:none;">
+    <div id="3FButtons" style="display:none;" class="noclean_room">
         <a>3F</a></br>
-        <button type="submit" class="3F">301</button>
-        <button type="submit" class="3F">302</button></br>
-        <button type="submit" class="3F">303</button>
-        <button type="submit" class="3F">304</button></br>
-        <button type="submit" class="3F">305</button>
-        <button type="submit" class="3F">306</button></br>
-        <button type="submit" class="3F">307</button>
-        <button type="submit" class="3F">308</button></br>
-        <button type="submit" class="3F">309</button>
-        <button type="submit" class="3F">310</button></br>
-        <button type="submit" class="3F">311</button>
-        <button type="submit" class="3F">312</button></br>
-        <button type="submit" class="3F">313</button>
-        <button type="submit" class="3F">314</button></br>
-        <button type="submit" class="3F">315</button>
-        <button type="submit" class="3F">316</button></br>
-        <button type="submit" class="3F">317</button>
-        <button type="submit" class="3F">318</button></br>
-        <button type="submit" class="3F">319</button>
-        <button type="submit" class="3F">320</button></br>
-        <button type="submit" class="3F">321</button>
-        <button type="submit" class="3F">322</button></br>
-        <button type="submit" class="3F">323</button>
-        <button type="submit" class="3F">324</button></br>
-        <button type="submit" class="3F">325</button>
-        <button type="submit" class="3F">326</button></br>
+        <button type="submit" class="button1">301</button>
+        <button type="submit" class="button1">302</button></br>
+        <button type="submit" class="button1">303</button>
+        <button type="submit" class="button1">304</button></br>
+        <button type="submit" class="button1">305</button>
+        <button type="submit" class="button1">306</button></br>
+        <button type="submit" class="button1">307</button>
+        <button type="submit" class="button1">308</button></br>
+        <button type="submit" class="button1">309</button>
+        <button type="submit" class="button1">310</button></br>
+        <button type="submit" class="button1">311</button>
+        <button type="submit" class="button1">312</button></br>
+        <button type="submit" class="button1">313</button>
+        <button type="submit" class="button1">314</button></br>
+        <button type="submit" class="button1">315</button>
+        <button type="submit" class="button1">316</button></br>
+        <button type="submit" class="button1">317</button>
+        <button type="submit" class="button1">318</button></br>
+        <button type="submit" class="button1">319</button>
+        <button type="submit" class="button1">320</button></br>
+        <button type="submit" class="button1">321</button>
+        <button type="submit" class="button1">322</button></br>
+        <button type="submit" class="button1">323</button>
+        <button type="submit" class="button1">324</button></br>
+        <button type="submit" class="button1">325</button>
+        <button type="submit" class="button1">326</button></br>
     </div>
 
-    <div id="4FButtons" style="display:none;">
+    <div id="4FButtons" style="display:none;" class="noclean_room">
         <a>4F</a></br>
-        <button type="submit" class="4F">401</button>
-        <button type="submit" class="4F">402</button></br>
-        <button type="submit" class="4F">403</button>
-        <button type="submit" class="4F">404</button></br>
-        <button type="submit" class="4F">405</button>
-        <button type="submit" class="4F">406</button></br>
-        <button type="submit" class="4F">407</button>
-        <button type="submit" class="4F">408</button></br>
-        <button type="submit" class="4F">409</button>
-        <button type="submit" class="4F">410</button></br>
-        <button type="submit" class="4F">411</button>
-        <button type="submit" class="4F">412</button></br>
-        <button type="submit" class="4F">413</button>
-        <button type="submit" class="4F">414</button></br>
-        <button type="submit" class="4F">415</button>
-        <button type="submit" class="4F">416</button></br>
-        <button type="submit" class="4F">417</button>
-        <button type="submit" class="4F">418</button></br>
-        <button type="submit" class="4F">419</button>
-        <button type="submit" class="4F">420</button></br>
-        <button type="submit" class="4F">421</button>
-        <button type="submit" class="4F">422</button></br>
-        <button type="submit" class="4F">423</button>
-        <button type="submit" class="4F">424</button></br>
-        <button type="submit" class="4F">425</button>
-        <button type="submit" class="4F">426</button></br>
+        <button type="submit" class="button1">401</button>
+        <button type="submit" class="button1">402</button></br>
+        <button type="submit" class="button1">403</button>
+        <button type="submit" class="button1">404</button></br>
+        <button type="submit" class="button1">405</button>
+        <button type="submit" class="button1">406</button></br>
+        <button type="submit" class="button1">407</button>
+        <button type="submit" class="button1">408</button></br>
+        <button type="submit" class="button1">409</button>
+        <button type="submit" class="button1">410</button></br>
+        <button type="submit" class="button1">411</button>
+        <button type="submit" class="button1">412</button></br>
+        <button type="submit" class="button1">413</button>
+        <button type="submit" class="button1">414</button></br>
+        <button type="submit" class="button1">415</button>
+        <button type="submit" class="button1">416</button></br>
+        <button type="submit" class="button1">417</button>
+        <button type="submit" class="button1">418</button></br>
+        <button type="submit" class="button1">419</button>
+        <button type="submit" class="button1">420</button></br>
+        <button type="submit" class="button1">421</button>
+        <button type="submit" class="button1">422</button></br>
+        <button type="submit" class="button1">423</button>
+        <button type="submit" class="button1">424</button></br>
+        <button type="submit" class="button1">425</button>
+        <button type="submit" class="button1">426</button></br>
     </div>
 
-    <div id="5FButtons" style="display:none;">
+    <div id="5FButtons" style="display:none;" class="noclean_room">
         <a>5F</a></br>
-        <button type="submit" class="5F">501</button>
-        <button type="submit" class="5F">502</button></br>
-        <button type="submit" class="5F">503</button>
-        <button type="submit" class="5F">504</button></br>
-        <button type="submit" class="5F">505</button>
-        <button type="submit" class="5F">506</button></br>
-        <button type="submit" class="5F">507</button>
-        <button type="submit" class="5F">508</button></br>
-        <button type="submit" class="5F">509</button>
-        <button type="submit" class="5F">510</button></br>
-        <button type="submit" class="5F">511</button>
-        <button type="submit" class="5F">512</button></br>
-        <button type="submit" class="5F">513</button>
-        <button type="submit" class="5F">514</button></br>
-        <button type="submit" class="5F">515</button>
-        <button type="submit" class="5F">516</button></br>
-        <button type="submit" class="5F">517</button>
-        <button type="submit" class="5F">518</button></br>
-        <button type="submit" class="5F">519</button>
-        <button type="submit" class="5F">520</button></br>
-        <button type="submit" class="5F">521</button>
-        <button type="submit" class="5F">522</button></br>
-        <button type="submit" class="5F">523</button>
-        <button type="submit" class="5F">524</button></br>
-        <button type="submit" class="5F">525</button>
-        <button type="submit" class="5F">526</button></br>
+        <button type="submit" class="button1">501</button>
+        <button type="submit" class="button1">502</button></br>
+        <button type="submit" class="button1">503</button>
+        <button type="submit" class="button1">504</button></br>
+        <button type="submit" class="button1">505</button>
+        <button type="submit" class="button1">506</button></br>
+        <button type="submit" class="button1">507</button>
+        <button type="submit" class="button1">508</button></br>
+        <button type="submit" class="button1">509</button>
+        <button type="submit" class="button1">510</button></br>
+        <button type="submit" class="button1">511</button>
+        <button type="submit" class="button1">512</button></br>
+        <button type="submit" class="button1">513</button>
+        <button type="submit" class="button1">514</button></br>
+        <button type="submit" class="button1">515</button>
+        <button type="submit" class="button1">516</button></br>
+        <button type="submit" class="button1">517</button>
+        <button type="submit" class="button1">518</button></br>
+        <button type="submit" class="button1">519</button>
+        <button type="submit" class="button1">520</button></br>
+        <button type="submit" class="button1">521</button>
+        <button type="submit" class="button1">522</button></br>
+        <button type="submit" class="button1">523</button>
+        <button type="submit" class="button1">524</button></br>
+        <button type="submit" class="button1">525</button>
+        <button type="submit" class="button1">526</button></br>
     </div>
-    <div id="6FButtons" style="display:none;">
+    <div id="6FButtons" style="display:none;" class="noclean_room">
         <a>6F</a></br>
-        <button type="submit" class="6F">601</button>
-        <button type="submit" class="6F">602</button></br>
-        <button type="submit" class="6F">603</button>
-        <button type="submit" class="6F">604</button></br>
-        <button type="submit" class="6F">605</button>
-        <button type="submit" class="6F">606</button></br>
-        <button type="submit" class="6F">607</button>
-        <button type="submit" class="6F">608</button></br>
-        <button type="submit" class="6F">609</button>
-        <button type="submit" class="6F">610</button></br>
-        <button type="submit" class="6F">611</button>
-        <button type="submit" class="6F">612</button></br>
-        <button type="submit" class="6F">613</button>
-        <button type="submit" class="6F">614</button></br>
-        <button type="submit" class="6F">615</button>
-        <button type="submit" class="6F">616</button></br>
-        <button type="submit" class="6F">617</button>
-        <button type="submit" class="6F">618</button></br>
-        <button type="submit" class="6F">619</button>
-        <button type="submit" class="6F">620</button></br>
-        <button type="submit" class="6F">621</button>
-        <button type="submit" class="6F">622</button></br>
-        <button type="submit" class="6F">623</button>
-        <button type="submit" class="6F">624</button></br>
-        <button type="submit" class="6F">625</button>
-        <button type="submit" class="6F">626</button></br>
+        <button type="submit" class="button1">601</button>
+        <button type="submit" class="button1">602</button></br>
+        <button type="submit" class="button1">603</button>
+        <button type="submit" class="button1">604</button></br>
+        <button type="submit" class="button1">605</button>
+        <button type="submit" class="button1">606</button></br>
+        <button type="submit" class="button1">607</button>
+        <button type="submit" class="button1">608</button></br>
+        <button type="submit" class="button1">609</button>
+        <button type="submit" class="button1">610</button></br>
+        <button type="submit" class="button1">611</button>
+        <button type="submit" class="button1">612</button></br>
+        <button type="submit" class="button1">613</button>
+        <button type="submit" class="button1">614</button></br>
+        <button type="submit" class="button1">615</button>
+        <button type="submit" class="button1">616</button></br>
+        <button type="submit" class="button1">617</button>
+        <button type="submit" class="button1">618</button></br>
+        <button type="submit" class="button1">619</button>
+        <button type="submit" class="button1">620</button></br>
+        <button type="submit" class="button1">621</button>
+        <button type="submit" class="button1">622</button></br>
+        <button type="submit" class="button1">623</button>
+        <button type="submit" class="button1">624</button></br>
+        <button type="submit" class="button1">625</button>
+        <button type="submit" class="button1">626</button></br>
     </div>
-    <div id="7FButtons" style="display:none;">
+    <div id="7FButtons" style="display:none;" class="noclean_room">
         <a>7F</a></br>
-        <button type="submit" class="7F">701</button>
-        <button type="submit" class="7F">702</button></br>
-        <button type="submit" class="7F">703</button>
-        <button type="submit" class="7F">704</button></br>
-        <button type="submit" class="7F">705</button>
-        <button type="submit" class="7F">706</button></br>
-        <button type="submit" class="7F">707</button>
-        <button type="submit" class="7F">708</button></br>
-        <button type="submit" class="7F">709</button>
-        <button type="submit" class="7F">710</button></br>
-        <button type="submit" class="7F">711</button>
-        <button type="submit" class="7F">712</button></br>
-        <button type="submit" class="7F">713</button>
-        <button type="submit" class="7F">714</button></br>
-        <button type="submit" class="7F">715</button>
-        <button type="submit" class="7F">716</button></br>
-        <button type="submit" class="7F">717</button>
-        <button type="submit" class="7F">718</button></br>
-        <button type="submit" class="7F">719</button>
-        <button type="submit" class="7F">720</button></br>
-        <button type="submit" class="7F">721</button>
-        <button type="submit" class="7F">722</button></br>
-        <button type="submit" class="7F">723</button>
-        <button type="submit" class="7F">724</button></br>
-        <button type="submit" class="7F">725</button>
-        <button type="submit" class="7F">726</button></br>
+        <button type="submit" class="button1">701</button>
+        <button type="submit" class="button1">702</button></br>
+        <button type="submit" class="button1">703</button>
+        <button type="submit" class="button1">704</button></br>
+        <button type="submit" class="button1">705</button>
+        <button type="submit" class="button1">706</button></br>
+        <button type="submit" class="button1">707</button>
+        <button type="submit" class="button1">708</button></br>
+        <button type="submit" class="button1">709</button>
+        <button type="submit" class="button1">710</button></br>
+        <button type="submit" class="button1">711</button>
+        <button type="submit" class="button1">712</button></br>
+        <button type="submit" class="button1">713</button>
+        <button type="submit" class="button1">714</button></br>
+        <button type="submit" class="button1">715</button>
+        <button type="submit" class="button1">716</button></br>
+        <button type="submit" class="button1">717</button>
+        <button type="submit" class="button1">718</button></br>
+        <button type="submit" class="button1">719</button>
+        <button type="submit" class="button1">720</button></br>
+        <button type="submit" class="button1">721</button>
+        <button type="submit" class="button1">722</button></br>
+        <button type="submit" class="button1">723</button>
+        <button type="submit" class="button1">724</button></br>
+        <button type="submit" class="button1">725</button>
+        <button type="submit" class="button1">726</button></br>
     </div>
-    <div id="8FButtons" style="display:none;">
+    <div id="8FButtons" style="display:none;" class="noclean_room">
         <a>8F</a></br>
-        <button type="submit" class="8F">801</button>
-        <button type="submit" class="8F">802</button></br>
-        <button type="submit" class="8F">803</button>
-        <button type="submit" class="8F">804</button></br>
-        <button type="submit" class="8F">805</button>
-        <button type="submit" class="8F">806</button></br>
-        <button type="submit" class="8F">807</button>
-        <button type="submit" class="8F">808</button></br>
-        <button type="submit" class="8F">809</button>
-        <button type="submit" class="8F">810</button></br>
-        <button type="submit" class="8F">811</button>
-        <button type="submit" class="8F">812</button></br>
-        <button type="submit" class="8F">813</button>
-        <button type="submit" class="8F">814</button></br>
-        <button type="submit" class="8F">815</button>
-        <button type="submit" class="8F">816</button></br>
-        <button type="submit" class="8F">817</button>
-        <button type="submit" class="8F">818</button></br>
-        <button type="submit" class="8F">819</button>
-        <button type="submit" class="8F">820</button></br>
-        <button type="submit" class="8F">821</button>
-        <button type="submit" class="8F">822</button></br>
-        <button type="submit" class="8F">823</button>
-        <button type="submit" class="8F">824</button></br>
-        <button type="submit" class="8F">825</button>
-        <button type="submit" class="8F">826</button></br>
+        <button type="submit" class="button1">801</button>
+        <button type="submit" class="button1">802</button></br>
+        <button type="submit" class="button1">803</button>
+        <button type="submit" class="button1">804</button></br>
+        <button type="submit" class="button1">805</button>
+        <button type="submit" class="button1">806</button></br>
+        <button type="submit" class="button1">807</button>
+        <button type="submit" class="button1">808</button></br>
+        <button type="submit" class="button1">809</button>
+        <button type="submit" class="button1">810</button></br>
+        <button type="submit" class="button1">811</button>
+        <button type="submit" class="button1">812</button></br>
+        <button type="submit" class="button1">813</button>
+        <button type="submit" class="button1">814</button></br>
+        <button type="submit" class="button1">815</button>
+        <button type="submit" class="button1">816</button></br>
+        <button type="submit" class="button1">817</button>
+        <button type="submit" class="button1">818</button></br>
+        <button type="submit" class="button1">819</button>
+        <button type="submit" class="button1">820</button></br>
+        <button type="submit" class="button1">821</button>
+        <button type="submit" class="button1">822</button></br>
+        <button type="submit" class="button1">823</button>
+        <button type="submit" class="button1">824</button></br>
+        <button type="submit" class="button1">825</button>
+        <button type="submit" class="button1">826</button></br>
     </div>
-    <div id="9FButtons" style="display:none;">
+    <div id="9FButtons" style="display:none;" class="noclean_room">
         <a>9F</a></br>
-        <button type="submit" class="9F">901</button>
-        <button type="submit" class="9F">902</button></br>
-        <button type="submit" class="9F">903</button>
-        <button type="submit" class="9F">904</button></br>
-        <button type="submit" class="9F">905</button>
-        <button type="submit" class="9F">906</button></br>
-        <button type="submit" class="9F">907</button>
-        <button type="submit" class="9F">908</button></br>
-        <button type="submit" class="9F">909</button>
-        <button type="submit" class="9F">910</button></br>
-        <button type="submit" class="9F">911</button>
-        <button type="submit" class="9F">912</button></br>
-        <button type="submit" class="9F">913</button>
-        <button type="submit" class="9F">914</button></br>
-        <button type="submit" class="9F">915</button>
-        <button type="submit" class="9F">916</button></br>
-        <button type="submit" class="9F">917</button>
-        <button type="submit" class="9F">918</button></br>
-        <button type="submit" class="9F">919</button>
-        <button type="submit" class="9F">920</button></br>
-        <button type="submit" class="9F">921</button>
-        <button type="submit" class="9F">922</button></br>
-        <button type="submit" class="9F">923</button>
-        <button type="submit" class="9F">924</button></br>
-        <button type="submit" class="9F">925</button>
-        <button type="submit" class="9F">926</button></br>
+        <button type="submit" class="button1">901</button>
+        <button type="submit" class="button1">902</button></br>
+        <button type="submit" class="button1">903</button>
+        <button type="submit" class="button1">904</button></br>
+        <button type="submit" class="button1">905</button>
+        <button type="submit" class="button1">906</button></br>
+        <button type="submit" class="button1">907</button>
+        <button type="submit" class="button1">908</button></br>
+        <button type="submit" class="button1">909</button>
+        <button type="submit" class="button1">910</button></br>
+        <button type="submit" class="button1">911</button>
+        <button type="submit" class="button1">912</button></br>
+        <button type="submit" class="button1">913</button>
+        <button type="submit" class="button1">914</button></br>
+        <button type="submit" class="button1">915</button>
+        <button type="submit" class="button1">916</button></br>
+        <button type="submit" class="button1">917</button>
+        <button type="submit" class="button1">918</button></br>
+        <button type="submit" class="button1">919</button>
+        <button type="submit" class="button1">920</button></br>
+        <button type="submit" class="button1">921</button>
+        <button type="submit" class="button1">922</button></br>
+        <button type="submit" class="button1">923</button>
+        <button type="submit" class="button1">924</button></br>
+        <button type="submit" class="button1">925</button>
+        <button type="submit" class="button1">926</button></br>
     </div>
-    <div id="10FButtons" style="display:none;">
+    <div id="10FButtons" style="display:none;" class="noclean_room">
         <a>10F</a></br>
-        <button type="submit" class="10F">1001</button>
-        <button type="submit" class="10F">1002</button></br>
-        <button type="submit" class="10F">1003</button>
-        <button type="submit" class="10F">1004</button></br>
-        <button type="submit" class="10F">1005</button>
-        <button type="submit" class="10F">1006</button></br>
-        <button type="submit" class="10F">1007</button>
-        <button type="submit" class="10F">1008</button></br>
-        <button type="submit" class="10F">1009</button>
-        <button type="submit" class="10F">1010</button></br>
-        <button type="submit" class="10F">1011</button>
-        <button type="submit" class="10F">1012</button></br>
-        <button type="submit" class="10F">1013</button>
-        <button type="submit" class="10F">1014</button></br>
-        <button type="submit" class="10F">1015</button>
-        <button type="submit" class="10F">1016</button></br>
-        <button type="submit" class="10F">1017</button>
-        <button type="submit" class="10F">1018</button></br>
-        <button type="submit" class="10F">1019</button>
-        <button type="submit" class="10F">1020</button></br>
-        <button type="submit" class="10F">1021</button>
-        <button type="submit" class="10F">1022</button></br>
-        <button type="submit" class="10F">1023</button>
-        <button type="submit" class="10F">1024</button></br>
-        <button type="submit" class="10F">1025</button>
-        <button type="submit" class="10F">1026</button></br>
+        <button type="submit" class="button1">1001</button>
+        <button type="submit" class="button1">1002</button></br>
+        <button type="submit" class="button1">1003</button>
+        <button type="submit" class="button1">1004</button></br>
+        <button type="submit" class="button1">1005</button>
+        <button type="submit" class="button1">1006</button></br>
+        <button type="submit" class="button1">1007</button>
+        <button type="submit" class="button1">1008</button></br>
+        <button type="submit" class="button1">1009</button>
+        <button type="submit" class="button1">1010</button></br>
+        <button type="submit" class="button1">1011</button>
+        <button type="submit" class="button1">1012</button></br>
+        <button type="submit" class="button1">1013</button>
+        <button type="submit" class="button1">1014</button></br>
+        <button type="submit" class="button1">1015</button>
+        <button type="submit" class="button1">1016</button></br>
+        <button type="submit" class="button1">1017</button>
+        <button type="submit" class="button1">1018</button></br>
+        <button type="submit" class="button1">1019</button>
+        <button type="submit" class="button1">1020</button></br>
+        <button type="submit" class="button1">1021</button>
+        <button type="submit" class="button1">1022</button></br>
+        <button type="submit" class="button1">1023</button>
+        <button type="submit" class="button1">1024</button></br>
+        <button type="submit" class="button1">1025</button>
+        <button type="submit" class="button1">1026</button></br>
     </div>
-    <div id="11FButtons" style="display:none;">
+    <div id="11FButtons" style="display:none;" class="noclean_room">
         <a>11F</a></br>
-        <button type="submit" class="11F">1101</button>
-        <button type="submit" class="11F">1102</button></br>
-        <button type="submit" class="11F">1103</button>
-        <button type="submit" class="11F">1104</button></br>
-        <button type="submit" class="11F">1105</button>
-        <button type="submit" class="11F">1106</button></br>
-        <button type="submit" class="11F">1107</button>
-        <button type="submit" class="11F">1108</button></br>
-        <button type="submit" class="11F">1109</button>
-        <button type="submit" class="11F">1110</button></br>
-        <button type="submit" class="11F">1111</button>
-        <button type="submit" class="11F">1112</button></br>
-        <button type="submit" class="11F">1113</button>
-        <button type="submit" class="11F">1114</button></br>
-        <button type="submit" class="11F">1115</button>
-        <button type="submit" class="11F">1116</button></br>
-        <button type="submit" class="11F">1117</button>
-        <button type="submit" class="11F">1118</button></br>
-        <button type="submit" class="11F">1119</button>
-        <button type="submit" class="11F">1120</button></br>
-        <button type="submit" class="11F">1121</button>
-        <button type="submit" class="11F">1122</button></br>
-        <button type="submit" class="11F">1123</button>
-        <button type="submit" class="11F">1124</button></br>
-        <button type="submit" class="11F">1125</button>
-        <button type="submit" class="11F">1126</button></br>
+        <button type="submit" class="button1">1101</button>
+        <button type="submit" class="button1">1102</button></br>
+        <button type="submit" class="button1">1103</button>
+        <button type="submit" class="button1">1104</button></br>
+        <button type="submit" class="button1">1105</button>
+        <button type="submit" class="button1">1106</button></br>
+        <button type="submit" class="button1">1107</button>
+        <button type="submit" class="button1">1108</button></br>
+        <button type="submit" class="button1">1109</button>
+        <button type="submit" class="button1">1110</button></br>
+        <button type="submit" class="button1">1111</button>
+        <button type="submit" class="button1">1112</button></br>
+        <button type="submit" class="button1">1113</button>
+        <button type="submit" class="button1">1114</button></br>
+        <button type="submit" class="button1">1115</button>
+        <button type="submit" class="button1">1116</button></br>
+        <button type="submit" class="button1">1117</button>
+        <button type="submit" class="button1">1118</button></br>
+        <button type="submit" class="button1">1119</button>
+        <button type="submit" class="button1">1120</button></br>
+        <button type="submit" class="button1">1121</button>
+        <button type="submit" class="button1">1122</button></br>
+        <button type="submit" class="button1">1123</button>
+        <button type="submit" class="button1">1124</button></br>
+        <button type="submit" class="button1">1125</button>
+        <button type="submit" class="button1">1126</button></br>
     </div>
     <script>
         function showButtons() {
@@ -339,6 +334,10 @@
     });
     </script>
 
-    <button onclick="location.href='menu.html'">戻る</button></br>
+    <div class="returnmenu">
+        <form action="{{url_for('menu')}}" method="get">
+            <button type="submit" class="button2">戻る</button>
+        </form>
+    </div>
 </body>
 </html>
