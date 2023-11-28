@@ -149,8 +149,22 @@ def request(room_number):
     
     cursor.execute(sql, (room_number,))
     rows = cursor.fetchall()
-    print(rows)
     
     cursor.close()
     connection.close()
     return rows
+  
+# 客室状況
+def room_status(room_number):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT status FROM guestroom WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_number,))
+    row = cursor.fetchone()
+    
+    print(row)
+    
+    cursor.close()
+    connection.close()
+    return row
