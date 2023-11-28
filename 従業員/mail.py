@@ -11,7 +11,7 @@ def generate_number():
     return str(random.randint(1000, 9999))
 
 def send_mail(to, subject, body):
-    ID = 'r.kumagai.sys22@morijyobi.ac.jp'
+    ID = to
     PASS = os.environ['MAIL_PASS']
     HOST = 'smtp.gmail.com'
     PORT = 587
