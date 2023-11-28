@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/confirm_input.css')}}">
     <title>Document</title>
 </head>
 <body>
     <header>
-        <h1>清掃管理システム</h1>
-        <h3>ダイワロイネットホテル</h3>
-    </header> 
-    <h2>パスワード変更</h2>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
+    </header>   
+    <h3>パスワード変更</h3>
     {% if error != null %}
     <p style="color:red">{{error}}</p>
     {% endif %}
     <form action="{{url_for('confirm_number')}}" method="post" class="form">
-        <h3>入力したメールアドレスに送られた確認番号を入力し、<br>
+        <h4>入力したメールアドレスに送られた確認番号を入力し、<br>
            パスワード変更を完了してください 
-        </h3>
-        <p>確認番号を入力してください</p>
-        <input type="text" name="number"><br>
-        <p>新しいパスワード</p>
-        <input type="password" name="password1"><br>
-        <p>パスワード確認</p>
-        <input type="password" name="password2"><br>
-        <button type="submit">変更</button>
+        </h4>
+        <p class="te1">確認番号</p>
+        <input type="text" name="number" class="input-number"><br>
+        <p class="te2">新しいパスワード</p>
+        <input type="password" name="password1" class="input-pass"><br>
+        <p class="te3">パスワード確認</p>
+        <input type="password" name="password2" class="input-pass"><br>
+        <button type="submit" class="button1">変更</button>
     </form>
 </body>
 </html>

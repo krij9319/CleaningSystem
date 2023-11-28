@@ -11,10 +11,10 @@
         <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
         <p>ダイワロイネットホテル</p>
     </header>   
-    <h3>ログイン</h3>
     {% if error != null %}
-    <p style="color:red">{{error}}</p>
+    <p style="color:red" class="text">{{error}}</p>
     {% endif %}
+    <h3>ログイン</h3>
     <form action="{{url_for('send_number')}}" method="post" class="form">
         <p class="text">メールアドレスを入力してください</p>
         <input type="text" name="mail" class="input-mail"><br>
