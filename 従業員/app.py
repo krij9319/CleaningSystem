@@ -147,9 +147,6 @@ def submit_shift():
     selected_days = request.form.getlist('selected_days[]')
     return render_template('shift_all.html', selected_days=selected_days)
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 # シフト閲覧
 @app.route('/shift_all', methods=['GET'])
 def shift_all():
