@@ -110,15 +110,17 @@ def menu():
     return render_template('menu.html')
 
 # 未清掃一覧
-@app.route('/noclean_all', methods=['GET'])
-def noclean_all():
-    noclean_list = db.noclean_list()
+@app.route('/noclean_2f_all', methods=['GET'])
+def noclean_2f_all():
+    noclean_list = db.noclean_2f_list()
     return render_template('noclean_all.html', room=noclean_list)
 
 # 清掃開始
 @app.route('/start_clean', methods=['GET'])
 def start_clean():
-    return render_template('start_clean.html')
+    room_number = request.args.get("room_number")
+    request_room = db.request(room_number)
+    return render_template('start_clean.html', request=request_room)
 
 # 清掃開始エラー
 @app.route('/start_clean_error', methods=['GET'])
