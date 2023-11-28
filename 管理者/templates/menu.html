@@ -18,5 +18,9 @@
         <a href="{{url_for("shift_management")}}" class="a-text">シフト<br>管理</a>  
         <a href="#" class="a-text">従業員<br>管理</a><br>
     <button href="{{url_for("logout")}}" class="button1">ログアウト</button>
+ 
+    <form action="{{url_for('emp')}}" method="get">
+        <button type="submit">従業員登録</button>
+    </form>
 </body>
 </html>

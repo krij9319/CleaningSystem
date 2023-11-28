@@ -3,9 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title></title>
 </head>
 <body>
+    <header>
+        <a href="{{url_for('index')}}">清掃管理システム</a>
+        <h4>ダイワロイネットホテル</h4>
+    </header>
+    
+    <div id="displayButtonNumber"></div>
+
+<p>以下の項目を必ず</br>確認してください</p>
+
+<input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
+<label for="myCheckbox">アメニティがあるか</label></br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
+<label for="myCheckbox">冷蔵庫の中はないか</label></br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
+<label for="myCheckbox">人数分のナイトウエア</br>  があるか</label></br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
+<label for="myCheckbox">人数分のスリッパが</br>  があるか</label></br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
+<label for="myCheckbox">浴槽に毛が落ちて</br>  ないか</label></br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
+<label for="myCheckbox">人数分の水があるか</label></br>
+<input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
+<label for="myCheckbox">要望に応えているか</label></br>
+
+<p>清掃を終了しますか?</p>
+
+<button onclick="validateCheckboxes()">完了</button>
+<script>
+
+    function validateCheckboxes() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var isChecked = true;
+
+        checkboxes.forEach(function(checkbox) {
+            if (!checkbox.checked) {
+                isChecked = false;
+            }
+        });
+
+        if (isChecked) {
+            window.location.href = 'noclean_all.html'; 
+        } else {
+            window.location.href = 'clean_error.html'; 
+        }
+    }
+</script>
+
+<script>
+    function getParameterByName(name) {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    window.onload = function() {
+        var buttonNumber = getParameterByName('buttonNumber');
+        var displayElement = document.getElementById('displayButtonNumber');
+
+        if (buttonNumber) {
+            displayElement.textContent = buttonNumber;
+        } else {
+            displayElement.textContent = "error";
+        }
+    };
+</script>
+
     
 </body>
 </html>

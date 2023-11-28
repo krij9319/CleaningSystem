@@ -1,45 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/start_clean.css')}}">
+    <title>清掃開始</title>
 </head>
 <body>
     <header>
-        <a href="{{url_for('index')}}">清掃管理システム</a>
-        <h4>ダイワロイネットホテル</h4>
+        <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
+        <h3>ダイワロイネットホテル</h3>
     </header>
-
-    <div id="displayButtonNumber"></div>
-
-    <div class = "request">
-        要望
+  
+    <div class="room_number">
+        {% for requests in request %}
+            <h1>{{requests[0]}}</h1>
+        {% endfor %}
     </div>
-    <div class = "start">
-        清掃を開始しますか?
+
+    <h1>要望</h1>
+    <div class="request">
+        {% for requests in request %}
+            <h3>ナイトウェア {{requests[1]}}</h3>
+            <h3>バスタオル {{requests[2]}}</h3>
+            <h3>ミネラルウォーター {{requests[3]}}</h3>
+            <h3>フェイスタオル {{requests[4]}}</h3>
+            <h3>ティッシュ {{requests[5]}}</h3>
+            <h3>緑茶 {{requests[6]}}</h3>
+            <h3>トイレットペーパー {{requests[7]}}</h3>
+            <h3>スリッパ {{requests[8]}}</h3>
+            <h3>ヘアブラシ {{requests[9]}}</h3>
+            <h3>歯ブラシ {{requests[10]}}</h3>
+            <h3>その他 {{requests[11]}}</h3>
+        {% endfor %}
     </div>
-    <button onclick="location.href='noclean_all.html'">戻る</button>
-    <button onclick="location.href='clean.html?buttonNumber=' + encodeURIComponent(document.getElementById('displayButtonNumber').textContent)">開始</button>
+    <h2>清掃を開始しますか？</h2>
 
-    <script>
-        function getParameterByName(name) {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-    
-        window.onload = function() {
-            var buttonNumber = getParameterByName('buttonNumber');
-            var displayElement = document.getElementById('displayButtonNumber');
-    
-            if (buttonNumber) {
-                displayElement.textContent = buttonNumber;
-            } else {
-                displayElement.textContent = "error";
-            }
-        };
-    </script>
-
-
+    <div class="buttons">
+        <form action="{{url_for('noclean_2f_all')}}" method="get">
+            <button type="submit" class="button1">戻る</button>
+        </form>
+        <form action="{{url_for('clean')}}" method="get">
+            <button type="submit" class="button2">開始</button>
+        </form>
+    </div>
 </body>
 </html>

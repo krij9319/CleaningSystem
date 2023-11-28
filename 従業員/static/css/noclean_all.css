@@ -1,11 +1,64 @@
 @charset "UTF-8";
 
-.noclean {
-    font-size: 12px;
-    color: brown;
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
 }
 
+header {
+    color:#1AA9FB;
+    text-align: center;
+    border-bottom: 3px solid #707070;
+}
 
+header .titlename{
+    color: inherit;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.hierarchy {
+    display: flex;
+}
+
+.noclean {
+    margin-left: 50px;
+}
+
+.pulldown {
+    margin-left: 90px;
+    width: 70px;
+    height: 30px;
+    margin-top: 30px;
+}
+
+.button1 {
+    width: 45%;
+    height: 40px;
+    background-color: #E1E1E1;
+    border-color: #E1E1E1;
+    margin: 5px;
+}
+
+.noclean_room {
+    text-align: center;
+}
+
+#2FButtons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.return_menu {
+    text-align: center;
+}
+
+.button2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100px;
+    height: 30px;
+}
 
 * body {
     font-family: Arial, sans-serif;
