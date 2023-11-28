@@ -79,19 +79,19 @@ def navigateSend():
 @app.route('/numbermail', methods=['POST'])
 def send_number():
     mail_address = request.form.get('mail')
-    authnumber = db.generate_new_number()
     
-    db.update_number(authnumber, mail_address)
-    
-    to = mail_address
-    subject = '確認番号'
-    body = f'確認番号は{authnumber}です。'
-    
-    mail.send_mail(to, subject, body)
     if mail_address == '':
         error = 'このメールアドレスは登録されていません'
         return render_template('OTP_mail.html', error=error)
     else:
+        authnumber = db.generate_new_number()
+    
+        db.update_number(authnumber, mail_address)
+        
+        to = mail_address
+        subject = '確認番号'
+        body = f'確認番号は{authnumber}です。'
+        mail.send_mail(to, subject, body)
         return redirect(url_for('navigateNumber'))
 
 @app.route('/sendnumber', methods=['GET'])
@@ -134,6 +134,14 @@ def emp_regi():
     
     mail.send_mail(to, subject, body)
     return redirect(url_for('index'))
-    
+
+@app.route('/room')
+def room_management():
+    return render_template('room_management.html')
+
+@app.route('/sift')
+def shift_management():
+    return render_template('sift_management.html')  
+  
 if __name__ == '__main__':
     app.run(debug=True)

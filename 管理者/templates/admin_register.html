@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/admin_register.css')}}">
     <title>Document</title>
 </head>
 <body>
     <header>
-        <h1>清掃管理システム</h1>
-        <h3>ダイワロイネットホテル</h3>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
     </header>    
-    <h2>新規管理者登録</h2>
+    <h3>新規管理者登録</h3>
     <form action="{{url_for('register_mail')}}" method="post">
-        管理者ID:<input type="text" name="adminid"><br>
-        氏名:<input type="text" name="name"><br>
-        メールアドレス:<input type="text" name="mail"><br>
-        <button type="submit">メール送信</button>
+        <p class="te1">管理者ID</p>
+        <input type="text" name="adminid" class="input-text"><br>
+        <p class="te2">氏名</p>
+        <input type="text" name="name" class="input-text"><br>
+        <p class="te3">メールアドレス</p>
+        <input type="text" name="mail" class="input-text"><br>
+        <div>
+            <button  class="button2"><a href="{{url_for('admintop')}}" class="aa">戻る</a></button>    
+            <button type="submit" class="button1">メール送信</button>
+        </div>    
     </form>
-    <a href="{{url_for('admintop')}}">戻る</a>    
 </body>
 </html>
