@@ -120,7 +120,14 @@ def noclean_2f_all():
 def start_clean():
     room_number = request.args.get('room_number')
     request_room = db.request(room_number)
-    return render_template('start_clean.html', request=request_room)
+    print(request_room)
+    
+    if request_room == []:
+        no_request = db.no_request(room_number)
+        return render_template('start_clean_norequest.html', request=no_request)
+    else:
+        return render_template('start_clean.html', request=request_room)
+        
 
 # 清掃開始エラー
 @app.route('/start_clean_error', methods=['GET'])
@@ -134,10 +141,12 @@ def clean():
     status = db.room_status(room_number)
     print(status)
     
-    if status != 0:
-        redirect(url_for('start_clean_error'))
+    if status[0] != 0:
+        request_room = db.request(room_number)
+        return render_template('start_clean_error.html', error=request_room)
     else:
         request_room = db.request(room_number)
+        db.cleaning(room_number)
         return render_template('clean.html', clean=request_room)
 
 # 清掃エラー
