@@ -153,32 +153,34 @@ def request(room_number):
     cursor.close()
     connection.close()
     return rows
-
-# 要望なし
-def no_request(room_number):
+  
+# 今日のインセンティブ
+def insentive_today(employee_id):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id FROM guestroom WHERE room_id = %s"
+    sql = "SELECT avg(incentive) from employee, cleaning_history where employee_id = %s and NOW()"
     
-    cursor.execute(sql, (room_number,))
+    cursor.execute(sql, (employee_id,))
     rows = cursor.fetchall()
+    print(rows)
     
     cursor.close()
     connection.close()
     return rows
 
-# 客室状況
-def room_status(room_number):
+# 今月のインセンティブ
+def insentive_monday(employee_id):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT status FROM guestroom WHERE room_id = %s"
+    sql = "SELECT avg(incentive) from employee, cleaning_history where employee_id = %s and LAST_DAY()"
     
-    cursor.execute(sql, (room_number,))
-    row = cursor.fetchone()
+    cursor.execute(sql, (employee_id,))
+    rows = cursor.fetchall()
+    print(rows)
     
     cursor.close()
     connection.close()
-    return row
+    return rows
 
 # 清掃中
 def cleaning(room_number):
