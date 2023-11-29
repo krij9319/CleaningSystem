@@ -11,7 +11,7 @@
         <h3>ダイワロイネットホテル</h3>
     </header>
     <h3>従業員一覧</h3>
-    <button><a href="{{url_for('employee_register')}}">従業員の新規登録</a></button><br>
+    <button><a href="{{url_for('emp')}}">従業員の新規登録</a></button><br>
     <input type="checkbox" id="check">削除済みの従業員も表示
     <table>
         <thead>
@@ -25,13 +25,13 @@
         </thead>
         <tbody>
             <form>
-                {% for employee in employee %}
+                {% for employee in employees %}
                 <tr>
                     <td>{{ employee[0]}}</td>
                     <td>{{ employee[2]}}</td>
-                    <td>{{ employee[1]}}</td>
+                    <td><a href="{{url_for('employee_detail')}}" class="username">{{ employee[1]}}</a></td>
                     <td>良</td>
-                    <td><button><a href="{{url_for('employee_questionnaire')}}">アンケート</a></button></td>
+                    <td><button><a href="#">アンケート</a></button></td>
                 </tr>
                 {% endfor %}
             </form>
