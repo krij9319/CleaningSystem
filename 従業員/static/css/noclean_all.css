@@ -33,20 +33,22 @@ header .titlename{
 }
 
 .button1 {
-    width: 45%;
+    width: 130px;
     height: 40px;
     background-color: #E1E1E1;
     border-color: #E1E1E1;
-    margin: 5px;
+    margin: 10px;
+    margin-left: 50px;
 }
 
 .noclean_room {
     text-align: center;
-}
-
-#2FButtons {
     display: flex;
     flex-wrap: wrap;
+}
+
+h1 {
+    text-align: center;
 }
 
 .return_menu {
