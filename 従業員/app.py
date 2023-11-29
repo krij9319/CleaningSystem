@@ -155,7 +155,9 @@ def shift_all():
 # インセンティブ閲覧
 @app.route('/insentive_view', methods=['GET'])
 def insentive_view():
-    return render_template('insentive_view.html')
+    insentive_today = db.insentive_today
+    insentive_month = db.insentive_month
+    return render_template('insentive_view.html', money1 = insentive_today, money2 = insentive_month)
 
 # インセンティブ統計
 @app.route('/insentive_statictics', methods=['GET'])

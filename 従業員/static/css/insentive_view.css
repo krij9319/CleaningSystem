@@ -1,0 +1,42 @@
+@charset "UTF-8";
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+header {
+    color: #1AA9FB;
+    text-align: center;
+    border-bottom: 3px solid #707070;
+}
+
+header .titlename {
+    color: inherit;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.before {
+    margin-left: 70%;
+}
+
+.one{
+    text-align: center;
+    font-size: 25px;
+}
+
+.two{
+    text-align: center;
+    font-size: 25px;
+}
+
+.three{
+    text-align: center;
+    font-size: 25px;
+}
+
+.four{
+    text-align: center;
+    font-size: 25px;
+}
+

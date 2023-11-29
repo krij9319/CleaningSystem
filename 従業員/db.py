@@ -154,3 +154,31 @@ def request(room_number):
     cursor.close()
     connection.close()
     return rows
+  
+# 今日のインセンティブ
+def insentive_today(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT avg(incentive) from employee, cleaning_history where employee_id = %s and NOW()"
+    
+    cursor.execute(sql, (employee_id,))
+    rows = cursor.fetchall()
+    print(rows)
+    
+    cursor.close()
+    connection.close()
+    return rows
+
+# 今月のインセンティブ
+def insentive_monday(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT avg(incentive) from employee, cleaning_history where employee_id = %s and LAST_DAY()"
+    
+    cursor.execute(sql, (employee_id,))
+    rows = cursor.fetchall()
+    print(rows)
+    
+    cursor.close()
+    connection.close()
+    return rows

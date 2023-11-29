@@ -3,36 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/insentive_view.css')}}">
     <title>インセンティブ</title>
-    <style>
-        body {
-            font-family: 'HGゴシックM', 'Helvetica', sans-serif;
-        }
-        .one p,
-        .two p,
-        .three p,
-        .four p {
-        }
-    </style>
 </head>
-<header>
-    <a href="{{}}">清掃管理システム</a>
-    <h4>ダイワロイネットホテル</h4>
-</header>
+
 <body>
-    <a href="{{}}">これまでの統計</a>
+    <header>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <h3>ダイワロイネットホテル</h3>
+    </header>
+
+    <a href="{{url_for('insentive_statictics')}}" class="before">これまでの統計</a>
+
     <div class="one">
         <p>本日の</p>
     </div>
-    <div class="two">
+    <div class="one">
         <p>インセンティブ</p>
     </div>
-    <div class="three">
+
+    <div class = "money">
+        {% for inmoney1 in money1%}
+        <h2>{{inmoney1[0]}}</h2>
+        {% endfor %}円
+    </div>    
+
+    <div class="one">
         <p>今月の</p>
     </div>
-    <div class="four">
+    <div class="one">
         <p>インセンティブ</p>
     </div>
-    <button onclick="location.href='menu.html'">戻る</button></br>
+    <div class = "money">
+        {% for inmoney2 in money2%}
+        <h2>{{inmoney2[0]}}</h2>
+        {% endfor %}円
+    </div> 
+    <div style="text-align: center;">
+    <button onclick="location.href='{{ url_for('menu') }}'">戻る</button>
+    </div>
 </body>
 </html>
