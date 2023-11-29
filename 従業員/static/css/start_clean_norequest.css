@@ -18,22 +18,37 @@ header .titlename{
 }
 
 .room_number {
+    text-align: left;
+}
+
+h1 {
     text-align: center;
 }
 
-.content {
+h2 {
     text-align: center;
-}
-
-.content h1 {
     color: red;
 }
 
+.request {
+    background-color: #E1E1E1;
+}
+
+.request h2 {
+    color: black;
+}
+
 .buttons {
-    text-align: center;
+    display: flex;
 }
 
 .button1 {
+    margin: 50px;
+    width: 100px;
+    height: 30px;
+}
+
+.button2 {
     margin: 50px;
     width: 100px;
     height: 30px;
