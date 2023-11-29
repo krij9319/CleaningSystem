@@ -153,7 +153,46 @@ def request(room_number):
     cursor.close()
     connection.close()
     return rows
+
+# 客室状況
+def room_status(room_number):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT status FROM guestroom WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_number,))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    return row
   
+# 要望なし
+def no_request(room_nubmer):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id FROM guestroom WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_nubmer,))
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    return rows
+
+
+# 清掃中
+def cleaning(room_number):
+    connetion = get_connection()
+    cursor = connetion.cursor()
+    sql = "UPDATE guestroom SET status = 1 WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_number,))
+    connetion.commit()
+    
+    cursor.close()
+    connetion.close()
+
 # 今日のインセンティブ
 def insentive_today(employee_id):
     connection = get_connection()
@@ -181,15 +220,3 @@ def insentive_monday(employee_id):
     cursor.close()
     connection.close()
     return rows
-
-# 清掃中
-def cleaning(room_number):
-    connetion = get_connection()
-    cursor = connetion.cursor()
-    sql = "UPDATE guestroom SET status = 1 WHERE room_id = %s"
-    
-    cursor.execute(sql, (room_number,))
-    connetion.commit()
-    
-    cursor.close()
-    connetion.close()
