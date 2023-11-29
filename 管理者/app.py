@@ -109,6 +109,10 @@ def confirm_number():
         db.password_update(pass2, number)
         msg = 'パスワードを変更しました。'
         return render_template('index.html', msg=msg)
+    else:
+        error = '入力内容に誤りがあります'
+        return render_template('confirm_input.html', error=error)
+        
 
 @app.route('/menu', methods=['GET'])
 def menu():
@@ -142,6 +146,15 @@ def room_management():
 @app.route('/sift')
 def shift_management():
     return render_template('sift_management.html')  
+
+@app.route('/employee')
+def employee_all():
+    employee = db.select_all_emp()
+    return render_template('employee_all.html', employees = employee)  
+
+@app.route('/detail')
+def employee_detail():
+    return render_template('employee_detail.html')  
   
 if __name__ == '__main__':
     app.run(debug=True)
