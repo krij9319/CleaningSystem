@@ -149,7 +149,6 @@ def request(room_number):
     
     cursor.execute(sql, (room_number,))
     rows = cursor.fetchall()
-    print(rows)
     
     cursor.close()
     connection.close()

@@ -60,12 +60,16 @@ h3 {
     font-size: 30px;
     margin-top: 25px;
     width: 200px;
+    border: 1px solid #000;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
 }
 
 .button2 {
     font-size: 30px;
     margin-top: 25px;
     width: 110px;
+    border: 1px solid #000;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
 }
 
 .input-text {

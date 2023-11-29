@@ -43,6 +43,8 @@ header p {
     margin-top: 25px;
     height: 45px;
     width: 170px;
+    border: 1px solid #000;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
 }
 
 .a-text {

@@ -167,3 +167,15 @@ def insert_emp(id, name, email, concat, otp):
     connection.close()
 
   return count
+
+def select_all_emp():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM employee"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    return rows

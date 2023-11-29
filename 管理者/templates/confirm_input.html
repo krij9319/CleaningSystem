@@ -13,7 +13,7 @@
     </header>   
     <h3>パスワード変更</h3>
     {% if error != null %}
-    <p style="color:red">{{error}}</p>
+    <p style="color:red" class="text">{{error}}</p>
     {% endif %}
     <form action="{{url_for('confirm_number')}}" method="post" class="form">
         <h4>入力したメールアドレスに送られた確認番号を入力し、<br>
