@@ -132,7 +132,7 @@ def password_update(password, otp):
 def noclean_2f_list():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id FROM guestroom WHERE status = 0 and floors = 2"
+    sql = "SELECT room_id FROM guestroom WHERE status = 0 and floors = 2 ORDER BY room_id ASC"
     
     cursor.execute(sql)
     rows = cursor.fetchall()
@@ -141,7 +141,7 @@ def noclean_2f_list():
     connection.close()
     return rows
   
-# 清掃開始
+# 要望
 def request(room_number):
     connection = get_connection()
     cursor = connection.cursor()
@@ -181,3 +181,15 @@ def insentive_monday(employee_id):
     cursor.close()
     connection.close()
     return rows
+
+# 清掃中
+def cleaning(room_number):
+    connetion = get_connection()
+    cursor = connetion.cursor()
+    sql = "UPDATE guestroom SET status = 1 WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_number,))
+    connetion.commit()
+    
+    cursor.close()
+    connetion.close()
