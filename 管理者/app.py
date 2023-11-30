@@ -79,19 +79,19 @@ def navigateSend():
 @app.route('/numbermail', methods=['POST'])
 def send_number():
     mail_address = request.form.get('mail')
-    authnumber = db.generate_new_number()
     
-    db.update_number(authnumber, mail_address)
-    
-    to = mail_address
-    subject = '確認番号'
-    body = f'確認番号は{authnumber}です。'
-    
-    mail.send_mail(to, subject, body)
     if mail_address == '':
         error = 'このメールアドレスは登録されていません'
         return render_template('OTP_mail.html', error=error)
     else:
+        authnumber = db.generate_new_number()
+    
+        db.update_number(authnumber, mail_address)
+        
+        to = mail_address
+        subject = '確認番号'
+        body = f'確認番号は{authnumber}です。'
+        mail.send_mail(to, subject, body)
         return redirect(url_for('navigateNumber'))
 
 @app.route('/sendnumber', methods=['GET'])
@@ -109,6 +109,10 @@ def confirm_number():
         db.password_update(pass2, number)
         msg = 'パスワードを変更しました。'
         return render_template('index.html', msg=msg)
+    else:
+        error = '入力内容に誤りがあります'
+        return render_template('confirm_input.html', error=error)
+        
 
 @app.route('/menu', methods=['GET'])
 def menu():
@@ -134,6 +138,23 @@ def emp_regi():
     
     mail.send_mail(to, subject, body)
     return redirect(url_for('index'))
-    
+
+@app.route('/room')
+def room_management():
+    return render_template('room_management.html')
+
+@app.route('/sift')
+def shift_management():
+    return render_template('sift_management.html')  
+
+@app.route('/employee')
+def employee_all():
+    employee = db.select_all_emp()
+    return render_template('employee_all.html', employees = employee)  
+
+@app.route('/detail')
+def employee_detail():
+    return render_template('employee_detail.html')  
+  
 if __name__ == '__main__':
     app.run(debug=True)
