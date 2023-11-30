@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/clean.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/clean_norequest.css')}}">
     <title>清掃</title>
 </head>
 <body>
@@ -38,23 +38,6 @@
         <input type="checkbox" id="myCheckbox" name="myCheckbox" value="チェックされたときの値">
         <label for="myCheckbox">要望に応えているか</label></br>
     </div>
-    
-    <div class="content2">
-        {% for room in clean %}
-        <h5>ナイトウェア {{room[1]}}</h5>
-        <h5>バスタオル {{room[2]}}</h5>
-        <h5>ミネラルウォーター {{room[3]}}</h5>
-        <h5>フェイスタオル {{room[4]}}</h5>
-        <h5>ティッシュ {{room[5]}}</h5>
-        <h5>緑茶 {{room[6]}}</h5>
-        <h5>トイレットペーパー {{room[7]}}</h5>
-        <h5>スリッパ {{room[8]}}</h5>
-        <h5>ヘアブラシ {{room[9]}}</h5>
-        <h5>歯ブラシ {{room[10]}}</h5>
-        <h5>その他 {{room[11]}}</h5>
-        {% endfor %}
-    </div>
-
 
     <div class="end">
         <h2>清掃を終了しますか?</h2>
