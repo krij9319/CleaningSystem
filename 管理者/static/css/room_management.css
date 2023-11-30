@@ -1,0 +1,144 @@
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+body {
+    color: #707070;
+}
+
+header {
+    color:#1AA9FB;
+    border-bottom: 1px solid #707070;
+    text-align: center;
+}
+
+header p {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0%;
+}
+
+.titlename {
+    text-decoration: none;
+    font-size: 45px;
+    color:inherit;
+    margin-right: 460px;
+    margin-bottom: 5px;
+}
+
+.exp {
+    display: flex;
+    justify-content: space-between;
+    font-size: 35px;
+    border: 1px solid black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+    height: 50px;
+}
+
+.ex {
+    margin-right: 20px;
+    margin-top: 0px;
+}
+
+.allbox {
+    font-size: 25px;
+    display:flex;
+}
+
+.box1 {
+    width: 35px;
+    height: 35px;
+    background: #FF8F8F;
+}
+
+.box2 {
+    width: 35px;
+    height: 35px;
+    background: #FFFF8A;
+}
+
+.box3 {
+    width: 35px;
+    height: 35px;
+    background: #82FA95;
+}
+
+.box4 {
+    width: 35px;
+    height: 35px;
+    background: #82DAFA;
+}
+
+.F-1 {
+    text-align: center;
+}
+
+.F-2 {
+    transform: translate(7.25%,0%);
+}
+
+.floor {
+    transform: translate(7.25%,0%);
+}
+
+.a {
+    margin-right: 5px; /* ボタン同士の間隔 */
+}
+.b {
+    margin-right: 5px; /* ボタン同士の間隔 */
+}
+label input {
+    display: none; /* デフォルトのinputは非表示にする */
+}
+
+label.a span.c {
+    color: #333;
+    background: #82FA95;
+    border: 1px solid black;
+    font-size: 20px; 
+    padding: 10px 35px; 
+}
+label.b span.d {
+    color: #333;
+    background: #82FA95;
+    border: 1px solid black;
+    font-size: 15px; 
+    padding: 15px 35px; 
+}
+label.a input:checked + span.c {
+    color: black;
+    background: #82DAFA; 
+}
+label.b input:checked + span.d {
+    color: black;
+    background: #82DAFA; 
+}
+
+.size {
+    font-size: 20px;
+    width: 130px;
+    padding: 15px;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+    border: 1px solid #000;
+}
+
+.btn1 {
+    font-size: 11px;
+    width: 170px;
+    padding: 10px;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+    border: 1px solid #000;
+    transform: translate(480%,-130%);
+}
+
+.btn2 {
+    font-size: 11px;
+    width: 170px;
+    padding: 10px;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+    border: 1px solid #000;
+    transform: translate(490%,-130%);
+}
