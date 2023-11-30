@@ -180,7 +180,6 @@ def no_request(room_nubmer):
     connection.close()
     return rows
 
-
 # 清掃中
 def cleaning(room_number):
     connetion = get_connection()
@@ -192,6 +191,18 @@ def cleaning(room_number):
     
     cursor.close()
     connetion.close()
+
+# 清掃完了
+def clean_completion(room_number):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "UPDATE guestroom SET status = 2 WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_number,))
+    connection.commit()
+    
+    cursor.close()
+    connection.close()
 
 # 今日のインセンティブ
 def insentive_today(employee_id):
