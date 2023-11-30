@@ -143,7 +143,12 @@ def clean():
     
     if status[0] != 0:
         request_room = db.request(room_number)
-        return render_template('start_clean_error.html', error=request_room)
+        print(request_room)
+        if request_room != []:
+            return render_template('start_clean_error.html', error=request_room)
+        else:
+            norequest_room = db.no_request(room_number)
+            return render_template('clean_norequest_error.html', error=norequest_room)
     else:
         request_room = db.request(room_number)
         
@@ -159,6 +164,18 @@ def clean():
 @app.route('/clean_error', methods=['GET'])
 def clean_error():
     return render_template('clean_error.html')
+
+# 要望なし清掃エラー
+@app.route('/clean_norequest_error', methods=['GET'])
+def clean_norequest_error():
+    return render_template('clean_norequest_error.html')
+
+# 清掃完了
+@app.route('/clean_completion', methods=['GET'])
+def clean_completion():
+    room_number = request.args.get('room_number')
+    db.clean_completion(room_number)
+    return redirect(url_for('noclean_2f_all'))
 
 # シフト申請
 @app.route('/shift', methods=['GET'])

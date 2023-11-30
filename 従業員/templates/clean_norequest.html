@@ -41,8 +41,11 @@
 
     <div class="end">
         <h2>清掃を終了しますか?</h2>
-        <form action="">
+        <form action="{{url_for('clean_completion')}}" method="get">
+            {% for room in clean %}
+            <input type="hidden" name="room_number" value="{{room[0]}}">
             <button type="submit" class="button1">完了</button>
+            {% endfor %}
         </form>
     </div>
 

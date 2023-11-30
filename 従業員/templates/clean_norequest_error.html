@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/clean_norequest_error.css')}}">
+    <title>清掃開始エラー</title>
+</head>
+<body>
+    <header>
+        <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
+        <h3>ダイワロイネットホテル</h3>
+    </header>
+
+    <div class="room_number">
+        {% for requests in error %}
+            <h1>{{requests[0]}}</h1>
+        {% endfor %}
+    </div>
+    <div class="content">
+        <h1>エラー</h1>
+        <h2>この部屋は、清掃中<br>または清掃済みです。</h2>
+    </div>
+    <div class="buttons">
+        <form action="{{url_for('noclean_2f_all')}}" method="get">
+            <button type="submit" class="button1">戻る</button>
+        </form>
+    </div>
+</body>
+</html>
