@@ -14,22 +14,29 @@
     
     <div class="hierarchy">
         <h1 class="noclean">未清掃一覧</h1>
-            <select id="cleaningOptions" name="cleaningOptions" onchange="showButtons()" class="pulldown">
-                <option value="option2">2F</option>
-                <option value="option3">3F</option>
-                <option value="option4">4F</option>
-                <option value="option5">5F</option>
-                <option value="option6">6F</option>
-                <option value="option7">7F</option>
-                <option value="option8">8F</option>
-                <option value="option9">9F</option>
-                <option value="option10">10F</option>
-                <option value="option11">11F</option>
-                <option value="option12">すべて</option>
+            <select id="cleaningOptions" name="cleaningOptions" onChange="location.href=value" class="pulldown">
+                <option>フロア</option>
+                <option value="{{url_for('noclean_all', floor=2)}}" value="2">2F</option>
+                <option value="{{url_for('noclean_all', floor=3)}}" value="3">3F</option>
+                <option value="{{url_for('noclean_all', floor=4)}}" value="4">4F</option>
+                <option value="{{url_for('noclean_all', floor=5)}}" value="5">5F</option>
+                <option value="{{url_for('noclean_all', floor=6)}}" value="6">6F</option>
+                <option value="{{url_for('noclean_all', floor=7)}}" value="7">7F</option>
+                <option value="{{url_for('noclean_all', floor=8)}}" value="8">8F</option>
+                <option value="{{url_for('noclean_all', floor=9)}}" value="9">9F</option>
+                <option value="{{url_for('noclean_all', floor=10)}}" value="10">10F</option>
+                <option value="{{url_for('noclean_all', floor=11)}}" value="11">11F</option>
+                <option value="{{url_for('noclean_all_list')}}">すべて</option>
             </select></br>
     </div>
 
-    <h1>2F</h1></br>
+    <script>
+        function redirectToPage() {
+          var selectBox = document.getElementById("cleaningOptions");
+          var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+          window.location.href = selectedValue; // オプションの値に応じてリンク先にリダイレクト
+        }
+    </script>
 
     <div class="noclean_room">
         {% for rooms in room %}

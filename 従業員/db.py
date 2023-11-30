@@ -132,7 +132,7 @@ def password_update(password, otp):
 def noclean_2f_list():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id FROM guestroom WHERE status = 0 and floors = 2 ORDER BY room_id ASC"
+    sql = "SELECT room_id, floors FROM guestroom WHERE status = 0 and floors = 2 ORDER BY room_id ASC"
     
     cursor.execute(sql)
     rows = cursor.fetchall()
@@ -141,6 +141,32 @@ def noclean_2f_list():
     connection.close()
     return rows
   
+def noclean_list(floor):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id FROM guestroom WHERE status = 0 and floors = %s ORDER BY room_id ASC"
+    
+    cursor.execute(sql, (floor,))
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    return rows  
+
+def noclean_all():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id FROM guestroom WHERE status = 0 ORDER BY room_id ASC"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+    print(rows)
+    
+    cursor.close()
+    connection.close()
+    return rows  
+
 # 要望
 def request(room_number):
     connection = get_connection()
