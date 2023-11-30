@@ -146,8 +146,14 @@ def clean():
         return render_template('start_clean_error.html', error=request_room)
     else:
         request_room = db.request(room_number)
-        db.cleaning(room_number)
-        return render_template('clean.html', clean=request_room)
+        
+        if request_room == []:
+            clean_no_request = db.no_request(room_number)
+            db.cleaning(room_number)
+            return render_template('clean_norequest.html', clean=clean_no_request)
+        else:
+            db.cleaning(room_number)
+            return render_template('clean.html', clean=request_room)
 
 # 清掃エラー
 @app.route('/clean_error', methods=['GET'])
