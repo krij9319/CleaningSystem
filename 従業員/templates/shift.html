@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='/css/shift.css')}}">
     <title>シフト申請</title>
-    
+
 </head>
 <body>
-<header>
-<a href="{{}}">清掃管理システム</a>
-<h4>ダイワロイネットホテル</h4>
-</header>
-<h1>シフト申請</h1>
-<p class="days">毎月20日まで</p>
+    <header>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <h3>ダイワロイネットホテル</h3>
+    </header>
+<div class = "title">シフト申請</div>
+<p class="days">※毎月20日まで</p>
 <p class="holiday">休日希望日にチェックしてください</p>
 <div id="currentMonth"></div>
 <div id="header" class="header"></div>
 <div id="calendar" class="calendar"></div>
-<button onclick="location.href='menu.html'">戻る</button>
+<button onclick="location.href='{{ url_for('menu') }}'">戻る</button>
 <form id="shiftForm">
 <button onclick="submitShift()">申請</button>
 </form>

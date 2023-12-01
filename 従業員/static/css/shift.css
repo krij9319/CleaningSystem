@@ -1,4 +1,44 @@
 @charset "UTF-8";
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+header {
+    color: #1AA9FB;
+    text-align: center;
+    border-bottom: 3px solid #707070;
+}
+
+header .titlename {
+    color: inherit;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.title {
+    font-size: 35px;
+}
+
+.days {
+    margin-left: 70%;
+}
+
+.holiday {
+    text-align: center;
+    color: red;
+}
+
+.list_job {
+    text-align: center;
+}
+
+.button1 {
+    margin-top: 50px;
+    width: 170px;
+    height: 50px;
+}
+
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 40px);
@@ -35,12 +75,35 @@
     text-align: center;
     font-weight: bold;
 }
+
 #currentMonth {
     padding-left: 0px;
     font-size: 18px;
     margin-bottom: 10px;
     grid-column: 3 / span 3;
 }
-.days{
+
+.days {
     color: red;
+}
+
+@media screen and (max-width: 600px) {
+    /* Styles for screens with a width of 600 pixels or less */
+    .title {
+        font-size: 25px;
+    }
+
+    .days {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .calendar,
+    .header {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .day {
+        width: 100%;
+    }
 }
