@@ -115,6 +115,17 @@ def noclean_2f_all():
     noclean_list = db.noclean_2f_list()
     return render_template('noclean_all.html', room=noclean_list)
 
+@app.route('/noclean_all', methods=['GET'])
+def noclean_all():
+    floor = request.args.get('floor')
+    noclean_list = db.noclean_list(floor)
+    return render_template('noclean_all.html', room=noclean_list)
+
+@app.route('/noclean_all_list', methods=['GET'])
+def noclean_all_list():
+    noclean_list = db.noclean_all()
+    return render_template('noclean_all.html', room=noclean_list)
+
 # 清掃開始
 @app.route('/start_clean', methods=['GET'])
 def start_clean():
