@@ -3,22 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='/css/employee_register.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/employee_register.css')}}">
     <title>新規従業員登録</title>
 </head>
 <body>
     <header>
-        <h1 id="head_main">清掃管理システム</h1>
-        <h3 id="head_sub">ダイワロイネットホテル</h3>        
-    <h2>新規従業員登録</h2>
-    <form action="{{url_for('emp_regi')}}" method="post">
-        従業員ID<br><input type="text" name="employee_id"><br>
-        氏名<br><input type="text" name="name"><br>
-        メールアドレス<br><input type="text" name="mail"><br>
-        営業時間<br>
-        <input type="radio" name="concat" value="A">9:00~15:00<input type="radio" name="concat" value="B">10:00~15:00<br>
-        <button type="submit">登録</button>
+        <a class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
+    </header>        
+    <h1>新規従業員登録</h1>
+    <form action="{{url_for('con_regi')}}" method="post">
+        <p class="te1">従業員ID</p>
+        <input type="text" name="employee_id" class="input-text"><br>
+        <p class="te2">氏名</p>
+        <input type="text" name="name" class="input-text"><br>
+        <p class="te3">メールアドレス</p>
+        <input type="text" name="mail" class="input-text"><br>
+        <p class="te4">業務時間</p>
+        <div class="rbs">
+            <div class="bs1">
+                <input type="radio" name="concat" value="A" class="rb">&nbsp;9:00~15:00
+            </div>
+            <div class="bs2">
+                <input type="radio" name="concat" value="B" class="rb">&nbsp;10:00~15:00
+            </div>
+        </div>
+        <button type="submit" class="button1">登録</button>
     </form>
-    <button type="submit">戻る</button>
+    <button type="submit" class="button2"><a href="{{url_for('employee_all')}}" style='text-decoration:none;'>戻る</a></button>
 </body>
 </html>

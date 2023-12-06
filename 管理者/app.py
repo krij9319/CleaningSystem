@@ -122,6 +122,22 @@ def menu():
 def emp():
     return render_template('employee_register.html')
 
+@app.route('/confirmemp' , methods=['POST'])
+def con_regi():
+    id = request.form.get('employee_id')
+    name = request.form.get('name')
+    email = request.form.get('mail')
+    concat = request.form.get('concat')
+    if concat == 'A':
+        concat = '9:00~15:00'
+    else:
+        concat ='10:00~15:00'
+    print(concat)
+    
+        
+    return render_template('confirm_register.html', id=id, name=name, email=email, concat=concat)
+    
+
 @app.route('/empregi', methods=['POST'])
 def emp_regi():
     id = request.form.get('employee_id')
@@ -129,6 +145,11 @@ def emp_regi():
     email = request.form.get('mail')
     concat = request.form.get('concat')
     otp = mail.generate_otp()
+    
+    if concat == '9:00~15:00':
+        concat = 'A'
+    else:
+        concat = 'B'
 
     db.insert_emp(id, name, email, concat, otp)
 
@@ -137,7 +158,7 @@ def emp_regi():
     body = f'あなたのワンタイムパスワードは{otp}です。'
     
     mail.send_mail(to, subject, body)
-    return redirect(url_for('index'))
+    return redirect(url_for('employee_all'))
 
 @app.route('/room')
 def room_management():
