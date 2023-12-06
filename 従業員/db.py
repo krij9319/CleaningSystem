@@ -1,3 +1,4 @@
+import datetime
 import os, psycopg2, string, random, hashlib, mail
 
 # postgresへの接続
@@ -256,15 +257,14 @@ def clean_completion(room_number):
     connection.close()
 
 # シフト申請
-def shift_request(emplyee_id, holiday_request):
-    sql = "INSERT INTO shift_reguest VALUES(defalut, %s, %s)"
+def shift_request(employee_id, holiday_request):
+    sql = "INSERT INTO shift_request VALUES(default, %s, %s)"
     
     try:
       connection = get_connection()
       cursor = connection.cursor()
       
       cursor.execute(sql, (employee_id, holiday_request))
-      count = cursor.rowcount()
       connection.commit()
       
     except psycopg2.DatabaseError:
@@ -274,7 +274,7 @@ def shift_request(emplyee_id, holiday_request):
       cursor.close()
       connection.close()
     
-    return count
+    return 'うんち'
       
 
 # 今日のインセンティブ
