@@ -1,5 +1,7 @@
+from click import DateTime
 from flask import Flask, render_template, request, redirect,url_for,session
-import db,string,random,os,mail
+import db,string,random,os,mail,datetime
+from datetime import datetime as dt
 from datetime import timedelta
 from smtplib import SMTP
 from email.mime.text import MIMEText
@@ -200,12 +202,21 @@ def shift():
 def shift_request():
     holiday_request = request.form.get('holiday_request')
     employee_id = request.form.get('employee_id')
-    print(holiday_request)
+    print(holiday_request.split(','))
+    holiday = []
+    for holi in holiday_request.split(','):
+        print(holi)
+        if holi == '':
+            break
+        holiday.append(datetime.datetime.strptime(holi, '%Y/%m/%d'))
+        print(holiday)
+    print(holiday)
     print(employee_id)
-    db.shift_request(employee_id, holiday_request)
+    for holi in holiday:
+        print(type(holi))
+        db.shift_request(employee_id, holi)
     message = "シフト申請が完了しました"
     return render_template('menu.html', msg=message, employee=employee_id)
-
 
 # シフト閲覧
 @app.route('/shift_all', methods=['GET'])
