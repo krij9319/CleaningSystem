@@ -179,3 +179,13 @@ def select_all_emp():
     cursor.close()
     connection.close()
     return rows
+
+def get_user_details(user_name):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT employee_id, name, mail FROM employee WHERE name = %s"
+    cursor.execute(sql, (user_name,))
+    user_details = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return user_details

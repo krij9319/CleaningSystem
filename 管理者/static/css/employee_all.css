@@ -1,0 +1,124 @@
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+body {
+    text-align: center;
+    color: #707070;
+}
+
+header {
+    color:#1AA9FB;
+    border-bottom: 1px solid #707070;
+}
+
+header p {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0%;
+}
+
+.titlename {
+    text-decoration: none;
+    font-size: 45px;
+    color:inherit;
+    margin-right: 460px;
+    margin-bottom: 5px;
+}
+
+ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-top: 0%;
+}
+
+ul li:last-of-type {
+    margin-left: auto;
+}
+
+li p{
+    font-size: 35px;
+}
+
+.text {
+    text-decoration: none;
+    font-size: 15px;
+    color: #000;
+}
+
+table {
+    margin: auto;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+table td:nth-child(1) {
+    width: 80px;
+}
+
+table td:nth-child(2) {
+    width: 80px;
+}
+
+table td:nth-child(3) {
+    width: 170px;
+}
+
+table td:nth-child(4) {
+    width: 50px;
+}
+
+table td:nth-child(5) {
+    width: 150px;
+}
+
+th {
+    padding: 7px;
+    border: solid 1px #000;
+}
+
+td {
+    padding: 5px;
+    border: solid 1px #000;
+}
+
+.btn1 {
+    width: 150px;
+    padding: 5px;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+    border: 1px solid #000; 
+}
+
+.btn2 {
+    background-color: #fbfbfb;
+    font-size: 11px;
+    width: 75px;
+    height: 35px;
+    border-radius: 1000px;
+    border: 1px solid #000;
+}
+
+.btn3 {
+    font-size: 11px;
+    width: 70px;
+    height: 45px;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+    border: 1px solid #000;
+}
+
+.a-text {
+    text-decoration: none;
+    font-size: 15px;
+    color: #000;
+}
+
+.time {
+    margin-right: 35%;
+}
+
+.username {
+    text-decoration: none;
+    color: #000;
+}
