@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/employee_detail.css')}}">
     <title>Document</title>
 </head>
 <body>
-    
+    <header>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
+    </header>  
+    <h3>従業員詳細</h3>
+    {% for data in user_details %}
+        <p>従業員ID<br>
+            {{ data[0] }}</p>
+        <p>名前<br>
+            {{ data[1] }}</p>
+        <p>メール<br>
+            {{ data[2] }}</p>
+    {% endfor %}
+        <p>評価<br>
+            5.0</p>
+        <p>インセンティブ<br>
+            今日:100円&nbsp;&nbsp;今月:2500円</p>    
+    <button class="a-btn"><a href="{{url_for('employee_all')}}" class="a-text">戻る</a></button>  
+    <button class="a-btn"><a href="#" class="a-text">編集</a></button>  
+    <button class="a-btn"><a href="#" class="a-text">削除</a></button>
 </body>
 </html>

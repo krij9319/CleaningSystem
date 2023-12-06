@@ -154,7 +154,10 @@ def employee_all():
 
 @app.route('/detail')
 def employee_detail():
-    return render_template('employee_detail.html')  
+    user_name = request.args.get('emp_name')
+    print(user_name)
+    user_detail = db.get_user_details(user_name)
+    return render_template('employee_detail.html', user_details=user_detail)
   
 if __name__ == '__main__':
     app.run(debug=True)
