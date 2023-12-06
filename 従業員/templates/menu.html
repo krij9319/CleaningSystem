@@ -19,12 +19,18 @@
         <form action="{{url_for('shift_all')}}" method="get">
             <button type="submit" class="button1">シフト閲覧</button></br>
         </form>
-        <form action="{{url_for('shift')}}" method="get">
+        {% for employee_number in employee %}
+        <form action="{{url_for('shift')}}" method="post">
+            <input type="hidden" name="employee_numbers" value="{{employee_number}}">
             <button type="submit" class="button1">シフト申請</button></br>
         </form>
+        {% endfor %}
+        {% for employee_number in employee %}
         <form action="{{url_for('insentive_view')}}" method="get">
+            <input type="hidden" name="employee_number" value="{{employee_number}}">
             <button type="submit" class="button1">インセンティブ</button></br>
         </form>
+        {% endfor %}
         <form action="{{url_for('logout')}}" method="get">
             <button type="submit" class="button1">ログアウト</button></br>
         </form>

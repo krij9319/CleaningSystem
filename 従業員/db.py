@@ -128,6 +128,31 @@ def password_update(password, otp):
 
   return count
 
+# 従業員ID
+def employee_id(email):
+  connection = get_connection()
+  cursor = connection.cursor()
+  sql = "SELECT employee_id FROM employee WHERE mail = %s"
+  
+  cursor.execute(sql, (email,))
+  row = cursor.fetchone()
+  
+  cursor.close()
+  connection.close()
+  return row
+
+def employee_id_2(employees):
+  connection = get_connection()
+  cursor = connection.cursor()
+  sql = "SELECT employee_id FROM employee WHERE employee_id = %s"
+  
+  cursor.execute(sql, (employees,))
+  row = cursor.fetchone()
+  
+  cursor.close()
+  connection.close()
+  return row
+
 # 未清掃一覧
 def noclean_2f_list():
     connection = get_connection()
@@ -229,6 +254,28 @@ def clean_completion(room_number):
     
     cursor.close()
     connection.close()
+
+# シフト申請
+def shift_request(emplyee_id, holiday_request):
+    sql = "INSERT INTO shift_reguest VALUES(defalut, %s, %s)"
+    
+    try:
+      connection = get_connection()
+      cursor = connection.cursor()
+      
+      cursor.execute(sql, (employee_id, holiday_request))
+      count = cursor.rowcount()
+      connection.commit()
+      
+    except psycopg2.DatabaseError:
+      count = 0
+    
+    finally:
+      cursor.close()
+      connection.close()
+    
+    return count
+      
 
 # 今日のインセンティブ
 def insentive_today(employee_id):
