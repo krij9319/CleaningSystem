@@ -16,12 +16,8 @@ header .titlename {
     font-size: 40px;
 }
 
-.title {
-    font-size: 35px;
-}
-
-.days {
-    margin-left: 70%;
+body {
+    text-align: center;
 }
 
 .holiday {
@@ -33,10 +29,25 @@ header .titlename {
     text-align: center;
 }
 
+.header_title {
+    display: flex;
+}
+
+.main_title {
+    margin-left: 20px;
+}
+
+.sub_title {
+    margin-top: 30px;
+    margin-left: 80px;
+    color: red;
+}
+
 .button1 {
     margin-top: 50px;
-    width: 170px;
-    height: 50px;
+    text-align: center;
+    width:75px;
+    height: 30px;
 }
 
 .calendar {
@@ -85,6 +96,18 @@ header .titlename {
 
 .days {
     color: red;
+}
+
+#currentMonth {
+    background-color: #E6E6E6;
+}
+
+#header {
+    background-color: #EBEBEB;
+}
+
+#calendar {
+    background-color: #F2F2F2;
 }
 
 @media screen and (max-width: 600px) {

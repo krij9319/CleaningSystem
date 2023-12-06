@@ -37,7 +37,8 @@ def login():
     
     if db.login(email, password):
         session['user'] = True
-        return redirect(url_for('menu'))
+        employee_id = db.employee_id(email)
+        return render_template('menu.html', employee=employee_id)
     
     else:
         error = 'ユーザ名またはパスワードが違います。'
@@ -189,14 +190,22 @@ def clean_completion():
     return redirect(url_for('noclean_2f_all'))
 
 # シフト申請
-@app.route('/shift', methods=['GET'])
+@app.route('/shift', methods=['GET', 'POST'])
 def shift():
-    return render_template('shift.html')
+    employee_id = request.form.get('employee_numbers')
+    print(employee_id)
+    return render_template('shift.html', employees=employee_id)
 
 @app.route('/submit_shift', methods=['POST'])
-def submit_shift():
-    selected_days = request.form.getlist('selected_days[]')
-    return render_template('shift_all.html', selected_days=selected_days)
+def shift_request():
+    holiday_request = request.form.get('holiday_request')
+    employee_id = request.form.get('employee_id')
+    print(holiday_request)
+    print(employee_id)
+    db.shift_request(employee_id, holiday_request)
+    message = "シフト申請が完了しました"
+    return render_template('menu.html', msg=message, employee=employee_id)
+
 
 # シフト閲覧
 @app.route('/shift_all', methods=['GET'])
