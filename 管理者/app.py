@@ -157,7 +157,7 @@ def emp_regi():
     subject = 'ワンタイムパスワード'
     body = f'あなたのワンタイムパスワードは{otp}です。'
     
-    mail.send_mail(to, subject, body)
+    mail.send_mail(to, subject, body)    
     return redirect(url_for('employee_all'))
 
 @app.route('/room')
