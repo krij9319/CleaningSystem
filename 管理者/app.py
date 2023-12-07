@@ -134,9 +134,9 @@ def emp_regi():
 @app.route('/room')
 def room_management():
     return render_template('room_management.html')
-@app.route('/sift')
+@app.route('/shift')
 def shift_management():
-    return render_template('sift_management.html')
+    return render_template('shift_management.html')
 @app.route('/employee')
 def employee_all():
     employee = db.select_all_emp()
