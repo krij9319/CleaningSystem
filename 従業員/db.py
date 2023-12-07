@@ -274,7 +274,7 @@ def shift_request(employee_id, holiday_request):
       cursor.close()
       connection.close()
     
-    return 'うんち'
+    return '完了'
       
 
 # 今日のインセンティブ
