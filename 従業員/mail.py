@@ -12,7 +12,7 @@ def generate_number():
 
 def send_mail(to, subject, body):
     ID = to
-    PASS = os.environ['MAIL_PASS']
+    PASS = os.environ['Cleaning_PASS']
     HOST = 'smtp.gmail.com'
     PORT = 587
     
