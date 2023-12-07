@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/confirm_register.css')}}">
+    <title>新規従業員登録</title>
 </head>
 <body>
-    
+    <header>
+        <a class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
+    </header>        
+    <h1>新規従業員登録</h1>
+    <h2 style="color:red">登録内容をご確認ください</h2>
+    <form action="{{url_for('emp_regi')}}" method="post">
+        {%if id%}
+        <p class="te1">従業員ID</p>
+        <p class="xt1">{{id}}</p>
+        <input type="hidden" name="employee_id" value="{{ id }}">
+        {%endif%}
+        {%if name%}
+        <p class="te2">氏名</p>
+        <p class="xt2">{{name}}</p>
+        <input type="hidden" name="name" value="{{ name }}">
+        {%endif%}
+        {%if email%}
+        <p class="te3">メールアドレス</p>
+        <p class="xt3">{{email}}</p>
+        <input type="hidden" name="mail" value="{{ email }}">
+        {%endif%}
+        {%if concat%}
+        <p class="te4">業務時間</p>
+        <p class="xt4">{{concat}}</p>
+        <input type="hidden" name="concat" value="{{ concat }}">
+        {%endif%}
+        <h2 style="color:red">この内容で登録しますか？</h2>
+        <button type="submit" class="button1">登録</button>
+    </form>
+    <button type="submit" class="button2"><a href="{{url_for('emp')}}" style='text-decoration:none;'>戻る</button>
 </body>
 </html>

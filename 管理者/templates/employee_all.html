@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/employee_all.css')}}">
     <title>Document</title>
 </head>
 <body>
     <header>
-        <h1>清掃管理システム</h1>
-        <h3>ダイワロイネットホテル</h3>
-    </header>
-    <h3>従業員一覧</h3>
-    <button><a href="{{url_for('emp')}}">従業員の新規登録</a></button><br>
-    <input type="checkbox" id="check">削除済みの従業員も表示
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
+    </header>  
+    <ul>
+        <li><p>従業員一覧</p></li>
+        <li>
+            <button class="btn1"><a href="{{url_for('emp')}}" class="text">従業員の新規登録</a></button><br>
+            <input type="checkbox" id="check">削除済みの従業員も表示
+        </li>
+    </ul>       
     <table>
         <thead>
             <tr>
@@ -28,16 +33,16 @@
                 {% for employee in employees %}
                 <tr>
                     <td>{{ employee[0]}}</td>
-                    <td>{{ employee[2]}}</td>
-                    <td><a href="{{url_for('employee_detail')}}" class="username">{{ employee[1]}}</a></td>
-                    <td>良</td>
-                    <td><button><a href="#">アンケート</a></button></td>
-                </tr>
+                    <td>{{ employee[6]}}</td>
+                    <td><a href="{{url_for('employee_detail', emp_name=employee[1])}}" name="emp_name" value="{{employee[1]}}" class="username">{{employee[1]}}</a></td>
+                    <td>5.0</td>
+                    <td><button class="btn2"><a href="#" class="a-text">閲覧</a></button></td>
                 {% endfor %}
+                </tr>
             </form>
         </tbody>
-    </table>
-    <p>A 9:00~15:00<br>B 10:00~15:00</p>
-    <button><a href="{{url_for('admintop')}}">戻る</a></button>
+    </table>   
+    <p class="time">A 9:00~15:00<br>B 10:00~15:00</p>
+    <button class="btn3"><a href="{{url_for('admintop')}}" class="a-text">戻る</a></button>
 </body>
 </html>

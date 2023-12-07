@@ -94,6 +94,7 @@ def menu():
 @app.route('/emp', methods=['GET'])
 def emp():
     return render_template('employee_register.html')
+
 @app.route('/confirmemp' , methods=['POST'])
 def con_regi():
     id = request.form.get('employee_id')
@@ -106,6 +107,7 @@ def con_regi():
         concat ='10:00~15:00'
     print(concat)
     return render_template('confirm_register.html', id=id, name=name, email=email, concat=concat)
+
 @app.route('/empregi', methods=['POST'])
 def emp_regi():
     id = request.form.get('employee_id')
@@ -113,16 +115,20 @@ def emp_regi():
     mail_address = request.form.get('mail')
     concat = request.form.get('concat')
     otp = mail.generate_otp()
+    
     if concat == '9:00~15:00':
         concat = 'A'
     else:
         concat = 'B'
+
     db.insert_emp(id, name, mail_address, concat, otp)
+
     to = mail_address
     subject = 'ワンタイムパスワード'
     body = f'あなたのワンタイムパスワードは{otp}です。'
     mail.send_mail(to, subject, body)
     return redirect(url_for('employee_all'))
+
 @app.route('/room')
 def room_management():
     return render_template('room_management.html')
@@ -139,5 +145,6 @@ def employee_detail():
     print(user_name)
     user_detail = db.get_user_details(user_name)
     return render_template('employee_detail.html', user_details=user_detail)
+
 if __name__ == '__main__':
     app.run(debug=True)

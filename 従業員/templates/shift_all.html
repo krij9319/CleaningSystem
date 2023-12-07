@@ -3,26 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/shift_all.css')}}">
+    <title>シフト</title>
+
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>申請内容確認</title>
-</head>
-<body>
-    <h1>申請内容確認</h1>
-    <p>選択された日付:</p>
-    <ul>
-        {% for day in selected_days %}
-            <li>{{ day }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/">戻る</a>
-</body>
-</html>
+    <header>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <h3>ダイワロイネットホテル</h3>
+    </header>
+    <button onclick="location.href='{{ url_for('menu') }}'">戻る</button>
 </body>
 </html>

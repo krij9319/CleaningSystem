@@ -12,6 +12,10 @@
         <h3>ダイワロイネットホテル</h3>
     </header>
 
+    {% if msg != null %}
+            <h1 style="color:red" class="message">{{msg}}</h1>
+    {% endif %}
+
     <div class="list_job">
         <form action="{{url_for('noclean_2f_all')}}" method="get">
             <button type="submit" class="button1">未清掃一覧</button></br>

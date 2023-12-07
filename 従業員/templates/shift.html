@@ -22,12 +22,12 @@
     <div id="header" class="header"></div>
     {% for employee in employees %}
     <form action="{{url_for('shift_request')}}" method="post">
-        <div id="calendar" name="holiday_request" value="setCalendarDate()" class="calendar"></div>
-        <input type="text" size="100" id="employee_id" name="employee_id" value="employee" >
+        <div id="calendar" value="setCalendarDate()" class="calendar"></div>
+        <input type="hidden" id="employee_id" name="holiday_request" value="">
+        <input type="hidden" name="employee_id" value="{{employee}}">
         <button type="submit" class="button1">申請する</button>
     </form>
     {% endfor %}
-
 
     <script>
         const calendar = document.getElementById('calendar', value="setCalendarDate()");
