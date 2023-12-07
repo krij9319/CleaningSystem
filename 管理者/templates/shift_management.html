@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/shift_management.css')}}">
+    <title>シフト管理</title>
+
 </head>
 <body>
+    <header>
+        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <h3>ダイワロイネットホテル</h3>
+    </header>
+    <h3 class = "up">出勤日にチェックを入れて更新してください</h3>
+    <h3 class = "black">希望休には■が自動で入ります</h3>
     
+    
+    <button onclick="location.href='{{ url_for('menu') }}'">戻る</button>
 </body>
 </html>
