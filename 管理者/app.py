@@ -142,7 +142,7 @@ def con_regi():
 def emp_regi():
     id = request.form.get('employee_id')
     name = request.form.get('name')
-    email = request.form.get('mail')
+    mail_address = request.form.get('mail')
     concat = request.form.get('concat')
     otp = mail.generate_otp()
     
@@ -151,9 +151,9 @@ def emp_regi():
     else:
         concat = 'B'
 
-    db.insert_emp(id, name, email, concat, otp)
+    db.insert_emp(id, name, mail_address, concat, otp)
 
-    to = email
+    to = mail_address
     subject = 'ワンタイムパスワード'
     body = f'あなたのワンタイムパスワードは{otp}です。'
     
