@@ -214,6 +214,7 @@ def room_status(room_number):
     
     cursor.execute(sql, (room_number,))
     row = cursor.fetchone()
+    print(row)
     
     cursor.close()
     connection.close()
