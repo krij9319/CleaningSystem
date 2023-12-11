@@ -257,6 +257,40 @@ def clean_completion(room_number):
     cursor.close()
     connection.close()
 
+# インセンティブ引き出し
+def select_incentive(room_number):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT incentive FROM guestroom WHERE room_id = %s"
+    
+    cursor.execute(sql, (room_number,))
+    row = cursor.fetchone()
+    print(row)
+    
+    cursor.close()
+    connection.close()
+    return row
+    
+# 清掃履歴登録
+def insert_cleaning_history(emp, room_number, incentive):
+    sql = "INSERT INTO cleaning_history VALUES(default, null, %s, %s, current_timestamp, %s)"
+    
+    try:
+      connection = get_connection()
+      cursor = connection.cursor()
+      
+      cursor.execute(sql, (emp, room_number, incentive))
+      connection.commit()
+    
+    except psycopg2.DatabaseError:
+      count = 0
+    
+    finally:
+      cursor.close()
+      connection.close()
+    
+    return '完了'
+
 # シフト申請
 def shift_request(employee_id, holiday_request):
     sql = "INSERT INTO shift_request VALUES(default, %s, %s)"
@@ -276,7 +310,6 @@ def shift_request(employee_id, holiday_request):
       connection.close()
     
     return '完了'
-      
 
 # 今日のインセンティブ
 def insentive_today(employee_id):
