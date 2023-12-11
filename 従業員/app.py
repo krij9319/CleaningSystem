@@ -39,7 +39,7 @@ def login():
     
     if db.login(email, password):
         employee_id = db.employee_id(email)
-        app.permanent_session_lifetime = timedelta(minutes=15)
+        app.permanent_session_lifetime = timedelta(hours=5)
         session['emp'] = employee_id
         print(employee_id)
         return render_template('menu.html', session=session)
@@ -211,8 +211,13 @@ def clean_norequest_error():
 def clean_completion():
     room_number = request.form.get('room_number')
     emp = session.get('emp')
+    incentive = db.select_incentive(room_number)
+    print(room_number)
     print(emp)
+    print(incentive)
     db.clean_completion(room_number)
+    cleaning_history = db.insert_cleaning_history(emp, room_number, incentive)
+    print(cleaning_history)
     noclean_list = db.noclean_2f_list()
     return render_template('noclean_all.html', room=noclean_list, session=session)
 
