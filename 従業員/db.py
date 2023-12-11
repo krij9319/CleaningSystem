@@ -214,6 +214,7 @@ def room_status(room_number):
     
     cursor.execute(sql, (room_number,))
     row = cursor.fetchone()
+    print(row)
     
     cursor.close()
     connection.close()
@@ -274,7 +275,7 @@ def shift_request(employee_id, holiday_request):
       cursor.close()
       connection.close()
     
-    return 'うんち'
+    return '完了'
       
 
 # 今日のインセンティブ

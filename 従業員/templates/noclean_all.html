@@ -8,26 +8,31 @@
 </head>
 <body>
     <header>
+        {% if emp != [] %}
+        <input type="hidden" value="{{emp}}">
         <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
         <h3>ダイワロイネットホテル</h3>
+        {% endif %}    
     </header>
     
     <div class="hierarchy">
         <h1 class="noclean">未清掃一覧</h1>
+        {% if employees != [] %}
             <select id="cleaningOptions" name="cleaningOptions" onChange="location.href=value" class="pulldown">
                 <option>フロア</option>
-                <option value="{{url_for('noclean_all', floor=2)}}" value="2">2F</option>
-                <option value="{{url_for('noclean_all', floor=3)}}" value="3">3F</option>
-                <option value="{{url_for('noclean_all', floor=4)}}" value="4">4F</option>
-                <option value="{{url_for('noclean_all', floor=5)}}" value="5">5F</option>
-                <option value="{{url_for('noclean_all', floor=6)}}" value="6">6F</option>
-                <option value="{{url_for('noclean_all', floor=7)}}" value="7">7F</option>
-                <option value="{{url_for('noclean_all', floor=8)}}" value="8">8F</option>
-                <option value="{{url_for('noclean_all', floor=9)}}" value="9">9F</option>
-                <option value="{{url_for('noclean_all', floor=10)}}" value="10">10F</option>
-                <option value="{{url_for('noclean_all', floor=11)}}" value="11">11F</option>
+                <option value="{{url_for('noclean_all', floor=2, employee_numbers="{{employees}}")}}" value="2">2F</option>
+                <option value="{{url_for('noclean_all', floor=3, employee_numbers="{{employees}}")}}" value="3">3F</option>
+                <option value="{{url_for('noclean_all', floor=4, employee_numbers="{{employees}}")}}" value="4">4F</option>
+                <option value="{{url_for('noclean_all', floor=5, employee_numbers="{{employees}}")}}" value="5">5F</option>
+                <option value="{{url_for('noclean_all', floor=6, employee_numbers="{{employees}}")}}" value="6">6F</option>
+                <option value="{{url_for('noclean_all', floor=7, employee_numbers="{{employees}}")}}" value="7">7F</option>
+                <option value="{{url_for('noclean_all', floor=8, employee_numbers="{{employees}}")}}" value="8">8F</option>
+                <option value="{{url_for('noclean_all', floor=9, employee_numbers="{{employees}}")}}" value="9">9F</option>
+                <option value="{{url_for('noclean_all', floor=10, employee_numbers="{{employees}}")}}" value="10">10F</option>
+                <option value="{{url_for('noclean_all', floor=11, employee_numbers="{{employees}}")}}" value="11">11F</option>
                 <option value="{{url_for('noclean_all_list')}}">すべて</option>
             </select></br>
+        {% endif %}
     </div>
 
     <script>
@@ -40,15 +45,18 @@
 
     <div class="noclean_room">
         {% for rooms in room %}
-        <form action="{{url_for('start_clean')}}" method="get">
+        {% if emp != [] %}
+        <form action="{{url_for('start_clean')}}" method="post">
+            <input type="hidden" name="employee_numbers" value="{{emp}}">
             <input type="hidden" name="room_number" value="{{rooms[0]}}"><br>
             <button type="submit" class="button1">{{rooms[0]}}</button><br>
         </form>
+        {% endif %}
         {% endfor %}
     </div>
     
     <div class="return_menu">
-        <form action="{{url_for('menu')}}" method="get">
+        <form action="{{url_for('menu')}}" method="post">
             <button type="submit" class="button2">戻る</button>
         </form>
     </div>

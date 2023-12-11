@@ -13,8 +13,66 @@
         <h3>ダイワロイネットホテル</h3>
     </header>
     <h3 class = "up">出勤日にチェックを入れて更新してください</h3>
-    <h3 class = "black">希望休には■が自動で入ります</h3>
-    
+    <h3 class = "black">希望休には🔲が自動で入ります</h3>
+    <h2 id="currentMonth"></h2>
+    <div class="days-container" id="daysContainer"></div>
+    <div class="shift-requests">
+        <ul>
+            {% for shift in shifts %}
+                <li>{{ shift.employee_id }}: {{ shift.holiday_request }}</li>
+            {% endfor %}
+        </ul>
+      <p class = "A">A 9:00~15:00</P>
+      <p class = "B">B 10:00~15:00</P>
+    </div>
+  
+    <script>
+      function generateCalendar() {
+        const currentYear = 2024;
+        const currentMonth = 0; 
+  
+        document.getElementById('currentMonth').innerText = `${currentYear}年 ${currentMonth + 1}月`;
+  
+        const daysContainer = document.getElementById('daysContainer');
+        daysContainer.innerHTML = '';
+  
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // 月の日数を取得
+  
+        const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+        for (let i = 0; i < firstDayOfWeek; i++) {
+          const emptyDayWrapper = document.createElement('div');
+          emptyDayWrapper.className = 'day-wrapper empty';
+          daysContainer.appendChild(emptyDayWrapper);
+        }
+  
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dayWrapper = document.createElement('div');
+          dayWrapper.className = 'day-wrapper';
+  
+          const dayElement = document.createElement('div');
+          dayElement.className = 'day';
+          dayElement.innerText = day;
+  
+          const weekdayElement = document.createElement('div');
+          weekdayElement.className = 'weekday';
+          weekdayElement.innerText = getWeekday(currentYear, currentMonth, day);
+  
+          dayWrapper.appendChild(dayElement);
+          dayWrapper.appendChild(weekdayElement);
+  
+          daysContainer.appendChild(dayWrapper);
+        }
+      }
+  
+      function getWeekday(year, month, day) {
+        const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+        const date = new Date(year, month, day);
+        const weekdayIndex = date.getDay();
+        return weekdays[weekdayIndex];
+      }
+  
+      generateCalendar();
+    </script>
     
     <button onclick="location.href='{{ url_for('menu') }}'">戻る</button>
 </body>
