@@ -48,6 +48,21 @@ p {
     background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
 }
 
+
+.a-btn2 {
+    width: 90px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid #000;
+    margin-top: 20px;
+    margin: 20px;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+    font-size: 22px;
+}
+
 .a-text {
     text-align: center;
     color: #000;

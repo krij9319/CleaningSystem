@@ -168,16 +168,12 @@ def insert_emp(id, name, email, concat, otp):
 
   return count
 
-def select_all_emp():
+def all_employee():
     connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT * FROM employee"
-    
-    cursor.execute(sql)
+    cursor.execute(sql,)
     rows = cursor.fetchall()
-    
-    cursor.close()
-    connection.close()
     return rows
 
 def get_user_details(user_name):
@@ -189,3 +185,23 @@ def get_user_details(user_name):
     cursor.close()
     connection.close()
     return user_details
+  
+def employee_delete(id):
+  sql = 'UPDATE employee SET delete_flag = True WHERE employee_id = %s'
+  
+  try :   # 例外処理
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(sql, (id,))
+    count = cursor.rowcount # 更新件数を取得
+    connection.commit()
+
+  except psycopg2.DatabaseError:    # Java でいう catch 失敗した時の処理をここに書く
+    count = 0   # 例外が発生したら 0 を return する。
+
+  finally:  # 成功しようが、失敗しようが、close する。
+    cursor.close()
+    connection.close()
+
+  return count
