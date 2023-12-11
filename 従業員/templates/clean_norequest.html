@@ -8,8 +8,11 @@
 </head>
 <body>
     <header>
+        {% if emp != [] %}
+        <input type="hidden" value="{{emp}}">
         <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
         <h3>ダイワロイネットホテル</h3>
+        {% endif %}    
     </header>
     
     <div class="room">
@@ -41,12 +44,15 @@
 
     <div class="end">
         <h2>清掃を終了しますか?</h2>
-        <form action="{{url_for('clean_completion')}}" method="get">
-            {% for room in clean %}
+        {% for room in clean %}
+        {% if emp != [] %}
+        <form action="{{url_for('clean_completion')}}" method="post">
+            <input type="hidden" value="{{emp}}">
             <input type="hidden" name="room_number" value="{{room[0]}}">
             <button type="submit" class="button1">完了</button>
-            {% endfor %}
         </form>
+        {% endif %}
+        {% endfor %}
     </div>
 
         <script>

@@ -8,8 +8,11 @@
 </head>
 <body>
     <header>
+        {% if emp != [] %}
+        <input type="hidden" value="{{emp}}">
         <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
         <h3>ダイワロイネットホテル</h3>
+        {% endif %}    
     </header>
     
     <div id="displayButtonNumber"></div>
