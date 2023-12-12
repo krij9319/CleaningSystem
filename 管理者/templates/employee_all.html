@@ -15,7 +15,7 @@
         <li><p>従業員一覧</p></li>
         <li>
             <button class="btn1"><a href="{{url_for('emp')}}" class="text">従業員の新規登録</a></button><br>
-            <input type="checkbox" id="check">削除済みの従業員も表示
+            <input type="checkbox" id="check" name="deleted">削除済みの従業員も表示
         </li>
     </ul>       
     <table>
@@ -31,18 +31,34 @@
         <tbody>
             <form>
                 {% for employee in employees %}
-                <tr>
-                    <td>{{ employee[0]}}</td>
-                    <td>{{ employee[6]}}</td>
-                    <td><a href="{{url_for('employee_detail', emp_name=employee[1])}}" name="emp_name" value="{{employee[1]}}" class="username">{{employee[1]}}</a></td>
-                    <td>5.0</td>
-                    <td><button class="btn2"><a href="#" class="a-text">閲覧</a></button></td>
+                    <tr {% if employee[7] == true %}class = "hidden"{% endif %}>
+                        <td>{{ employee[0]}}</td>
+                        <td>{{ employee[6]}}</td>
+                        <td><a href="{{url_for('employee_detail', emp_name=employee[1])}}" name="emp_name" value="{{employee[1]}}" class="username">{{employee[1]}}</a></td>
+                        <td>5.0</td>
+                        <td><button class="btn2"><a href="#" class="a-text">閲覧</a></button></td>
+                    </tr>
                 {% endfor %}
-                </tr>
             </form>
         </tbody>
     </table>   
     <p class="time">A 9:00~15:00<br>B 10:00~15:00</p>
     <button class="btn3"><a href="{{url_for('admintop')}}" class="a-text">戻る</a></button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var rows = document.querySelectorAll(".hidden");
+            var check = document.getElementById("check");
+
+            check.addEventListener("click", function() {
+                rows.forEach(function(row) {
+                    if (row.style.display === "none" || row.style.display === "") {
+                        row.style.display = "table-row";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
