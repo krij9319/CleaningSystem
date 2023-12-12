@@ -9,8 +9,11 @@
 
 <body>
     <header>
-        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        {% if emp != [] %}
+        <input type="hidden" value="{{emp}}">
+        <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
         <h3>ダイワロイネットホテル</h3>
+        {% endif %}    
     </header>
 
     <a href="{{url_for('insentive_statictics')}}" class="before">これまでの統計</a>
@@ -23,9 +26,9 @@
     </div>
 
     <div class = "money">
-        {% for inmoney1 in money1%}
-        <h2>{{inmoney1[0]}}</h2>
-        {% endfor %}円
+        {% if money1 != []%}
+        <h2 class="incentive_money">{{money1}}円</h2>
+        {% endif %}
     </div>    
 
     <div class="one">
@@ -34,13 +37,19 @@
     <div class="one">
         <p>インセンティブ</p>
     </div>
+
     <div class = "money">
-        {% for inmoney2 in money2%}
-        <h2>{{inmoney2[0]}}</h2>
-        {% endfor %}円
-    </div> 
-    <div style="text-align: center;">
-    <button onclick="location.href='{{ url_for('menu') }}'">戻る</button>
+        {% if money2 != []%}
+        <h2 class="incentive_money">{{money2}}円</h2>
+        {% endif %}
+    </div>
+    <div class="return_menu">
+        {% if emp != [] %}
+        <form action="{{url_for('menu')}}" method="post">
+            <input type="hidden" value="{{emp}}">
+            <button type="submit" class="button1">戻る</button>
+        </form>
+        {% endif %}
     </div>
 </body>
 </html>

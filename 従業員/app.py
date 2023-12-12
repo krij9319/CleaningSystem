@@ -35,7 +35,7 @@ def login():
         return render_template('index.html', error=error)
     
     if otp and otp[5] == False:
-        return redirect(url_for('otp_mail'))
+        return redirect(url_for('OTP_mail'))
     
     if db.login(email, password):
         employee_id = db.employee_id(email)
@@ -252,14 +252,20 @@ def shift_request():
 # シフト閲覧
 @app.route('/shift_all', methods=['GET', 'POST'])
 def shift_all():
+    emp = session.get('emp')
+    print(emp)
     return render_template('shift_all.html')
 
 # インセンティブ閲覧
 @app.route('/insentive_view', methods=['GET', 'POST'])
 def insentive_view():
-    insentive_today = db.insentive_today
-    insentive_month = db.insentive_month
-    return render_template('insentive_view.html', money1 = insentive_today, money2 = insentive_month)
+    emp = session.get('emp')
+    incentive_today = db.incentive_today(emp)
+    incentive_month = db.incentive_month(emp)
+    print(emp)
+    print(incentive_today)
+    print(incentive_month)
+    return render_template('insentive_view.html', session=session, money1=incentive_today, money2=incentive_month)
 
 # インセンティブ統計
 @app.route('/insentive_statictics', methods=['GET', 'POST'])

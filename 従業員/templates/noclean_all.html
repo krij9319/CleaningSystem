@@ -56,9 +56,13 @@
     </div>
     
     <div class="return_menu">
+        {% if emp != [] %}
         <form action="{{url_for('menu')}}" method="post">
+            <input type="hidden" value="{{emp}}">
             <button type="submit" class="button2">戻る</button>
         </form>
+        {% endif %}
     </div>
+
 </body>
 </html>
