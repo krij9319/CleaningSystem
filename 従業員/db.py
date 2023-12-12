@@ -312,29 +312,27 @@ def shift_request(employee_id, holiday_request):
     return '完了'
 
 # 今日のインセンティブ
-def insentive_today(employee_id):
+def incentive_today(employee_id):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT avg(incentive) from employee, cleaning_history where employee_id = %s and NOW()"
+    sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND CAST(clean_datetime AS DATE) = CURRENT_DATE"
     
-    cursor.execute(sql, (employee_id,))
-    rows = cursor.fetchall()
-    print(rows)
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
     
     cursor.close()
     connection.close()
-    return rows
+    return row
 
 # 今月のインセンティブ
-def insentive_monday(employee_id):
+def incentive_month(employee_id):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT avg(incentive) from employee, cleaning_history where employee_id = %s and LAST_DAY()"
+    sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND DATE_PART('YEAR', clean_datetime) = DATE_PART('YEAR', CURRENT_TIMESTAMP) AND DATE_PART('MONTH', clean_datetime) = DATE_PART('MONTH', CURRENT_TIMESTAMP)"
     
-    cursor.execute(sql, (employee_id,))
-    rows = cursor.fetchall()
-    print(rows)
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
     
     cursor.close()
     connection.close()
-    return rows
+    return row
