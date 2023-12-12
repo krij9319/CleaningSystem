@@ -36,7 +36,7 @@
         const daysContainer = document.getElementById('daysContainer');
         daysContainer.innerHTML = '';
   
-        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // 月の日数を取得
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   
         const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
         for (let i = 0; i < firstDayOfWeek; i++) {
