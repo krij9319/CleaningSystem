@@ -96,7 +96,7 @@ label input {
 
 label.a span.c {
     color: #333;
-    background: #82FA95;
+    /* background: #82FA95; */
     border: 1px solid black;
     font-size: 20px; 
     padding: 10px 35px; 
@@ -142,3 +142,122 @@ label.b input:checked + span.d {
     border: 1px solid #000;
     transform: translate(490%,-130%);
 }
+
+div.rooms {
+    display: flex;
+    justify-content: space-around;
+  }
+  p.room {
+      color: #333;
+      background: #82FA95;
+      border: 1px solid black;
+      font-size: 25px; 
+      width: 100px;
+      padding: 15px 20px;
+  }
+  
+  p.rs {
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+  }
+  
+  .m {
+    background: #FF8F8F;
+    font-size: 11px;
+    width: 130px;
+    padding: 10px;
+    border: 1px solid #000;
+    margin: 10px;
+  }
+  
+  .s {
+    background: #FFFF8A;
+    font-size: 11px;
+    width: 130px;
+    padding: 10px;
+    border: 1px solid #000;
+    margin: 10px;
+  }
+  
+  .z {
+    background: #82FA95;
+    font-size: 11px;
+    width: 130px;
+    padding: 10px;
+    border: 1px solid #000;
+    margin: 10px;
+  }
+  
+/* .modal-open{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 50px;
+    font-weight: bold;
+    color: #fff;
+    background: #000;
+    margin: auto;
+    cursor: pointer;
+    transform: translate(-50%,-50%);
+  } */
+
+  .modal-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(0,0,0,50%);
+    padding: 40px 20px;
+    overflow: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    box-sizing: border-box;
+  }
+
+  .modal-container:before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+
+  .modal-container.active{
+    opacity: 1;
+    visibility: visible;
+    z-index: 1000px;
+  }
+ 
+  .modal-body{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 525px;
+    width: 100%;
+  }
+
+  .modal-close{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    color: #000;
+    cursor: pointer;
+  }
+
+  .modal-content{
+    background: #fff;
+    text-align: left;
+    padding: 30px;
+  }

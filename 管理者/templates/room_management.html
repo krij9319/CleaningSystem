@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>客室管理</title>
-    <link rel="stylesheet" href="css/room_management.css">
+    <script src="{{url_for("static",filename="/css/jquery-3.7.1.min.js")}}"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/room_management.css')}}">
 </head>
 <body>
     <header>
@@ -22,18 +23,43 @@
         <div class="box3"></div>：清掃済み
         <div class="box4"></div>：選択中
     </div>
-    <button class="btn1">更新</button><button class="btn2">全て未清掃に変更</button><br>
+    <button class="btn2">全て未清掃に変更</button><br>
+    <button class="modal-open btn1">更新</button>
+    <div class="modal-container">
+        <div class="modal-body">
+            <div class="modal-close">×</div>
+            <div class="modal-content">
+              <div class="rooms">
+                <p class="room rs" value="201">201</p>
+                <p class="room rs" value="319">319</p>
+                <p class="room rs" value="1102">1102</p>
+              </div>
+              <div class="rooms">
+                <p class="room rs" value="201">201</p>
+                <p class="room rs" value="319">319</p>
+                <p class="room rs" value="1102">1102</p>
+              </div>
+              <div class="rooms">
+                <p class="room rs" value="201">201</p>
+                <p class="room rs" value="319">319</p>
+              </div>
+              <div class="stbtn">
+                <button class="m">未清掃に変更</button>
+                <button class="s">清掃中に変更</button>
+                <button class="z">清掃済みに変更</button>
+              </div>
+            </div>
+        </div>
+    </div>
     <h3 class="floor">2F</h3><br>
     <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="201"><span class="c">201</span></label>
-        <label class="a"><input type="checkbox" name="room" value="202"><span class="c">202</span></label>
-        <label class="a"><input type="checkbox" name="room" value="203"><span class="c">203</span></label>
-        <label class="a"><input type="checkbox" name="room" value="204"><span class="c">204</span></label>
-        <label class="a"><input type="checkbox" name="room" value="205"><span class="c">205</span></label>
-        <label class="a"><input type="checkbox" name="room" value="206"><span class="c">206</span></label>
-        <label class="a"><input type="checkbox" name="room" value="207"><span class="c">207</span></label>
-        <label class="a"><input type="checkbox" name="room" value="208"><span class="c">208</span></label>
-        <label class="a"><input type="checkbox" name="room" value="209"><span class="c">209</span></label><br><br><br>
+        {% for room in room %}
+        <div id="{{room[2]}}">
+            {%if "{{room[2]}}" == 0%}
+            <label class="a" style="background: red;"><input type="checkbox" name="room" value="{{room[0]}}"><span class="c">{{room[0]}}</span></label>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
     <div class="F-2">
         <label class="a"><input type="checkbox" name="room" value="210"><span class="c">210</span></label>
@@ -341,5 +367,44 @@
     <div style="text-align: center;">
         <button class="size">戻る</button>
     </div>
+    <script>
+        $(function(){
+            var open = $('.modal-open'),
+              close = $('.modal-close'),
+              container = $('.modal-container');
+          
+            open.on('click',function(){ 
+              container.addClass('active');
+              return false;
+            });
+        
+            close.on('click',function(){  
+              container.removeClass('active');
+            });
+          
+            $(document).on('click',function(e) {
+              if(!$(e.target).closest('.modal-body').length) {
+                container.removeClass('active');
+              }
+            });
+          });
+        
+        let room = document.getElemetById("{{room[2]}}")
+        console.log(room)
+        switch (room) {
+            case 0:
+                room.style.backgroundColor = "red";
+                break;
+            case 1:
+                room.style.backgroundColor = "yellow";
+                break;
+            case 2:
+                room.style.backgroundColor = "green";
+                break;
+            default:
+                room.style.backgroundColor = "white";  // デフォルトの色（変更可能）
+                break;
+        }
+    </script>
 </body>
 </html>
