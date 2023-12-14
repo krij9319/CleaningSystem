@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-import db, string, random, mail
+import db, string, random, mail, psycopg2
 
 app = Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
@@ -157,7 +157,7 @@ def emp_regi():
     subject = 'ワンタイムパスワード'
     body = f'あなたのワンタイムパスワードは{otp}です。'
     
-    mail.send_mail(to, subject, body)
+    mail.send_mail(to, subject, body)    
     return redirect(url_for('employee_all'))
 
 @app.route('/room')
@@ -171,7 +171,7 @@ def shift_management():
 
 @app.route('/employee')
 def employee_all():
-    employee = db.select_all_emp()
+    employee = db.all_employee()
     return render_template('employee_all.html', employees = employee)  
 
 @app.route('/detail')
@@ -180,16 +180,6 @@ def employee_detail():
     print(user_name)
     user_detail = db.get_user_details(user_name)
     return render_template('employee_detail.html', user_details=user_detail)
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/emped' , methods=['POST'])
 def employee_edit():
@@ -210,6 +200,23 @@ def employee_edit():
     
     return render_template('confirm_edit.html',id=id, name=name, mail=email, concat=concat)
 
+ 
+@app.route('/delete', methods=['POST'])
+def emp_delete():
+    id = request.form.get('id')
+    print(id)
+    name = request.form.get('name')
+    mail_address = request.form.get('mail')
+    
+    return render_template('employee_delete.html', id=id, name=name, mail_address=mail_address) 
+
+@app.route('/complete_delete', methods=['POST'])
+def complete_delete():
+    id = request.form.get('emp_id')
+    # print(id)
+    db.employee_delete(id)
+    
+    return redirect(url_for('employee_all')) 
 
   
 if __name__ == '__main__':

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+header {
+    color: #1AA9FB;
+    text-align: center;
+    border-bottom: 3px solid #707070;
+}
+
+header .titlename {
+    color: inherit;
+    text-decoration: none;
+    font-size: 40px;
+}

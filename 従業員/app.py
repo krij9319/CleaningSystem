@@ -35,12 +35,14 @@ def login():
         return render_template('index.html', error=error)
     
     if otp and otp[5] == False:
-        return redirect(url_for('otp_mail'))
+        return redirect(url_for('OTP_mail'))
     
     if db.login(email, password):
-        session['user'] = True
         employee_id = db.employee_id(email)
-        return render_template('menu.html', employee=employee_id)
+        app.permanent_session_lifetime = timedelta(hours=5)
+        session['emp'] = employee_id
+        print(employee_id)
+        return render_template('menu.html', session=session)
     
     else:
         error = 'ユーザ名またはパスワードが違います。'
@@ -108,100 +110,129 @@ def change_password():
         return render_template('index.html', msg=msg)   
 
 # メニュー画面
-@app.route('/menu', methods=['GET'])
+@app.route('/menu', methods=['GET', 'POST'])
 def menu():
-    return render_template('menu.html')
+    emp = session.get('emp')
+    print(emp)
+    return render_template('menu.html', session=session)
 
 # 未清掃一覧
-@app.route('/noclean_2f_all', methods=['GET'])
+@app.route('/noclean_2f_all', methods=['GET', 'POST'])
 def noclean_2f_all():
+    emp = session.get('emp')
+    print(emp)
     noclean_list = db.noclean_2f_list()
-    return render_template('noclean_all.html', room=noclean_list)
+    return render_template('noclean_all.html', room=noclean_list, session=session)
 
-@app.route('/noclean_all', methods=['GET'])
+@app.route('/noclean_all', methods=['GET', 'POST'])
 def noclean_all():
     floor = request.args.get('floor')
+    emp = session.get('emp')
+    print(emp)
     noclean_list = db.noclean_list(floor)
-    return render_template('noclean_all.html', room=noclean_list)
+    return render_template('noclean_all.html', room=noclean_list, session=session)
 
-@app.route('/noclean_all_list', methods=['GET'])
+@app.route('/noclean_all_list', methods=['GET', 'POST'])
 def noclean_all_list():
     noclean_list = db.noclean_all()
-    return render_template('noclean_all.html', room=noclean_list)
+    emp = session.get('emp')
+    print(emp)
+    return render_template('noclean_all.html', room=noclean_list, session=session)
 
 # 清掃開始
-@app.route('/start_clean', methods=['GET'])
+@app.route('/start_clean', methods=['GET', 'POST'])
 def start_clean():
-    room_number = request.args.get('room_number')
+    room_number = request.form.get('room_number')
+    emp = session.get('emp')
     request_room = db.request(room_number)
+    print(room_number)
+    print(emp)
     print(request_room)
     
     if request_room == []:
         no_request = db.no_request(room_number)
-        return render_template('start_clean_norequest.html', request=no_request)
+        return render_template('start_clean_norequest.html', request=no_request, session=session)
     else:
-        return render_template('start_clean.html', request=request_room)
+        return render_template('start_clean.html', request=request_room, session=session)
         
 
 # 清掃開始エラー
-@app.route('/start_clean_error', methods=['GET'])
+@app.route('/start_clean_error', methods=['GET', 'POST'])
 def start_clean_error():
-    return render_template('start_clean_error.html')
+    emp = session.get('emp')
+    print(emp)
+    return render_template('start_clean_error.html', session=session)
 
 # 清掃画面
-@app.route('/clean', methods=['GET'])
+@app.route('/clean', methods=['GET', 'POST'])
 def clean():
-    room_number = request.args.get('room_number')
+    room_number = request.form.get('room_number')
+    emp = session.get('emp')
     status = db.room_status(room_number)
+    print(room_number)
+    print(emp)
     print(status)
     
     if status[0] != 0:
         request_room = db.request(room_number)
         print(request_room)
         if request_room != []:
-            return render_template('start_clean_error.html', error=request_room)
+            return render_template('start_clean_error.html', error=request_room, session=session)
         else:
             norequest_room = db.no_request(room_number)
-            return render_template('clean_norequest_error.html', error=norequest_room)
+            return render_template('clean_norequest_error.html', error=norequest_room, session=session)
     else:
         request_room = db.request(room_number)
         
         if request_room == []:
             clean_no_request = db.no_request(room_number)
             db.cleaning(room_number)
-            return render_template('clean_norequest.html', clean=clean_no_request)
+            return render_template('clean_norequest.html', clean=clean_no_request, session=session)
         else:
             db.cleaning(room_number)
-            return render_template('clean.html', clean=request_room)
+            return render_template('clean.html', clean=request_room, session=session)
 
 # 清掃エラー
-@app.route('/clean_error', methods=['GET'])
+@app.route('/clean_error', methods=['GET', 'POST'])
 def clean_error():
-    return render_template('clean_error.html')
+    emp = session.get('emp')
+    print(emp)
+    return render_template('clean_error.html', session=session)
 
 # 要望なし清掃エラー
-@app.route('/clean_norequest_error', methods=['GET'])
+@app.route('/clean_norequest_error', methods=['GET', 'POST'])
 def clean_norequest_error():
-    return render_template('clean_norequest_error.html')
+    emp = session.get('emp')
+    print(emp)
+    return render_template('clean_norequest_error.html', session=session)
 
 # 清掃完了
-@app.route('/clean_completion', methods=['GET'])
+@app.route('/clean_completion', methods=['GET', 'POST'])
 def clean_completion():
-    room_number = request.args.get('room_number')
+    room_number = request.form.get('room_number')
+    emp = session.get('emp')
+    incentive = db.select_incentive(room_number)
+    print(room_number)
+    print(emp)
+    print(incentive)
     db.clean_completion(room_number)
-    return redirect(url_for('noclean_2f_all'))
+    cleaning_history = db.insert_cleaning_history(emp, room_number, incentive)
+    print(cleaning_history)
+    noclean_list = db.noclean_2f_list()
+    return render_template('noclean_all.html', room=noclean_list, session=session)
 
 # シフト申請
 @app.route('/shift', methods=['GET', 'POST'])
 def shift():
-    employee_id = request.form.get('employee_numbers')
-    print(employee_id)
-    return render_template('shift.html', employees=employee_id)
+    emp = session.get('emp')
+    print(emp)
+    return render_template('shift.html', session=session)
 
 @app.route('/submit_shift', methods=['POST'])
 def shift_request():
     holiday_request = request.form.get('holiday_request')
-    employee_id = request.form.get('employee_id')
+    emp = session.get('emp')
+    print(emp)
     print(holiday_request.split(','))
     holiday = []
     for holi in holiday_request.split(','):
@@ -211,27 +242,33 @@ def shift_request():
         holiday.append(datetime.datetime.strptime(holi, '%Y/%m/%d'))
         print(holiday)
     print(holiday)
-    print(employee_id)
+    print(emp)
     for holi in holiday:
         print(type(holi))
-        db.shift_request(employee_id, holi)
+        db.shift_request(emp, holi)
     message = "シフト申請が完了しました"
-    return render_template('menu.html', msg=message, employee=employee_id)
+    return render_template('menu.html', msg=message, session=session)
 
 # シフト閲覧
-@app.route('/shift_all', methods=['GET'])
+@app.route('/shift_all', methods=['GET', 'POST'])
 def shift_all():
+    emp = session.get('emp')
+    print(emp)
     return render_template('shift_all.html')
 
 # インセンティブ閲覧
-@app.route('/insentive_view', methods=['GET'])
+@app.route('/insentive_view', methods=['GET', 'POST'])
 def insentive_view():
-    insentive_today = db.insentive_today
-    insentive_month = db.insentive_month
-    return render_template('insentive_view.html', money1 = insentive_today, money2 = insentive_month)
+    emp = session.get('emp')
+    incentive_today = db.incentive_today(emp)
+    incentive_month = db.incentive_month(emp)
+    print(emp)
+    print(incentive_today)
+    print(incentive_month)
+    return render_template('insentive_view.html', session=session, money1=incentive_today, money2=incentive_month)
 
 # インセンティブ統計
-@app.route('/insentive_statictics', methods=['GET'])
+@app.route('/insentive_statictics', methods=['GET', 'POST'])
 def insentive_statictics():
     return render_template('insentive_statictics.html')
 

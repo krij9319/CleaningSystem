@@ -168,16 +168,12 @@ def insert_emp(id, name, email, concat, otp):
 
   return count
 
-def select_all_emp():
+def all_employee():
     connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT * FROM employee"
-    
-    cursor.execute(sql)
+    cursor.execute(sql,)
     rows = cursor.fetchall()
-    
-    cursor.close()
-    connection.close()
     return rows
 
 def get_user_details(user_name):
@@ -190,36 +186,22 @@ def get_user_details(user_name):
     connection.close()
     return user_details
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 def employee_update(name, mail, concat, employee_id):
   sql = 'UPDATE employee SET name = %s, mail = %s, concat = %s, WHERE employee_id = %s'
+
+def employee_delete(id):
+  sql = 'UPDATE employee SET delete_flag = True WHERE employee_id = %s'
   
   try :   # 例外処理
     connection = get_connection()
     cursor = connection.cursor()
 
+
     cursor.execute(sql, (name, mail, concat, employee_id))
+
+    cursor.execute(sql, (id,))
+
     count = cursor.rowcount # 更新件数を取得
     connection.commit()
 
@@ -229,6 +211,7 @@ def employee_update(name, mail, concat, employee_id):
   finally:  # 成功しようが、失敗しようが、close する。
     cursor.close()
     connection.close()
+
 
   return count
 
@@ -244,3 +227,6 @@ def select_two_room():
     cursor.close()
     connection.close()
     return rows
+
+  return count
+

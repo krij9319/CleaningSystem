@@ -8,8 +8,11 @@
 </head>
 <body>
     <header>
+        {% if emp != [] %}
+        <input type="hidden" value="{{emp}}">
         <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
         <h3>ダイワロイネットホテル</h3>
+        {% endif %}    
     </header>
 
     <div class="room_number">
@@ -22,9 +25,12 @@
         <h2>この部屋は、清掃中<br>または清掃済みです。</h2>
     </div>
     <div class="buttons">
-        <form action="{{url_for('noclean_2f_all')}}" method="get">
+        {% if emp != [] %}
+        <form action="{{url_for('noclean_2f_all')}}" method="post">
+            <input type="hidden" value="{{emp}}">
             <button type="submit" class="button1">戻る</button>
         </form>
+        {% endif %}
     </div>
 </body>
 </html>

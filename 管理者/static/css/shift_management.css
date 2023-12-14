@@ -1,0 +1,118 @@
+html {
+    font-size: 100%;
+    background-color: #fbfbfb;
+}
+
+body {
+    text-align: center;
+    color: #050000;
+}
+
+header {
+    color:#1AA9FB;
+    border-bottom: 1px solid #707070;
+}
+
+header p {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 0%;
+}
+
+.titlename {
+    text-decoration: none;
+    font-size: 45px;
+    color:inherit;
+    margin-right: 460px;
+    margin-bottom: 5px;
+}
+
+#ps {
+    text-align: right;
+    margin-right: 50px;
+}
+
+.pass {
+    color: #1AA9FB;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.button1 {
+    font-size: 20px;
+    margin-top: 25px;
+    height: 45px;
+    width: 170px;
+    border: 1px solid #000;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+}
+
+.a-btn {
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    border: 2px solid #000000;
+    margin-top: 20px;
+    margin: 20px;
+    background-color: #fbfbfb;
+}
+
+.a-text {
+    text-align: center;
+    color: #090000;
+    text-decoration: none;
+    font-size: 55px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .days-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100vw; 
+    overflow-x: auto; 
+  }
+
+  .day-wrapper {
+    box-sizing: border-box;
+    text-align: center;
+    width: 36px; 
+    padding: 5px;
+    border: 1px solid black;
+  }
+
+  .empty {
+    width: 163px; 
+    box-sizing: border-box;
+  }
+
+  .day {
+    font-size: 0.8em;
+  }
+
+  .weekday {
+    font-size: 0.8em;
+    color: #030000;
+  }
+
+  .weekday {
+    font-size: 0.8em;
+    color: #030000; 
+}
+
+.day-wrapper:nth-child(7n) .weekday,
+.day-wrapper:nth-child(7n+1) .weekday {
+    color: blue;
+}
+
+.day-wrapper:nth-child(7n+1) .weekday {
+  color: red;
+}
+
