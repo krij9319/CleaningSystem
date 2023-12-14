@@ -1,6 +1,7 @@
 from click import DateTime
 from flask import Flask, render_template, request, redirect,url_for,session
 import db,string,random,os,mail,datetime
+import matplotlib.pyplot as plt
 from datetime import datetime as dt
 from datetime import timedelta
 from smtplib import SMTP
@@ -254,7 +255,7 @@ def shift_request():
 def shift_all():
     emp = session.get('emp')
     print(emp)
-    return render_template('shift_all.html')
+    return render_template('shift_all.html', session=session)
 
 # インセンティブ閲覧
 @app.route('/insentive_view', methods=['GET', 'POST'])
@@ -262,7 +263,7 @@ def insentive_view():
     emp = session.get('emp')
     incentive_today = db.incentive_today(emp)
     incentive_month = db.incentive_month(emp)
-    print(emp)
+    print(emp[0])
     print(incentive_today)
     print(incentive_month)
     return render_template('insentive_view.html', session=session, money1=incentive_today, money2=incentive_month)
@@ -270,7 +271,12 @@ def insentive_view():
 # インセンティブ統計
 @app.route('/insentive_statictics', methods=['GET', 'POST'])
 def insentive_statictics():
-    return render_template('insentive_statictics.html')
+    emp = session.get('emp')
+    print(emp)
+    categories = ['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日','11日','12日','13日','14日','15日','16日','17日','18日','19日','20日','21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日']
+    values = []
+    
+    return render_template('insentive_statictics.html', session=session)
 
 # ログアウト
 @app.route('/logout')
