@@ -162,11 +162,12 @@ def emp_regi():
 
 @app.route('/room')
 def room_management():
-    return render_template('room_management.html')
+    room = db.select_two_room()
+    return render_template('room_management.html',room=room)
 
-@app.route('/sift')
+@app.route('/shift')
 def shift_management():
-    return render_template('sift_management.html')  
+    return render_template('shift_management.html')  
 
 @app.route('/employee')
 def employee_all():
@@ -179,6 +180,26 @@ def employee_detail():
     print(user_name)
     user_detail = db.get_user_details(user_name)
     return render_template('employee_detail.html', user_details=user_detail)
+
+@app.route('/emped' , methods=['POST'])
+def employee_edit():
+    id = request.form.get('employee_id')
+    name = request.form.get('name')
+    email = request.form.get('mail')
+    concat = request.form.get('concat')
+    
+    if name == '':
+        error = '名前が未入力です'
+        return render_template('employee_edit.html', error=error)
+    if email == '':
+        error = 'メールアドレスが未入力です'
+        return render_template('employee_edit.html', error=error)
+    if concat == '':
+        error = '業務時間が未選択です'
+        return render_template('employee_edit.html', error=error)
+    
+    return render_template('confirm_edit.html',id=id, name=name, mail=email, concat=concat)
+
  
 @app.route('/delete', methods=['POST'])
 def emp_delete():
@@ -196,6 +217,7 @@ def complete_delete():
     db.employee_delete(id)
     
     return redirect(url_for('employee_all')) 
+
   
 if __name__ == '__main__':
     app.run(debug=True)
