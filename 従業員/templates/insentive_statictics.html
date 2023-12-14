@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script type="text/javascript">
+        function ShowNowYear() {
+           var now = new Date();
+           var year = now.getFullYear();
+           document.write(year);
+        }
+    </script>
+    <title>インセンティブ</title>
 </head>
 <body>
-    
+    <header>
+        {% if emp != [] %}
+        <input type="hidden" value="{{emp}}">
+        <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
+        <h3>ダイワロイネットホテル</h3>
+        {% endif %}    
+    </header>
+
+    <div class="past_to_far">
+        <h1 class="noclean">未清掃一覧</h1>
+            <select id="cleaningOptions" name="cleaningOptions" onChange="location.href=value" class="pulldown">
+                <option>
+                    <script type="text/javascript">ShowNowYear();</script>
+                </option>
+                <option value="" value="1">1月</option>
+                <option value="" value="2">2月</option>
+                <option value="" value="3">3月</option>
+                <option value="" value="4">4月</option>
+                <option value="" value="5">5月</option>
+                <option value="" value="6">6月</option>
+                <option value="" value="7">7月</option>
+                <option value="" value="8">8月</option>
+                <option value="" value="9">9月</option>
+                <option value="" value="10">10月</option>
+                <option value="" value="11">11月</option>
+                <option value="" value="12">12月</option>
+            </select></br>
+    </div>
 </body>
 </html>
