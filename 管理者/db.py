@@ -228,5 +228,3 @@ def select_two_room():
     connection.close()
     return rows
 
-  return count
-
