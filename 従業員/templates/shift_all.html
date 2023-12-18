@@ -16,15 +16,129 @@
         {% endif %}    
     </header>
     
-    {% if shift != [] %}
-        {{shift}}
-    {% endif %}
+    <div class="header_title">
+        <h1 class="main_title">シフト閲覧</h1>
+        {% if worktype != [] %}
+        <h3 class="sub_title">就業タイプ：{{worktype[0]}}</h3>
+        {% endif %}
+    </div>
+
+    {% for work in shift %}
+    {{work[0]}}
+    {% endfor %}
+    <div id="currentMonth"></div>
+    <div id="header" class="header"></div>
+    <div id="calendar" value="createCalendar()" class="calendar"></div>
+
+    <div class="work_type">
+        <p>A 9:00 ~ 15:00</p>
+        <p>B 10:00 ~ 15:00</p>
+    </div>
 
     {% if emp != [] %}
-        <form action="{{url_for('menu')}}" method="post">
+        <form action="{{url_for('menu')}}" method="post" class="return_menu">
             <input type="hidden" value="{{emp}}">
             <button type="submit" class="button1">戻る</button>
         </form>
     {% endif %}
+
+    <script>
+        const calendar = document.getElementById('calendar', value="setCalendarDate()");
+        const header = document.getElementById('header');
+        const dayNames = ["日", "月", "火", "水", "木", "金", "土"];
+        const currentMonthElement = document.getElementById('currentMonth');
+        const working = [];
+        {% for work in shift %}
+            working.push({{work[0]}});
+        {% endfor %}
+        console.log(working)
+        function createCalendar(year, month) {
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            currentMonthElement.textContent = `${year}年${month + 1}月`;
+            for (let i = 0; i < dayNames.length; i++) {
+                const dayLabel = document.createElement('div');
+                dayLabel.textContent = dayNames[i];
+                header.appendChild(dayLabel);
+            }
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.classList.add('day');
+                calendar.appendChild(emptyCell);
+            }
+            // createCalendar 関数内で日付と working 配列を比較して背景色を設定
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.classList.add('day');
+                day.textContent = i;
+
+                // 日付のフォーマットを作成
+                const currentDate = `${year}/${month + 1}/${i < 10 ? '0' + i : i}`;
+
+                // working 配列に含まれる日付と一致する場合は赤色の背景を設定する
+                if (working.includes(currentDate)) {
+                    day.classList.add('registered-date'); // CSSで定義されたクラス
+                }
+
+                day.addEventListener('click', toggleSelection);
+                calendar.appendChild(day);
+            }
+            }
+        
+        /****　別の月に同じ日はNG　*********************************************************/
+        var day = ["","","","","","","","","","",
+                           "","","","","","","","","","",
+                            "","","","","","","","","","",""];
+        function toggleSelection(event) {
+          if( event.target.classList.contains('selected') == false){
+              event.target.classList.add('selected');
+              var wday = nextYear+ "/" + (nextMonth+1) + "/" + event.target.textContent;
+              var i = parseInt(event.target.textContent);
+              day[i] = wday;
+          } else {
+              event.target.classList.remove('selected');
+              var wday = nextYear+ "/" + (nextMonth+1) + "/" + event.target.textContent;
+              var i = parseInt(event.target.textContent);
+              day[i] = "";
+          }
+          var str="";
+          for( i = 0 ; i < day.length ; i++ ) {
+            if( day[i] != "" )
+                 str += day[i] + ",";
+          }
+          document.getElementById('employee_id').value = str;
+        }
+    /**********************************************************************************/
+        function submitShift() {
+            const selectedDays = document.querySelectorAll('.day.selected');
+        }
+        function getFirstDayOfNextMonth() {
+            const currentDate = new Date();
+            const nextMonth = currentDate.getMonth() + 1;
+            const nextYear = currentDate.getFullYear();
+            return new Date(nextYear, nextMonth, 1);
+        }
+        function showNextMonth() {
+            const firstDayOfNextMonth = getFirstDayOfNextMonth();
+            const nextMonth = firstDayOfNextMonth.getMonth();
+            const nextYear = firstDayOfNextMonth.getFullYear();
+            calendar.innerHTML = '';
+            header.innerHTML = '';
+            createCalendar(nextYear, nextMonth);
+        }
+        const firstDayOfNextMonth = getFirstDayOfNextMonth();
+        const nextMonth = firstDayOfNextMonth.getMonth();
+        const nextYear = firstDayOfNextMonth.getFullYear();
+        createCalendar(nextYear, nextMonth);
+        function setCalendarDate() {
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = today.getMonth() + 1;
+            var day = today.getDate();
+            var formattedDate = year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+            document.getElementById('holiday_request').value = formattedDate;
+        }
+    </script>
+
 </body>
 </html>
