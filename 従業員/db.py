@@ -311,6 +311,20 @@ def shift_request(employee_id, holiday_request):
     
     return '完了'
 
+# シフト閲覧
+def shift_all(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT workday FROM shift WHERE employee_id = %s"
+    
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return row
+    
 # 今日のインセンティブ
 def incentive_today(employee_id):
     connection = get_connection()
@@ -329,6 +343,19 @@ def incentive_month(employee_id):
     connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND DATE_PART('YEAR', clean_datetime) = DATE_PART('YEAR', CURRENT_TIMESTAMP) AND DATE_PART('MONTH', clean_datetime) = DATE_PART('MONTH', CURRENT_TIMESTAMP)"
+    
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    return row
+
+# インセンティブ統計
+def incentive_statictics(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT incentive FROM cleaning_history WHERE employee_id = %s"
     
     cursor.execute(sql, (employee_id))
     row = cursor.fetchone()

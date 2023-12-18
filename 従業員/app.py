@@ -255,7 +255,9 @@ def shift_request():
 def shift_all():
     emp = session.get('emp')
     print(emp)
-    return render_template('shift_all.html', session=session)
+    work_day = db.shift_all(emp)
+    print(work_day)
+    return render_template('shift_all.html', session=session, shift=work_day)
 
 # インセンティブ閲覧
 @app.route('/insentive_view', methods=['GET', 'POST'])
@@ -273,10 +275,18 @@ def insentive_view():
 def insentive_statictics():
     emp = session.get('emp')
     print(emp)
-    categories = ['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日','11日','12日','13日','14日','15日','16日','17日','18日','19日','20日','21日','22日','23日','24日','25日','26日','27日','28日','29日','30日','31日']
+    categories = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+    incentive_list = db.incentive_statictics(emp)
     values = []
     
-    return render_template('insentive_statictics.html', session=session)
+    values.extend(incentive_list)
+    
+    plt.bar(categories, values)
+    plt.xlabel('日数')
+    
+    statictics = plt.show()
+    
+    return render_template('insentive_statictics.html', session=session, incentive=statictics)
 
 # ログアウト
 @app.route('/logout')

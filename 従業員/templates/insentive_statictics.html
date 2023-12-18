@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/insentive_statictics.css')}}">
     <script type="text/javascript">
         function ShowNowYear() {
            var now = new Date();
@@ -22,12 +23,12 @@
     </header>
 
     <div class="past_to_far">
-        <h1 class="noclean">未清掃一覧</h1>
-            <select id="cleaningOptions" name="cleaningOptions" onChange="location.href=value" class="pulldown">
+        <h1 class="statictics">統計</h1>
+            <select id="cleaningOptions" name="staticticsOptions" onChange="location.href=value" class="pulldown">
                 <option>
                     <script type="text/javascript">ShowNowYear();</script>
                 </option>
-                <option value="" value="1">1月</option>
+                <option value="{{url_for('insentive_statictics', )}}" value="1">1月</option>
                 <option value="" value="2">2月</option>
                 <option value="" value="3">3月</option>
                 <option value="" value="4">4月</option>
@@ -40,6 +41,19 @@
                 <option value="" value="11">11月</option>
                 <option value="" value="12">12月</option>
             </select></br>
+    </div>
+
+    <div class="month_statictics">
+        <p>月合計：円</P>
+    </div>
+
+    <div class="return_menu">
+    {% if emp != [] %}
+    <form action="{{url_for('insentive_view')}}" method="post">
+        <input type="hidden" value="{{emp}}">
+        <button type="submit" class="button1">戻る</button>
+    </form>
+    {% endif %}
     </div>
 </body>
 </html>

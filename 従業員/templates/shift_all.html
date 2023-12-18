@@ -16,6 +16,10 @@
         {% endif %}    
     </header>
     
+    {% if shift != [] %}
+        {{shift}}
+    {% endif %}
+
     {% if emp != [] %}
         <form action="{{url_for('menu')}}" method="post">
             <input type="hidden" value="{{emp}}">
