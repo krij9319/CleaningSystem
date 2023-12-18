@@ -254,10 +254,12 @@ def shift_request():
 @app.route('/shift_all', methods=['GET', 'POST'])
 def shift_all():
     emp = session.get('emp')
-    print(emp)
     work_day = db.shift_all(emp)
+    work_type = db.work_type(emp)
+    print(emp)
     print(work_day)
-    return render_template('shift_all.html', session=session, shift=work_day)
+    print(work_type)
+    return render_template('shift_all.html', session=session, shift=work_day, worktype=work_type)
 
 # インセンティブ閲覧
 @app.route('/insentive_view', methods=['GET', 'POST'])

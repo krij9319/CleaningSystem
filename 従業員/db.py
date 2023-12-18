@@ -317,12 +317,24 @@ def shift_all(employee_id):
     cursor = connection.cursor()
     sql = "SELECT workday FROM shift WHERE employee_id = %s"
     
+    cursor.execute(sql, (employee_id,))
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return rows
+
+def work_type(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT type FROM employee WHERE employee_id = %s"
+    
     cursor.execute(sql, (employee_id))
     row = cursor.fetchone()
     
     cursor.close()
     connection.close()
-    
     return row
     
 # 今日のインセンティブ
