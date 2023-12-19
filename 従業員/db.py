@@ -369,9 +369,9 @@ def incentive_statictics(employee_id):
     cursor = connection.cursor()
     sql = "SELECT incentive FROM cleaning_history WHERE employee_id = %s"
     
-    cursor.execute(sql, (employee_id))
-    row = cursor.fetchone()
+    cursor.execute(sql, (employee_id,))
+    rows = cursor.fetchall()
     
     cursor.close()
     connection.close()
-    return row
+    return rows
