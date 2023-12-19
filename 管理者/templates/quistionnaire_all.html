@@ -1,11 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/quistionnaire_all.css')}}">
 </head>
 <body>
-    
+    <header>
+        <a class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
+    </header>
+    <div class="eval">
+        <h2>山田太郎</h2>
+        <h3 class="h">評価</h3>
+        <h2>４.３</h2>
+    </div>
+    <div class="eva_list">
+        <div class="all_eva">
+            <h3>ゴミが残っていた　　　　　</h3>
+            <h3>3/10&nbsp;件</h3>
+        </div>
+        <div class="all_eva">
+            <h3>ナイトウェアが足りなかった</h3>
+            <h3>2/10&nbsp;件</h3>
+        </div>
+        <div class="all_eva">
+            <h3>スリッパが足りなかった　　</h3>
+            <h3>1/10&nbsp;件</h3>
+        </div>
+        <div class="all_eva">
+            <h3>タオルが足りなかった　　　</h3>
+            <h3>0/10&nbsp;件</h3>
+        </div>
+    </div>
+    <div>
+        <table width="1000">
+            <tr>
+                <th>部屋番号</th>
+                <th>評価</th>
+                <th>清掃日</th>
+                <th>内容</th>
+                <th>その他</th>
+            </tr>
+            <tr>
+                <td width="15%">401</td>
+                <td width="5%">2</td>
+                <td width="10%">2023/10/10</td>
+                <td width="30%">ゴミが残っていた<br>ナイトウェアが足りなかった<br>スリッパが足りなかった<br>タオルが足りなかった</td>
+                <td>ああああああああああああああああああああああああああああああああああああああああああああああああああああああああ</td>
+            </tr>
+        </table>
+        <button class="back">戻る</button>
+        <button class="forward">前へ</button>
+        <button class="next">次へ</button>
+    </div>
 </body>
 </html>
