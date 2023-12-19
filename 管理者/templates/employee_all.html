@@ -31,7 +31,7 @@
         <tbody>
             <form>
                 {% for employee in employees %}
-                    <tr {% if employee[7] == true %}class = "hidden"{% endif %}>
+                    <tr {% if employee[7] == true %}hidden class = "hidden"{% endif %}>
                         <td>{{ employee[0]}}</td>
                         <td>{{ employee[6]}}</td>
                         <td><a href="{{url_for('employee_detail', emp_name=employee[1])}}" name="emp_name" value="{{employee[1]}}" class="username">{{employee[1]}}</a></td>

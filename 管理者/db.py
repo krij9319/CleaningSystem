@@ -196,10 +196,6 @@ def employee_delete(id):
   try :   # 例外処理
     connection = get_connection()
     cursor = connection.cursor()
-
-
-    cursor.execute(sql, (name, mail, concat, employee_id))
-
     cursor.execute(sql, (id,))
 
     count = cursor.rowcount # 更新件数を取得
@@ -212,21 +208,84 @@ def employee_delete(id):
     cursor.close()
     connection.close()
 
-
   return count
-
 
 def select_two_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, floors, status FROM guestroom WHERE floors = 2"
-    
-    cursor.execute(sql)
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 2"
+    cursor.execute(sql,)
     rows = cursor.fetchall()
-    
-    cursor.close()
-    connection.close()
     return rows
+  
+def select_three_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 3"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows  
+  
+def select_four_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 4"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows   
+  
+def select_five_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 5"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows 
+  
+def select_six_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 6"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows 
+  
+def select_seven_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 7"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows 
+  
+def select_eight_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 8"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows    
 
-  return count
+def select_nine_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 9"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows   
+  
+def select_ten_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 10"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows  
 
+def select_eleven_room():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 11"
+    cursor.execute(sql,)
+    rows = cursor.fetchall()
+    return rows        
