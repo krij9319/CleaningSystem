@@ -279,8 +279,9 @@ def insentive_view():
 def insentive_statictics():
     emp = session.get('emp')
     print(emp)
+    incentive_view = db.incentive_month(emp)
     incentive_list = db.incentive_statictics(emp)
-    return render_template('insentive_statictics.html', session=session, incentive=incentive_list)
+    return render_template('insentive_statictics.html', session=session, view=incentive_view, monenies=incentive_list)
 
 # ログアウト
 @app.route('/logout')
