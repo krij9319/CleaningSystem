@@ -177,7 +177,8 @@ def room_management():
 
 @app.route('/shift')
 def shift_management():
-    return render_template('shift_management.html')  
+    management = db.employee()
+    return render_template('shift_management.html', shifts = management)  
 
 @app.route('/employee')
 def employee_all():

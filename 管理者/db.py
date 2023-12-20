@@ -289,3 +289,11 @@ def select_eleven_room():
     cursor.execute(sql,)
     rows = cursor.fetchall()
     return rows        
+
+def employee():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM employee where delete_flag != true"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    return rows

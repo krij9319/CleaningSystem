@@ -1,79 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/shift_management.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='/css/shift_management.css')}}">
     <title>シフト管理</title>
-
 </head>
 <body>
     <header>
-        <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
+        <a href="#" class="titlename">清掃管理システム</a>
         <h3>ダイワロイネットホテル</h3>
     </header>
-    <h3 class = "up">出勤日にチェックを入れて更新してください</h3>
-    <h3 class = "black">希望休には🔲が自動で入ります</h3>
+    <h3 class="up">出勤日にチェックを入れて更新してください</h3>
+    <h3 class="black">希望休には🔳が自動で入ります</h3>
     <h2 id="currentMonth"></h2>
     <div class="days-container" id="daysContainer"></div>
+    <div class="box-container" id="boxContainer"></div>
+    <div class="box-container" id="newBoxContainer1"></div>
     <div class="shift-requests">
         <ul>
             {% for shift in shifts %}
-                <li>{{ shift.employee_id }}: {{ shift.holiday_request }}</li>
+                <p class=name>{{shift[1]}} {{shift[6]}}</p>
             {% endfor %}
         </ul>
-      <p class = "A">A 9:00~15:00</P>
-      <p class = "B">B 10:00~15:00</P>
+        <ul>
+            <p class="A">A 9:00~15:00</p>
+            <p class="A">B 10:00~15:00</p>
+        </ul>
     </div>
-  
+
+    <div class="center">
+        <button class="size">戻る</button>
+    </div>
+
     <script>
-      function generateCalendar() {
-        const currentYear = 2024;
-        const currentMonth = 0; 
-  
-        document.getElementById('currentMonth').innerText = `${currentYear}年 ${currentMonth + 1}月`;
-  
-        const daysContainer = document.getElementById('daysContainer');
-        daysContainer.innerHTML = '';
-  
-        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  
-        const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
-        for (let i = 0; i < firstDayOfWeek; i++) {
-          const emptyDayWrapper = document.createElement('div');
-          emptyDayWrapper.className = 'day-wrapper empty';
-          daysContainer.appendChild(emptyDayWrapper);
+        function generateCalendar() {
+            const currentYear = 2024;
+            const currentMonth = 0;
+
+            document.getElementById('currentMonth').innerText = `${currentYear}年 ${currentMonth + 1}月`;
+
+            const daysContainer = document.getElementById('daysContainer');
+            daysContainer.innerHTML = '';
+
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+            
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayWrapper = document.createElement('div');
+                dayWrapper.className = 'day-wrapper';
+
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+                dayElement.innerText = day;
+                dayElement.addEventListener('click', () => toggleSelect(dayElement));
+
+                const weekdayElement = document.createElement('div');
+                weekdayElement.className = 'weekday';
+                weekdayElement.innerText = getWeekday(currentYear, currentMonth, day);
+
+                dayWrapper.appendChild(dayElement);
+                dayWrapper.appendChild(weekdayElement);
+
+                daysContainer.appendChild(dayWrapper);
+            }
         }
-  
-        for (let day = 1; day <= daysInMonth; day++) {
-          const dayWrapper = document.createElement('div');
-          dayWrapper.className = 'day-wrapper';
-  
-          const dayElement = document.createElement('div');
-          dayElement.className = 'day';
-          dayElement.innerText = day;
-  
-          const weekdayElement = document.createElement('div');
-          weekdayElement.className = 'weekday';
-          weekdayElement.innerText = getWeekday(currentYear, currentMonth, day);
-  
-          dayWrapper.appendChild(dayElement);
-          dayWrapper.appendChild(weekdayElement);
-  
-          daysContainer.appendChild(dayWrapper);
-        }
-      }
-  
-      function getWeekday(year, month, day) {
-        const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
-        const date = new Date(year, month, day);
-        const weekdayIndex = date.getDay();
-        return weekdays[weekdayIndex];
-      }
-  
-      generateCalendar();
-    </script>
+
+        function generateBoxes() {
+            const boxContainer = document.getElementById('boxContainer');
+            boxContainer.innerHTML = '';
     
-    <button onclick="location.href='{{ url_for('menu') }}'">戻る</button>
+            const totalDays = 31;
+            const boxesPerRow = 7; // 1週間の日数
+            const totalRows = Math.ceil(totalDays / boxesPerRow);
+    
+            for (let row = 0; row < totalRows; row++) {
+                const rowContainer = document.createElement('div');
+                rowContainer.className = 'box-row';
+    
+                for (let col = 1; col <= boxesPerRow; col++) {
+                    const day = row * boxesPerRow + col;
+                    if (day > totalDays) {
+                        break; // 31日を超えたら終了
+                    }
+    
+                    const box = document.createElement('div');
+                    box.className = 'box';
+                    box.setAttribute('data-day', day);
+                    box.addEventListener('click', () => changeBoxColor(box));
+                    rowContainer.appendChild(box);
+                }
+    
+                boxContainer.appendChild(rowContainer);
+            }
+        }
+
+        function generateNewBoxes() {
+            const newBoxContainer1 = document.getElementById('newBoxContainer1');
+            boxContainer.innerHTML = '';
+    
+            const totalDays = 31;
+            const boxesPerRow = 7; // 1週間の日数
+            const totalRows = Math.ceil(totalDays / boxesPerRow);
+    
+            for (let row = 0; row < totalRows; row++) {
+                const rowContainer = document.createElement('div');
+                rowContainer.className = 'box-row';
+    
+                for (let col = 1; col <= boxesPerRow; col++) {
+                    const day = row * boxesPerRow + col;
+                    if (day > totalDays) {
+                        break; // 31日を超えたら終了
+                    }
+    
+                    const box = document.createElement('div');
+                    box.className = 'box';
+                    box.setAttribute('data-day', day);
+                    box.addEventListener('click', () => changeBoxColor(box));
+                    rowContainer.appendChild(box);
+                }
+    
+                boxContainer.appendChild(rowContainer);
+            }
+        }
+        
+
+        function dayIsRequested(day) {
+            return day > 0 && day < day.length && day[day] !== "";
+        }
+        function toggleSelect(dayElement) {
+            dayElement.classList.toggle('selected');
+        }
+
+        function changeBoxColor(box) {
+            const colors = ['white','yellowgreen', 'black'];
+            const currentColor = box.style.backgroundColor;
+            const currentIndex = colors.indexOf(currentColor);
+            const nextIndex = (currentIndex + 1) % colors.length;
+            box.style.backgroundColor = colors[nextIndex];
+        }
+
+        function getWeekday(year, month, day) {
+            const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+            const date = new Date(year, month, day);
+            const weekdayIndex = date.getDay();
+            return weekdays[weekdayIndex];
+        }
+
+        generateCalendar();
+        generateBoxes();
+        generateNewBoxes();
+    </script>
 </body>
 </html>
