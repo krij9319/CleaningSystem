@@ -1,3 +1,4 @@
+import json
 from click import DateTime
 from flask import Flask, render_template, request, redirect,url_for,session
 import db,string,random,os,mail,datetime
@@ -256,10 +257,11 @@ def shift_all():
     emp = session.get('emp')
     work_day = db.shift_all(emp)
     work_type = db.work_type(emp)
+    length = len(work_day)
     print(emp)
     print(work_day)
     print(work_type)
-    return render_template('shift_all.html', session=session, shift=work_day, worktype=work_type)
+    return render_template('shift_all.html', session=session, shift=work_day, worktype=work_type, length=length)
 
 # インセンティブ閲覧
 @app.route('/insentive_view', methods=['GET', 'POST'])
@@ -277,18 +279,8 @@ def insentive_view():
 def insentive_statictics():
     emp = session.get('emp')
     print(emp)
-    categories = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
     incentive_list = db.incentive_statictics(emp)
-    values = []
-    
-    values.extend(incentive_list)
-    
-    plt.bar(categories, values)
-    plt.xlabel('日数')
-    
-    statictics = plt.show()
-    
-    return render_template('insentive_statictics.html', session=session, incentive=statictics)
+    return render_template('insentive_statictics.html', session=session, incentive=incentive_list)
 
 # ログアウト
 @app.route('/logout')
