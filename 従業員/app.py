@@ -1,7 +1,6 @@
 from click import DateTime
 from flask import Flask, render_template, request, redirect,url_for,session
 import db,string,random,os,mail,datetime
-import matplotlib.pyplot as plt
 from datetime import datetime as dt
 from datetime import timedelta
 from smtplib import SMTP
