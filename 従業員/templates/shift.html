@@ -26,7 +26,7 @@
     {% if emp != [] %}
     <form action="{{url_for('shift_request')}}" method="post">
         <div id="calendar" value="setCalendarDate()" class="calendar"></div>
-        <input type="hidden" id="employee_id" name="holiday_request" value="">
+        <input type="hidden" id="employee_id" name="holiday_request">
         <input type="hidden" value="{{emp}}">
         <button type="submit" class="button1">申請する</button>
     </form>

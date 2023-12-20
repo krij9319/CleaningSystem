@@ -44,8 +44,15 @@
     </div>
 
     <div class="month_statictics">
-        <p>月合計：円</P>
+        {% if view != [] %}
+        <p>月合計：{{view[0]}}円</P>
+        {% endif %}
     </div>
+    
+    {% for money in monenies %}
+        {{money[0]}}
+        {{money[1]}}
+    {% endfor %}
 
     <div class="return_menu">
     {% if emp != [] %}

@@ -163,7 +163,17 @@ def emp_regi():
 @app.route('/room')
 def room_management():
     room = db.select_two_room()
-    return render_template('room_management.html',room=room)
+    troom = db.select_three_room()
+    foroom = db.select_four_room()
+    firoom = db.select_five_room()
+    siroom = db.select_six_room()
+    seroom = db.select_seven_room()
+    eiroom = db.select_eight_room()
+    niroom = db.select_nine_room()
+    teroom = db.select_ten_room()
+    elroom = db.select_eleven_room()
+    return render_template('room_management.html', room=room, troom=troom, foroom=foroom, firoom=firoom, siroom=siroom,
+                           seroom=seroom, eiroom=eiroom, niroom=niroom, teroom=teroom, elroom=elroom)
 
 @app.route('/shift')
 def shift_management():

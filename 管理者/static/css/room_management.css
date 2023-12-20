@@ -72,10 +72,6 @@ header p {
     background: #82DAFA;
 }
 
-.F-1 {
-    text-align: center;
-}
-
 .F-2 {
     transform: translate(7.25%,0%);
 }
@@ -84,180 +80,133 @@ header p {
     transform: translate(7.25%,0%);
 }
 
-.a {
-    margin-right: 5px; /* ボタン同士の間隔 */
-}
 .b {
     margin-right: 5px; /* ボタン同士の間隔 */
 }
-label input {
-    display: none; /* デフォルトのinputは非表示にする */
+
+table {
+    width: 103%;
+    text-align: center;
 }
 
-label.a span.c {
-    color: #333;
-    /* background: #82FA95; */
-    border: 1px solid black;
-    font-size: 20px; 
-    padding: 10px 35px; 
+tr.flex-row {
+    font-size: 0; /* 不要な空白を排除 */
 }
-label.b span.d {
-    color: #333;
-    background: #82FA95;
-    border: 1px solid black;
-    font-size: 15px; 
-    padding: 15px 35px; 
+
+td {
+    display: inline-block;
+    border: 1px solid #000;
+    width: 90px;
+    height: 35px;
+    font-size: 20px;
+    color: #000;
+    margin: 5px;
+    padding: 10px;
+    background-color: #82FA95;
 }
-label.a input:checked + span.c {
-    color: black;
-    background: #82DAFA; 
-}
-label.b input:checked + span.d {
-    color: black;
-    background: #82DAFA; 
+
+label input {
+    display: none;
 }
 
 .size {
     font-size: 20px;
-    width: 130px;
-    padding: 15px;
+    width: 90px;
+    height: 50px;
     background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
     border: 1px solid #000;
 }
 
+.btns {
+    display: inline-block;
+    margin-right: 70px;
+}
+
 .btn1 {
-    font-size: 11px;
+    font-size: 17px;
     width: 170px;
-    padding: 10px;
+    padding: 7px;
     background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
     border: 1px solid #000;
     transform: translate(480%,-130%);
 }
 
-.btn2 {
-    font-size: 11px;
-    width: 170px;
-    padding: 10px;
-    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
-    border: 1px solid #000;
-    transform: translate(490%,-130%);
-}
-
 div.rooms {
     display: flex;
     justify-content: space-around;
-  }
-  p.room {
-      color: #333;
-      background: #82FA95;
-      border: 1px solid black;
-      font-size: 25px; 
-      width: 100px;
-      padding: 15px 20px;
-  }
+}
+
+p.room {
+    color: #333;
+    background: #82FA95;
+    border: 1px solid black;
+    font-size: 25px; 
+    width: 100px;
+    padding: 15px 20px;
+}
   
-  p.rs {
+p.rs {
     margin: 10px 0px 0px 0px;
     text-align: center;
-  }
+}
   
-  .m {
+.m {
     background: #FF8F8F;
     font-size: 11px;
     width: 130px;
     padding: 10px;
     border: 1px solid #000;
     margin: 10px;
-  }
-  
-  .s {
+}
+
+.s {
     background: #FFFF8A;
     font-size: 11px;
     width: 130px;
     padding: 10px;
     border: 1px solid #000;
     margin: 10px;
-  }
-  
-  .z {
+}
+
+.z {
     background: #82FA95;
     font-size: 11px;
     width: 130px;
     padding: 10px;
     border: 1px solid #000;
     margin: 10px;
-  }
-  
-/* .modal-open{
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 50%;
-    left: 50%;
-    width: 300px;
-    height: 50px;
-    font-weight: bold;
-    color: #fff;
-    background: #000;
-    margin: auto;
-    cursor: pointer;
-    transform: translate(-50%,-50%);
-  } */
+}
 
-  .modal-container{
+#myModal {
+    display: none;
     position: fixed;
-    top: 0;
+    z-index: 1;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    text-align: center;
-    background: rgba(0,0,0,50%);
-    padding: 40px 20px;
     overflow: auto;
-    opacity: 0;
-    visibility: hidden;
-    transition: .3s;
-    box-sizing: border-box;
-  }
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
-  .modal-container:before{
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    height: 100%;
-  }
+#modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
 
-  .modal-container.active{
-    opacity: 1;
-    visibility: visible;
-    z-index: 1000px;
-  }
- 
-  .modal-body{
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 525px;
-    width: 100%;
-  }
-
-  .modal-close{
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 0px;
-    right: 5px;
-    width: 40px;
-    height: 40px;
-    font-size: 40px;
-    color: #000;
+#closeModal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-  }
+}
 
-  .modal-content{
-    background: #fff;
-    text-align: left;
-    padding: 30px;
-  }
+#closeModal:hover, #closeModal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
