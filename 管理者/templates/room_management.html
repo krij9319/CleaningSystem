@@ -13,7 +13,7 @@
         <p>ダイワロイネットホテル</p>
     </header>
     <div class="exp">
-        <p class="ex">&nbsp;&nbsp;&nbsp;&nbsp;客室管理</p>
+        <p class="ex">&nbsp;&nbsp;&nbsp;客室管理</p>
         <p class="ex">選択後、更新を押してください</p>
     </div>
     <div class="allbox">
@@ -23,372 +23,227 @@
         <div class="box3"></div>：清掃済み
         <div class="box4"></div>：選択中
     </div>
-    <button class="btn2">全て未清掃に変更</button><br>
-    <button class="modal-open btn1">更新</button>
-    <div class="modal-container">
-        <div class="modal-body">
-            <div class="modal-close">×</div>
-            <div class="modal-content">
-              <div class="rooms">
-                <p class="room rs" value="201">201</p>
-                <p class="room rs" value="319">319</p>
-                <p class="room rs" value="1102">1102</p>
-              </div>
-              <div class="rooms">
-                <p class="room rs" value="201">201</p>
-                <p class="room rs" value="319">319</p>
-                <p class="room rs" value="1102">1102</p>
-              </div>
-              <div class="rooms">
-                <p class="room rs" value="201">201</p>
-                <p class="room rs" value="319">319</p>
-              </div>
-              <div class="stbtn">
+    <div class="btns">
+        <button class="btn1">全て未清掃に変更</button>
+        <button class="modal-open btn1" onclick="displayCheckedCheckboxes()">更新</button>
+    </div>    
+    <div id="myModal">
+        <span id="closeModal">✖</span>
+        <div id="modal-content">
+            <p id="modalText"></p>
+            <div class="stbtn">
                 <button class="m">未清掃に変更</button>
                 <button class="s">清掃中に変更</button>
                 <button class="z">清掃済みに変更</button>
-              </div>
             </div>
-        </div>
+        </div>    
     </div>
-    <h3 class="floor">2F</h3><br>
-    <div class="F-1">
-        {% for room in room %}
-        <div id="{{room[2]}}">
-            {%if "{{room[2]}}" == 0%}
-            <label class="a" style="background: red;"><input type="checkbox" name="room" value="{{room[0]}}"><span class="c">{{room[0]}}</span></label>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="210"><span class="c">210</span></label>
-        <label class="a"><input type="checkbox" name="room" value="211"><span class="c">211</span></label>
-        <label class="a"><input type="checkbox" name="room" value="212"><span class="c">212</span></label>
-        <label class="a"><input type="checkbox" name="room" value="213"><span class="c">213</span></label><br><br><br>
-    </div>
-    <h3 class="floor">3F</h3><br>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="301"><span class="c">301</span></label>
-        <label class="a"><input type="checkbox" name="room" value="302"><span class="c">302</span></label>
-        <label class="a"><input type="checkbox" name="room" value="303"><span class="c">303</span></label>
-        <label class="a"><input type="checkbox" name="room" value="304"><span class="c">304</span></label>
-        <label class="a"><input type="checkbox" name="room" value="305"><span class="c">305</span></label>
-        <label class="a"><input type="checkbox" name="room" value="306"><span class="c">306</span></label>
-        <label class="a"><input type="checkbox" name="room" value="307"><span class="c">307</span></label>
-        <label class="a"><input type="checkbox" name="room" value="308"><span class="c">308</span></label>
-        <label class="a"><input type="checkbox" name="room" value="309"><span class="c">309</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="310"><span class="c">310</span></label>
-        <label class="a"><input type="checkbox" name="room" value="311"><span class="c">311</span></label>
-        <label class="a"><input type="checkbox" name="room" value="312"><span class="c">312</span></label>
-        <label class="a"><input type="checkbox" name="room" value="313"><span class="c">313</span></label>
-        <label class="a"><input type="checkbox" name="room" value="314"><span class="c">314</span></label>
-        <label class="a"><input type="checkbox" name="room" value="315"><span class="c">315</span></label>
-        <label class="a"><input type="checkbox" name="room" value="316"><span class="c">316</span></label>
-        <label class="a"><input type="checkbox" name="room" value="317"><span class="c">317</span></label>
-        <label class="a"><input type="checkbox" name="room" value="318"><span class="c">318</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="319"><span class="c">319</span></label>
-        <label class="a"><input type="checkbox" name="room" value="320"><span class="c">320</span></label>
-        <label class="a"><input type="checkbox" name="room" value="321"><span class="c">321</span></label>
-        <label class="a"><input type="checkbox" name="room" value="322"><span class="c">322</span></label>
-        <label class="a"><input type="checkbox" name="room" value="323"><span class="c">323</span></label>
-        <label class="a"><input type="checkbox" name="room" value="324"><span class="c">324</span></label>
-        <label class="a"><input type="checkbox" name="room" value="325"><span class="c">325</span></label>
-        <label class="a"><input type="checkbox" name="room" value="326"><span class="c">326</span></label><br><br><br>
-    </div>
-    <h3 class="floor">4F</h3><br>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="401"><span class="c">401</span></label>
-        <label class="a"><input type="checkbox" name="room" value="402"><span class="c">402</span></label>
-        <label class="a"><input type="checkbox" name="room" value="403"><span class="c">403</span></label>
-        <label class="a"><input type="checkbox" name="room" value="404"><span class="c">404</span></label>
-        <label class="a"><input type="checkbox" name="room" value="405"><span class="c">405</span></label>
-        <label class="a"><input type="checkbox" name="room" value="406"><span class="c">406</span></label>
-        <label class="a"><input type="checkbox" name="room" value="407"><span class="c">407</span></label>
-        <label class="a"><input type="checkbox" name="room" value="408"><span class="c">408</span></label>
-        <label class="a"><input type="checkbox" name="room" value="409"><span class="c">409</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="410"><span class="c">410</span></label>
-        <label class="a"><input type="checkbox" name="room" value="411"><span class="c">411</span></label>
-        <label class="a"><input type="checkbox" name="room" value="412"><span class="c">412</span></label>
-        <label class="a"><input type="checkbox" name="room" value="413"><span class="c">413</span></label>
-        <label class="a"><input type="checkbox" name="room" value="414"><span class="c">414</span></label>
-        <label class="a"><input type="checkbox" name="room" value="415"><span class="c">415</span></label>
-        <label class="a"><input type="checkbox" name="room" value="416"><span class="c">416</span></label>
-        <label class="a"><input type="checkbox" name="room" value="417"><span class="c">417</span></label>
-        <label class="a"><input type="checkbox" name="room" value="418"><span class="c">418</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="419"><span class="c">419</span></label>
-        <label class="a"><input type="checkbox" name="room" value="420"><span class="c">420</span></label>
-        <label class="a"><input type="checkbox" name="room" value="421"><span class="c">421</span></label>
-        <label class="a"><input type="checkbox" name="room" value="422"><span class="c">422</span></label>
-        <label class="a"><input type="checkbox" name="room" value="423"><span class="c">423</span></label>
-        <label class="a"><input type="checkbox" name="room" value="424"><span class="c">424</span></label>
-        <label class="a"><input type="checkbox" name="room" value="425"><span class="c">425</span></label>
-        <label class="a"><input type="checkbox" name="room" value="426"><span class="c">426</span></label><br><br><br>
-    </div>
-    <h3 class="floor">5F</h3><br>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="501"><span class="c">501</span></label>
-        <label class="a"><input type="checkbox" name="room" value="502"><span class="c">502</span></label>
-        <label class="a"><input type="checkbox" name="room" value="503"><span class="c">503</span></label>
-        <label class="a"><input type="checkbox" name="room" value="504"><span class="c">504</span></label>
-        <label class="a"><input type="checkbox" name="room" value="505"><span class="c">505</span></label>
-        <label class="a"><input type="checkbox" name="room" value="506"><span class="c">506</span></label>
-        <label class="a"><input type="checkbox" name="room" value="507"><span class="c">507</span></label>
-        <label class="a"><input type="checkbox" name="room" value="508"><span class="c">508</span></label>
-        <label class="a"><input type="checkbox" name="room" value="509"><span class="c">509</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="510"><span class="c">510</span></label>
-        <label class="a"><input type="checkbox" name="room" value="511"><span class="c">511</span></label>
-        <label class="a"><input type="checkbox" name="room" value="512"><span class="c">512</span></label>
-        <label class="a"><input type="checkbox" name="room" value="513"><span class="c">513</span></label>
-        <label class="a"><input type="checkbox" name="room" value="514"><span class="c">514</span></label>
-        <label class="a"><input type="checkbox" name="room" value="515"><span class="c">515</span></label>
-        <label class="a"><input type="checkbox" name="room" value="516"><span class="c">516</span></label>
-        <label class="a"><input type="checkbox" name="room" value="517"><span class="c">517</span></label>
-        <label class="a"><input type="checkbox" name="room" value="518"><span class="c">518</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="519"><span class="c">519</span></label>
-        <label class="a"><input type="checkbox" name="room" value="520"><span class="c">520</span></label>
-        <label class="a"><input type="checkbox" name="room" value="521"><span class="c">521</span></label>
-        <label class="a"><input type="checkbox" name="room" value="522"><span class="c">522</span></label>
-        <label class="a"><input type="checkbox" name="room" value="523"><span class="c">523</span></label>
-        <label class="a"><input type="checkbox" name="room" value="524"><span class="c">524</span></label>
-        <label class="a"><input type="checkbox" name="room" value="525"><span class="c">525</span></label>
-        <label class="a"><input type="checkbox" name="room" value="526"><span class="c">526</span></label><br><br><br>
-    </div>
-    <h3 class="floor">6F</h3><br>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="601"><span class="c">601</span></label>
-        <label class="a"><input type="checkbox" name="room" value="602"><span class="c">602</span></label>
-        <label class="a"><input type="checkbox" name="room" value="603"><span class="c">603</span></label>
-        <label class="a"><input type="checkbox" name="room" value="604"><span class="c">604</span></label>
-        <label class="a"><input type="checkbox" name="room" value="605"><span class="c">605</span></label>
-        <label class="a"><input type="checkbox" name="room" value="606"><span class="c">606</span></label>
-        <label class="a"><input type="checkbox" name="room" value="607"><span class="c">607</span></label>
-        <label class="a"><input type="checkbox" name="room" value="608"><span class="c">608</span></label>
-        <label class="a"><input type="checkbox" name="room" value="609"><span class="c">609</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="610"><span class="c">610</span></label>
-        <label class="a"><input type="checkbox" name="room" value="611"><span class="c">611</span></label>
-        <label class="a"><input type="checkbox" name="room" value="612"><span class="c">612</span></label>
-        <label class="a"><input type="checkbox" name="room" value="613"><span class="c">613</span></label>
-        <label class="a"><input type="checkbox" name="room" value="614"><span class="c">614</span></label>
-        <label class="a"><input type="checkbox" name="room" value="615"><span class="c">615</span></label>
-        <label class="a"><input type="checkbox" name="room" value="616"><span class="c">616</span></label>
-        <label class="a"><input type="checkbox" name="room" value="617"><span class="c">617</span></label>
-        <label class="a"><input type="checkbox" name="room" value="618"><span class="c">618</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="619"><span class="c">619</span></label>
-        <label class="a"><input type="checkbox" name="room" value="620"><span class="c">620</span></label>
-        <label class="a"><input type="checkbox" name="room" value="621"><span class="c">621</span></label>
-        <label class="a"><input type="checkbox" name="room" value="622"><span class="c">622</span></label>
-        <label class="a"><input type="checkbox" name="room" value="623"><span class="c">623</span></label>
-        <label class="a"><input type="checkbox" name="room" value="624"><span class="c">624</span></label>
-        <label class="a"><input type="checkbox" name="room" value="625"><span class="c">625</span></label>
-        <label class="a"><input type="checkbox" name="room" value="626"><span class="c">626</span></label><br><br><br>
-    </div>
-    <h3 class="floor">7F</h3><br>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="701"><span class="c">701</span></label>
-        <label class="a"><input type="checkbox" name="room" value="702"><span class="c">702</span></label>
-        <label class="a"><input type="checkbox" name="room" value="703"><span class="c">703</span></label>
-        <label class="a"><input type="checkbox" name="room" value="704"><span class="c">704</span></label>
-        <label class="a"><input type="checkbox" name="room" value="705"><span class="c">705</span></label>
-        <label class="a"><input type="checkbox" name="room" value="706"><span class="c">706</span></label>
-        <label class="a"><input type="checkbox" name="room" value="707"><span class="c">707</span></label>
-        <label class="a"><input type="checkbox" name="room" value="708"><span class="c">708</span></label>
-        <label class="a"><input type="checkbox" name="room" value="709"><span class="c">709</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="710"><span class="c">710</span></label>
-        <label class="a"><input type="checkbox" name="room" value="711"><span class="c">711</span></label>
-        <label class="a"><input type="checkbox" name="room" value="712"><span class="c">712</span></label>
-        <label class="a"><input type="checkbox" name="room" value="713"><span class="c">713</span></label>
-        <label class="a"><input type="checkbox" name="room" value="714"><span class="c">714</span></label>
-        <label class="a"><input type="checkbox" name="room" value="715"><span class="c">715</span></label>
-        <label class="a"><input type="checkbox" name="room" value="716"><span class="c">716</span></label>
-        <label class="a"><input type="checkbox" name="room" value="717"><span class="c">717</span></label>
-        <label class="a"><input type="checkbox" name="room" value="718"><span class="c">718</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="719"><span class="c">719</span></label>
-        <label class="a"><input type="checkbox" name="room" value="720"><span class="c">720</span></label>
-        <label class="a"><input type="checkbox" name="room" value="721"><span class="c">721</span></label>
-        <label class="a"><input type="checkbox" name="room" value="722"><span class="c">722</span></label>
-        <label class="a"><input type="checkbox" name="room" value="723"><span class="c">723</span></label>
-        <label class="a"><input type="checkbox" name="room" value="724"><span class="c">724</span></label>
-        <label class="a"><input type="checkbox" name="room" value="725"><span class="c">725</span></label>
-        <label class="a"><input type="checkbox" name="room" value="726"><span class="c">726</span></label><br><br><br>
-    </div>
-    <h3 class="floor">8F</h3><br>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="801"><span class="c">801</span></label>
-        <label class="a"><input type="checkbox" name="room" value="802"><span class="c">802</span></label>
-        <label class="a"><input type="checkbox" name="room" value="803"><span class="c">803</span></label>
-        <label class="a"><input type="checkbox" name="room" value="804"><span class="c">804</span></label>
-        <label class="a"><input type="checkbox" name="room" value="805"><span class="c">805</span></label>
-        <label class="a"><input type="checkbox" name="room" value="806"><span class="c">806</span></label>
-        <label class="a"><input type="checkbox" name="room" value="807"><span class="c">807</span></label>
-        <label class="a"><input type="checkbox" name="room" value="808"><span class="c">808</span></label>
-        <label class="a"><input type="checkbox" name="room" value="809"><span class="c">809</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="810"><span class="c">810</span></label>
-        <label class="a"><input type="checkbox" name="room" value="811"><span class="c">811</span></label>
-        <label class="a"><input type="checkbox" name="room" value="812"><span class="c">812</span></label>
-        <label class="a"><input type="checkbox" name="room" value="813"><span class="c">813</span></label>
-        <label class="a"><input type="checkbox" name="room" value="814"><span class="c">814</span></label>
-        <label class="a"><input type="checkbox" name="room" value="815"><span class="c">815</span></label>
-        <label class="a"><input type="checkbox" name="room" value="816"><span class="c">816</span></label>
-        <label class="a"><input type="checkbox" name="room" value="817"><span class="c">817</span></label>
-        <label class="a"><input type="checkbox" name="room" value="818"><span class="c">818</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="819"><span class="c">819</span></label>
-        <label class="a"><input type="checkbox" name="room" value="820"><span class="c">820</span></label>
-        <label class="a"><input type="checkbox" name="room" value="821"><span class="c">821</span></label>
-        <label class="a"><input type="checkbox" name="room" value="822"><span class="c">822</span></label>
-        <label class="a"><input type="checkbox" name="room" value="823"><span class="c">823</span></label>
-        <label class="a"><input type="checkbox" name="room" value="824"><span class="c">824</span></label>
-        <label class="a"><input type="checkbox" name="room" value="825"><span class="c">825</span></label>
-        <label class="a"><input type="checkbox" name="room" value="826"><span class="c">826</span></label><br><br><br>
-    </div>
-    <h3 class="floor">9F</h3><br>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="901"><span class="c">901</span></label>
-        <label class="a"><input type="checkbox" name="room" value="902"><span class="c">902</span></label>
-        <label class="a"><input type="checkbox" name="room" value="903"><span class="c">903</span></label>
-        <label class="a"><input type="checkbox" name="room" value="904"><span class="c">904</span></label>
-        <label class="a"><input type="checkbox" name="room" value="905"><span class="c">905</span></label>
-        <label class="a"><input type="checkbox" name="room" value="906"><span class="c">906</span></label>
-        <label class="a"><input type="checkbox" name="room" value="907"><span class="c">907</span></label>
-        <label class="a"><input type="checkbox" name="room" value="908"><span class="c">908</span></label>
-        <label class="a"><input type="checkbox" name="room" value="909"><span class="c">909</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="a"><input type="checkbox" name="room" value="910"><span class="c">910</span></label>
-        <label class="a"><input type="checkbox" name="room" value="911"><span class="c">911</span></label>
-        <label class="a"><input type="checkbox" name="room" value="912"><span class="c">912</span></label>
-        <label class="a"><input type="checkbox" name="room" value="913"><span class="c">913</span></label>
-        <label class="a"><input type="checkbox" name="room" value="914"><span class="c">914</span></label>
-        <label class="a"><input type="checkbox" name="room" value="915"><span class="c">915</span></label>
-        <label class="a"><input type="checkbox" name="room" value="916"><span class="c">916</span></label>
-        <label class="a"><input type="checkbox" name="room" value="917"><span class="c">917</span></label>
-        <label class="a"><input type="checkbox" name="room" value="918"><span class="c">918</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="a"><input type="checkbox" name="room" value="919"><span class="c">919</span></label>
-        <label class="a"><input type="checkbox" name="room" value="920"><span class="c">920</span></label>
-        <label class="a"><input type="checkbox" name="room" value="921"><span class="c">921</span></label>
-        <label class="a"><input type="checkbox" name="room" value="922"><span class="c">922</span></label>
-        <label class="a"><input type="checkbox" name="room" value="923"><span class="c">923</span></label>
-        <label class="a"><input type="checkbox" name="room" value="924"><span class="c">924</span></label>
-        <label class="a"><input type="checkbox" name="room" value="925"><span class="c">925</span></label>
-        <label class="a"><input type="checkbox" name="room" value="926"><span class="c">926</span></label><br><br><br>
-    </div>
-    <h3 class="floor">10F</h3><br>
-    <div class="F-1">
-        <label class="b"><input type="checkbox" name="room" value="1001"><span class="d">1001</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1002"><span class="d">1002</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1003"><span class="d">1003</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1004"><span class="d">1004</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1005"><span class="d">1005</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1006"><span class="d">1006</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1007"><span class="d">1007</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1008"><span class="d">1008</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1009"><span class="d">1009</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="b"><input type="checkbox" name="room" value="1010"><span class="d">1010</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1011"><span class="d">1011</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1012"><span class="d">1012</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1013"><span class="d">1013</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1014"><span class="d">1014</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1015"><span class="d">1015</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1016"><span class="d">1016</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1017"><span class="d">1017</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1018"><span class="d">1018</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="b"><input type="checkbox" name="room" value="1019"><span class="d">1019</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1020"><span class="d">1020</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1021"><span class="d">1021</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1022"><span class="d">1022</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1023"><span class="d">1023</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1024"><span class="d">1024</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1025"><span class="d">1025</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1026"><span class="d">1026</span></label><br><br><br>
-    </div>
-    <h3 class="floor">11F</h3><br>
-    <div class="F-1">
-        <label class="b"><input type="checkbox" name="room" value="1101"><span class="d">1101</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1102"><span class="d">1102</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1103"><span class="d">1103</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1104"><span class="d">1104</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1105"><span class="d">1105</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1106"><span class="d">1106</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1107"><span class="d">1107</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1108"><span class="d">1108</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1109"><span class="d">1109</span></label><br><br><br>
-    </div>
-    <div class="F-1">
-        <label class="b"><input type="checkbox" name="room" value="1110"><span class="d">1110</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1111"><span class="d">1111</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1112"><span class="d">1112</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1113"><span class="d">1113</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1114"><span class="d">1114</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1115"><span class="d">1115</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1116"><span class="d">1116</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1117"><span class="d">1117</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1118"><span class="d">1118</span></label><br><br><br>
-    </div>
-    <div class="F-2">
-        <label class="b"><input type="checkbox" name="room" value="1119"><span class="d">1119</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1120"><span class="d">1120</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1121"><span class="d">1121</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1122"><span class="d">1122</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1123"><span class="d">1123</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1124"><span class="d">1124</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1125"><span class="d">1125</span></label>
-        <label class="b"><input type="checkbox" name="room" value="1126"><span class="d">1126</span></label><br><br><br>
-    </div>
+    <form id="checkboxForm">
+        <p style="font-size: 20px" class="floor">2F</p>
+        <table>
+            <tbody>
+                {% for room in room %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{room[1]}}"><label><input type="checkbox" name="room" value="{{room[0]}}" onclick="handleCheckboxClick(this)"><span>{{room[0]}}</span></label></td>   
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 13 %}
+                            <td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td> <!-- 2行目の最後に見えない空セルを追加 -->
+                        {% endif %}
+                        </tr>  
+                    {% endif %}     
+                {% endfor %}          
+            </tbody>
+        </table>         
+        <br>
+        <p style="font-size: 20px" class="floor">3F</p>
+        <table>
+            <tbody>
+                {% for troom in troom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{troom[1]}}"><label><input type="checkbox" name="room" value="{{troom[0]}}" onclick="handleCheckboxClick(this)"><span>{{troom[0]}}</span></label></td>   
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 26 %}
+                            <td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>         
+        <p style="font-size: 20px" class="floor">4F</p>
+        <table>
+            <tbody>
+                {% for foroom in foroom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{foroom[1]}}"><label><input type="checkbox" name="room" value="{{foroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{foroom[0]}}</span></label></td>      
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 26 %}
+                            <td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>         
+        <p style="font-size: 20px" class="floor">5F</p>
+        <table>
+            <tbody>
+                {% for firoom in firoom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{firoom[1]}}"><label><input type="checkbox" name="room" value="{{firoom[0]}}" onclick="handleCheckboxClick(this)"><span>{{firoom[0]}}</span></label></td>   
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 26 %}
+                            <td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>         
+        <p style="font-size: 20px" class="floor">6F</p>
+        <table>
+            <tbody>
+                {% for siroom in siroom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{siroom[1]}}"><label><input type="checkbox" name="room" value="{{siroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{siroom[0]}}</span></label></td>   
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 26 %}
+                            <td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>       
+        <p style="font-size: 20px" class="floor">7F</p>
+        <table>
+            <tbody>
+                {% for seroom in seroom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{seroom[1]}}"><label><input type="checkbox" name="room" value="{{seroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{seroom[0]}}</span></label></td>   
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 26 %}
+                            <td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>       
+        <p style="font-size: 20px" class="floor">8F</p>
+        <table>
+            <tbody>
+                {% for eiroom in eiroom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{eiroom[1]}}"><label><input type="checkbox" name="room" value="{{eiroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{eiroom[0]}}</span></label></td>
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 26 %}
+                            <td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>       
+        <p style="font-size: 20px" class="floor">9F</p>
+        <table>
+            <tbody>
+                {% for niroom in niroom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{niroom[1]}}"><label><input type="checkbox" name="room" value="{{niroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{niroom[0]}}</span></label></td>
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 26 %}
+                            <td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>       
+        <p style="font-size: 20px" class="floor">10F</p>
+        <table>
+            <tbody>
+                {% for teroom in teroom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{teroom[1]}}"><label><input type="checkbox" name="room" value="{{teroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{teroom[0]}}</span></label></td>   
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 24 %}
+                            <td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>       
+        <p style="font-size: 20px" class="floor">11F</p>
+        <table>
+            <tbody>
+                {% for elroom in elroom %}
+                    {% if loop.index % 9 == 1 %}
+                        <tr class="flex-row">
+                    {% endif %}        
+                        <td id="{{elroom[1]}}"><label><input type="checkbox" name="room" value="{{elroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{elroom[0]}}</span></label></td>   
+                    {% if loop.index % 9 == 0 or loop.last %} 
+                        {% if loop.index == 24 %}
+                            <td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td>
+                        {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}          
+            </tbody>
+        </table>
+    </form>      
+    <br>     
     <div style="text-align: center;">
         <button class="size">戻る</button>
     </div>
     <script>
-        $(function(){
-            var open = $('.modal-open'),
-              close = $('.modal-close'),
-              container = $('.modal-container');
-          
-            open.on('click',function(){ 
-              container.addClass('active');
-              return false;
+        // モーダルを閉じる処理
+        document.getElementById("closeModal").addEventListener("click", function () {
+            document.getElementById("myModal").style.display = "none";
+        });
+
+        // チェックされたチェックボックスを表示する処理
+        function displayCheckedCheckboxes() {
+            let checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
+            let modalText = "";
+
+            checkboxes.forEach(function (checkbox) {
+                modalText += checkbox.value + "<br>";
             });
-        
-            close.on('click',function(){  
-              container.removeClass('active');
-            });
-          
-            $(document).on('click',function(e) {
-              if(!$(e.target).closest('.modal-body').length) {
-                container.removeClass('active');
-              }
-            });
-          });
-        
+            document.getElementById("modalText").innerHTML = "Checked checkboxes:<br>" + modalText;
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        // チェックボックスがクリックされたときに呼ばれる関数
+        function handleCheckboxClick(checkbox) {
+            // チェックボックスの状態に応じて色を変更
+            let label = checkbox.closest('td'); // チェックボックスに最も近い label 要素を取得
+            
+            if (checkbox.checked) {
+                label.style.backgroundColor = '#82DAFA'; // チェックが入ったときの背景色
+            } else {
+                label.style.backgroundColor = ''; // チェックが外れたときは背景色をクリア
+            }
+        }
         let room = document.getElemetById("{{room[2]}}")
         console.log(room)
         switch (room) {
