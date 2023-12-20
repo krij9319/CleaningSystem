@@ -198,7 +198,7 @@ def employee_delete(id):
     cursor = connection.cursor()
 
 
-    cursor.execute(sql, (name, mail, concat, employee_id))
+    cursor.execute(sql, (id))
 
     cursor.execute(sql, (id,))
 
