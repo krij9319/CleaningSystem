@@ -24,12 +24,12 @@
         <div class="box4"></div>：選択中
     </div>
     <div class="btns">
-        <button class="btn1">全て未清掃に変更</button>
+        <button class="btn1"><a href="{{url_for('update_guestroom_all')}}" class="a-text">全て未清掃に変更</a></button>
         <button class="modal-open btn1" onclick="displayCheckedCheckboxes()">更新</button>
     </div>    
     <form id="checkboxForm" method="post" action="{{ url_for('change_status') }}">
         <p style="font-size: 20px" class="floor">2F</p>
-        <table>
+         <table>
             <tbody>
                 {% for room in room %}
                     {% if loop.index % 9 == 1 %}
@@ -44,7 +44,7 @@
                     {% endif %}     
                 {% endfor %}          
             </tbody>
-        </table>         
+        </table>        
         <br>
         <p style="font-size: 20px" class="floor">3F</p>
         <table>
@@ -53,7 +53,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{troom[1]}}"><label><input type="checkbox" name="room" value="{{troom[0]}}" onclick="handleCheckboxClick(this)"><span>{{troom[0]}}</span></label></td>   
+                        <td id="{{troom[1]}}" class="button_room {% if troom[1] == 0 %}red{% endif %} {% if troom[1] == 1 %}yellow{% endif %} {% if troom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{troom[0]}}" onclick="handleCheckboxClick(this)"><span>{{troom[0]}}</span></label></td>   
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 26 %}
                             <td style="opacity: 0.0;"></td>
@@ -70,7 +70,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{foroom[1]}}"><label><input type="checkbox" name="room" value="{{foroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{foroom[0]}}</span></label></td>      
+                        <td id="{{foroom[1]}}" class="button_room {% if foroom[1] == 0 %}red{% endif %} {% if foroom[1] == 1 %}yellow{% endif %} {% if foroom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{foroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{foroom[0]}}</span></label></td>      
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 26 %}
                             <td style="opacity: 0.0;"></td>
@@ -87,7 +87,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{firoom[1]}}"><label><input type="checkbox" name="room" value="{{firoom[0]}}" onclick="handleCheckboxClick(this)"><span>{{firoom[0]}}</span></label></td>   
+                        <td id="{{firoom[1]}}" class="button_room {% if firoom[1] == 0 %}red{% endif %} {% if firoom[1] == 1 %}yellow{% endif %} {% if firoom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{firoom[0]}}" onclick="handleCheckboxClick(this)"><span>{{firoom[0]}}</span></label></td>   
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 26 %}
                             <td style="opacity: 0.0;"></td>
@@ -104,7 +104,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{siroom[1]}}"><label><input type="checkbox" name="room" value="{{siroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{siroom[0]}}</span></label></td>   
+                        <td id="{{siroom[1]}}" class="button_room {% if siroom[1] == 0 %}red{% endif %} {% if siroom[1] == 1 %}yellow{% endif %} {% if siroom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{siroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{siroom[0]}}</span></label></td>   
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 26 %}
                             <td style="opacity: 0.0;"></td>
@@ -121,7 +121,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{seroom[1]}}"><label><input type="checkbox" name="room" value="{{seroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{seroom[0]}}</span></label></td>   
+                        <td id="{{seroom[1]}}" class="button_room {% if seroom[1] == 0 %}red{% endif %} {% if seroom[1] == 1 %}yellow{% endif %} {% if seroom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{seroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{seroom[0]}}</span></label></td>   
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 26 %}
                             <td style="opacity: 0.0;"></td>
@@ -138,7 +138,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{eiroom[1]}}"><label><input type="checkbox" name="room" value="{{eiroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{eiroom[0]}}</span></label></td>
+                        <td id="{{eiroom[1]}}" class="button_room {% if eiroom[1] == 0 %}red{% endif %} {% if eiroom[1] == 1 %}yellow{% endif %} {% if eiroom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{eiroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{eiroom[0]}}</span></label></td>
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 26 %}
                             <td style="opacity: 0.0;"></td>
@@ -155,7 +155,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{niroom[1]}}"><label><input type="checkbox" name="room" value="{{niroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{niroom[0]}}</span></label></td>
+                        <td id="{{niroom[1]}}" class="button_room {% if niroom[1] == 0 %}red{% endif %} {% if niroom[1] == 1 %}yellow{% endif %} {% if niroom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{niroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{niroom[0]}}</span></label></td>
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 26 %}
                             <td style="opacity: 0.0;"></td>
@@ -172,7 +172,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{teroom[1]}}"><label><input type="checkbox" name="room" value="{{teroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{teroom[0]}}</span></label></td>   
+                        <td id="{{teroom[1]}}" class="button_room {% if teroom[1] == 0 %}red{% endif %} {% if teroom[1] == 1 %}yellow{% endif %} {% if teroom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{teroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{teroom[0]}}</span></label></td>   
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 24 %}
                             <td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td>
@@ -189,7 +189,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{elroom[1]}}"><label><input type="checkbox" name="room" value="{{elroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{elroom[0]}}</span></label></td>   
+                        <td id="{{elroom[1]}}" class="button_room {% if elroom[1] == 0 %}red{% endif %} {% if elroom[1] == 1 %}yellow{% endif %} {% if elroom[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{elroom[0]}}" onclick="handleCheckboxClick(this)"><span>{{elroom[0]}}</span></label></td>   
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 24 %}
                             <td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td>
@@ -202,8 +202,7 @@
         <div id="myModal">
             <span id="closeModal">✖</span>
             <div id="modal-content">
-                <p id="modalText"></p>
-                <div class="stbtn">
+                <div class="stbtn" id="changeButton">
                     <button class="m" name="changebtn" value="0" onclick="roomchange()">未清掃に変更</button>
                     <button class="s" name="changebtn" value="1" onclick="roomchange()">清掃中に変更</button>
                     <button class="z" name="changebtn" value="2" onclick="roomchange()">清掃済みに変更</button>
@@ -225,12 +224,34 @@
         function displayCheckedCheckboxes() {
             let checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
             let modalText = "";
+            let modalContent = document.getElementById("modal-content");
 
             checkboxes.forEach(function (checkbox) {
-                modalText += checkbox.value + "<br>";
-            });
-            document.getElementById("modalText").innerHTML = "Checked checkboxes:<br>" + modalText;
+            // チェックボックスの親要素であるtd要素を取得
+            let tdElement = checkbox.closest('td');
+
+            // すでに表示されているか確認
+            let existingLabel = modalContent.querySelector(".modaldiv[data-id='" + checkbox.value + "']");
+
+            if (!existingLabel && tdElement) {
+                let div = document.createElement("div");
+                div.className = "modaldiv";
+                div.setAttribute("data-id", checkbox.value);
+
+                if (tdElement.classList.contains("red")) {
+                    div.style.backgroundColor = "#FF8F8F";
+                } else if (tdElement.classList.contains("yellow")) {
+                    div.style.backgroundColor = "#FFFF8A";
+                } else if (tdElement.classList.contains("green")) {
+                    div.style.backgroundColor = "#82FA95";
+                }
+
+                div.innerHTML = "<p class='divtext'>" + checkbox.value + "</p>";
+                modalContent.appendChild(div);
+            }
+        });
             document.getElementById("myModal").style.display = "block";
+            document.getElementById("modal-content").appendChild(document.getElementById("changeButton"));
         }
 
         // チェックボックスがクリックされたときに呼ばれる関数

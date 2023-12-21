@@ -102,7 +102,6 @@ td {
     color: #000;
     margin: 5px;
     padding: 10px;
-    background-color: #82FA95;
 }
 
 label input {
@@ -131,25 +130,6 @@ label input {
     transform: translate(480%,-130%);
 }
 
-div.rooms {
-    display: flex;
-    justify-content: space-around;
-}
-
-p.room {
-    color: #333;
-    background: #82FA95;
-    border: 1px solid black;
-    font-size: 25px; 
-    width: 100px;
-    padding: 15px 20px;
-}
-  
-p.rs {
-    margin: 10px 0px 0px 0px;
-    text-align: center;
-}
-  
 .m {
     background: #FF8F8F;
     font-size: 11px;
@@ -194,6 +174,10 @@ p.rs {
     /* 他のスタイルも追加できます */
 }
 
+.a-text {
+    text-decoration: none;
+    color: #000;
+}
 
 #myModal {
     display: none;
@@ -208,11 +192,13 @@ p.rs {
 }
 
 #modal-content {
+    text-align: center;
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 70%;
+    height: 60%;
 }
 
 #closeModal {
@@ -242,12 +228,22 @@ p.rs {
 }
 
 /* 2の場合に青色にするクラス */
-.blue {
+.green {
     background-color: #82FA95;
     /* 他のスタイルも追加できます */
 }
 
-.skyblue {
-    background-color: skyblue;
-    /* 他のスタイルも追加できます */
+.modaldiv {
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #000;
+    width: 100px;
+    height: 55px;
+    color: #000;
+    margin: 10px;
+}
+
+.divtext{
+    font-size: 17px;
 }
