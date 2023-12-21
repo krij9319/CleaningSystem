@@ -175,6 +175,19 @@ def room_management():
     return render_template('room_management.html', room=room, troom=troom, foroom=foroom, firoom=firoom, siroom=siroom,
                            seroom=seroom, eiroom=eiroom, niroom=niroom, teroom=teroom, elroom=elroom)
 
+@app.route('/room', methods=['POST'])
+def change_status():
+    button_value = request.form.get('changebtn')
+    checks = request.form.getlist('room')
+    print(button_value)
+    print(checks)
+    if button_value in ['0', '1', '2']:
+            for checkbox_id in checks:
+                params = (int(button_value), checkbox_id)
+                db.update_status(params)
+    
+    return redirect(url_for('room_management')) 
+
 @app.route('/shift')
 def shift_management():
     management = db.employee()

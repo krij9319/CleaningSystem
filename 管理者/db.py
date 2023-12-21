@@ -334,11 +334,8 @@ def select_eleven_room():
     
     cursor.execute(sql,)
     rows = cursor.fetchall()
-        
-    cursor.close()
-    connection.close()
     
-    return rows        
+    return rows   
 
 def employee():
     connection = get_connection()
@@ -372,3 +369,19 @@ def update_guestroom_all():
       connection.close()
 
     return count
+
+ def update_status(params=None):  
+    connection = get_connection()
+    cursor = connection.cursor()
+    query = 'UPDATE guestroom SET status = %s WHERE room_id = %s'
+    if params:
+        cursor.execute(query, params)
+    else:
+        cursor.execute(query)
+     
+    connection.commit()
+    connection.close()
+
+        
+    cursor.close()
+    connection.close()
