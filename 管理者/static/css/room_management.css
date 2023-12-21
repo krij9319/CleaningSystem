@@ -177,6 +177,24 @@ p.rs {
     margin: 10px;
 }
 
+.red {
+    background-color: #FF8F8F;
+    /* 他のスタイルも追加できます */
+}
+
+/* 1の場合に黄黄にするクラス */
+.yellow {
+    background-color: #FFFF8A;
+    /* 他のスタイルも追加できます */
+}
+
+/* 2の場合に青色にするクラス */
+.green {
+    background-color: #82FA95;
+    /* 他のスタイルも追加できます */
+}
+
+
 #myModal {
     display: none;
     position: fixed;
@@ -209,4 +227,27 @@ p.rs {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* 0の場合に赤色にするクラス */
+.red {
+    background-color: #FF8F8F;
+    /* 他のスタイルも追加できます */
+}
+
+/* 1の場合に黄黄にするクラス */
+.yellow {
+    background-color: #FFFF8A;
+    /* 他のスタイルも追加できます */
+}
+
+/* 2の場合に青色にするクラス */
+.blue {
+    background-color: #82FA95;
+    /* 他のスタイルも追加できます */
+}
+
+.skyblue {
+    background-color: skyblue;
+    /* 他のスタイルも追加できます */
 }
