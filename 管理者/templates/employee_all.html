@@ -10,7 +10,12 @@
     <header>
         <a href="{{url_for('index')}}" class="titlename">清掃管理システム</a>
         <p>ダイワロイネットホテル</p>
-    </header>  
+    </header>
+
+    {% if msg != null %}
+        <h1 style="color:red" class="message">{{msg}}</h1>
+    {% endif %}
+
     <ul>
         <li><p>従業員一覧</p></li>
         <li>

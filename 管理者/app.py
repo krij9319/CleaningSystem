@@ -133,7 +133,6 @@ def con_regi():
     else:
         concat ='10:00~15:00'
     print(concat)
-    
         
     return render_template('confirm_register.html', id=id, name=name, email=email, concat=concat)
     
@@ -193,7 +192,7 @@ def shift_management():
     management = db.employee()
     return render_template('shift_management.html', shifts = management)  
 
-@app.route('/employee')
+@app.route('/employee', methods=['GET', 'POST'])
 def employee_all():
     employee = db.all_employee()
     return render_template('employee_all.html', employees = employee)  
@@ -205,26 +204,48 @@ def employee_detail():
     user_detail = db.get_user_details(user_name)
     return render_template('employee_detail.html', user_details=user_detail)
 
-@app.route('/emped' , methods=['POST'])
+@app.route('/employee_edit' , methods=['GET' ,'POST'])
 def employee_edit():
-    id = request.form.get('employee_id')
+    name = request.form.get('name')
+    print(name)
+    emp = db.select_employee(name)
+    print(emp)
+    return render_template('employee_edit.html', emp_id=emp)
+
+@app.route('/emp_edit_confirm', methods=['GET', 'POST'])
+def emp_edit_confirm():
+    employee_id = request.form.get('emp')
+    name = request.form.get('name')
+    email = request.form.get('mail')
+    concat = request.form.get('concat')
+    if concat == 'A':
+        concat = '9:00~15:00'
+    else:
+        concat ='10:00~15:00'
+    print(concat)
+    return render_template('confirm_edit.html', employee_id=employee_id, name=name, email=email, concat=concat)
+
+@app.route('/emp_edit_update', methods=['GET', 'POST'])
+def emp_edit_update():
+    employee_id = request.form.get('employee_id')
     name = request.form.get('name')
     email = request.form.get('mail')
     concat = request.form.get('concat')
     
-    if name == '':
-        error = '名前が未入力です'
-        return render_template('employee_edit.html', error=error)
-    if email == '':
-        error = 'メールアドレスが未入力です'
-        return render_template('employee_edit.html', error=error)
-    if concat == '':
-        error = '業務時間が未選択です'
-        return render_template('employee_edit.html', error=error)
+    if concat == '9:00~15:00':
+        concat = 'A'
+    else:
+        concat = 'B'
     
-    return render_template('confirm_edit.html',id=id, name=name, mail=email, concat=concat)
-
- 
+    print(employee_id)
+    print(name)
+    print(email)
+    print(concat)
+    emp_update = db.update_employee(name, email, concat, employee_id)
+    print(emp_update)
+    message = '変更しました'
+    return redirect(url_for('employee_all'))
+    
 @app.route('/delete', methods=['POST'])
 def emp_delete():
     id = request.form.get('id')
