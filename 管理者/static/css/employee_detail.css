@@ -69,3 +69,8 @@ p {
     text-decoration: none;
     font-size: 22px;
 }
+
+.buttons {
+    display: flex;
+    margin-left: 432px;
+}
