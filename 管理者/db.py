@@ -370,7 +370,7 @@ def update_guestroom_all():
 
     return count
 
- def update_status(params=None):  
+def update_status(params=None):  
     connection = get_connection()
     cursor = connection.cursor()
     query = 'UPDATE guestroom SET status = %s WHERE room_id = %s'
