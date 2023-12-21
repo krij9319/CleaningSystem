@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from datetime import datetime
-import db, string, random, mail, psycopg2, calendar
+import db, string, random, mail, psycopg2, calendar, datetime
 
 
 app = Flask(__name__)
@@ -115,7 +115,7 @@ def confirm_number():
         return render_template('confirm_input.html', error=error)
         
 
-@app.route('/menu', methods=['GET'])
+@app.route('/menu', methods=['GET', 'POST'])
 def menu():
     return render_template('menu.html')
 
@@ -190,43 +190,30 @@ def change_status():
 
 @app.route('/shift')
 def shift_management():
-    management = db.employee()
-    shift = db.shift()
-    name = []
-    type = []
-    shift_day= []
-    volume = len(management)
+    name = db.shift_empname()
+    holiday = db.shift_holiday_request()
+    print(name)
+    print(holiday)
+    return render_template('shift_management.html', name=name, holiday=holiday)  
 
-    shift_vol = len(shift_day)
-    for i in range(volume):
-        name.append(management[i][1])
-        type.append(management[i][6])
-    current_month = datetime.now().month
-    current_year = datetime.now().year
-    if current_month == 12:
-        current_year += 1
-        current_month = 1
-    else:
-        current_month = current_month + 1
-    month = calendar.monthrange(current_year,current_month)
-    day_list = []
-    sample_cw_list = ['月', '火', '水', '木', '金', '土', '日']
-    cw_list = []
-    for i in range(month[1]):
-        day_list.append(i+1)
-        for j in range(len(sample_cw_list)):
-            cw_list.append(sample_cw_list[j])
-    value = len(day_list)
-    for i in range(value):
-        if len(shift) < i:
-            if shift[1] == i:
-                shift_day.append(shift[i][1])
-            else:
-                shift_day.append(0)
-        else:
-                shift_day.append(1)
-    print(shift_day)
-    return render_template('shift_management.html', shifts = management, request=shift, current_month=current_month, current_year=current_year, day_list=day_list, cw_list=cw_list, value=value, name=name, type=type, volume=volume, shift_day=shift_day, shift_vol=shift_vol)  
+@app.route('/shift_register', methods=['GET', 'POST'])
+def shift_register():
+    emp_id = request.form.get('emp_id')
+    working = request.form.get('shift_work')
+    employee_id = db.select_emp_id(emp_id)
+    print(employee_id[0])
+    print(working)
+    workday = []
+    workday.extend(working.split(','))
+    
+    for work in workday:
+        print(type(work))
+        work_day = datetime.datetime.strptime(work, '%Y-%m-%d')
+        print(type(work_day))
+        work_register = db.shift_register(emp_id, work_day)
+        print(work_register)
+    
+    return redirect(url_for('shift_management'))
 
 @app.route('/employee', methods=['GET', 'POST'])
 def employee_all():

@@ -354,11 +354,68 @@ def shift():
     cursor.execute(sql)
     rows = cursor.fetchall()
     
-        
     cursor.close()
     connection.close()
     
     return rows
+
+def shift_empname():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT employee_id, name, type FROM employee"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return rows
+
+def shift_holiday_request():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT name, holiday_request FROM employee, shift_request WHERE employee.employee_id = shift_request.employee_id"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return rows
+
+def select_emp_id(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT employee_id FROM employee WHERE employee_id = %s"
+    
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return row
+
+def shift_register(employee_id, workday):
+    sql = "INSERT INTO shift VALUES(default, %s, %s)"
+    
+    try:
+      connection = get_connection()
+      cursor = connection.cursor()
+      
+      cursor.execute(sql, (employee_id, workday))
+      connection.commit()
+    
+    except psycopg2.DatabaseError:
+      count = 0
+    
+    finally:
+      cursor.close()
+      connection.close()
+    
+    return '完了'
 
 def update_guestroom_all():
     sql = 'UPDATE guestroom SET status = 0'
