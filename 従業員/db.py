@@ -197,7 +197,7 @@ def noclean_all():
 def request(room_number):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, request_nightwear, request_bathtowel, request_water, request_facetowel, request_tissue, request_tea, request_toiletpaper, request_slipperr, request_hairbrush, request_toothbrush,  content varchar FROM request WHERE room_id = %s"
+    sql = "SELECT room_id, request_nightwear, request_bathtowel, request_water, request_facetowel, request_tissue, request_tea, request_toiletpaper, request_slipperr, request_hairbrush, request_toothbrush, content FROM request WHERE room_id = %s ORDER BY request_datetime DESC LIMIT 1;"
     
     cursor.execute(sql, (room_number,))
     rows = cursor.fetchall()
@@ -311,13 +311,39 @@ def shift_request(employee_id, holiday_request):
     
     return '完了'
 
+# シフト閲覧
+def shift_all(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT workday FROM shift WHERE employee_id = %s"
+    
+    cursor.execute(sql, (employee_id,))
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return rows
+
+def work_type(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT type FROM employee WHERE employee_id = %s"
+    
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    return row
+    
 # 今日のインセンティブ
 def incentive_today(employee_id):
     connection = get_connection()
     cursor = connection.cursor()
     sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND CAST(clean_datetime AS DATE) = CURRENT_DATE"
     
-    cursor.execute(sql, (employee_id))
+    cursor.execute(sql, (employee_id,))
     row = cursor.fetchone()
     
     cursor.close()
@@ -328,11 +354,39 @@ def incentive_today(employee_id):
 def incentive_month(employee_id):
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND DATE_PART('YEAR', clean_datetime) = DATE_PART('YEAR', CURRENT_TIMESTAMP) AND DATE_PART('MONTH', clean_datetime) = DATE_PART('MONTH', CURRENT_TIMESTAMP)"
+    sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND DATE_PART('YEAR', clean_datetime) = DATE_PART('YEAR', CURRENT_TIMESTAMP) AND DATE_PART('MONTH', clean_datetime) = DATE_PART('MONTH', CURRENT_TIMESTAMP) "
     
     cursor.execute(sql, (employee_id))
     row = cursor.fetchone()
     
     cursor.close()
     connection.close()
+    
     return row
+
+# 年度のインセンティブ
+def incentive_year(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND DATE_PART('YEAR', clean_datetime) = DATE_PART('YEAR', CURRENT_TIMESTAMP)"
+    
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return row
+
+# インセンティブ統計
+def incentive_statictics(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT incentive, clean_datetime FROM cleaning_history WHERE employee_id = %s"
+    
+    cursor.execute(sql, (employee_id,))
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    return rows

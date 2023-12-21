@@ -1,6 +1,7 @@
+import json
 from click import DateTime
 from flask import Flask, render_template, request, redirect,url_for,session
-import db,string,random,os,mail,datetime
+import db,string,random,os,mail,datetime,json
 from datetime import datetime as dt
 from datetime import timedelta
 from smtplib import SMTP
@@ -253,8 +254,13 @@ def shift_request():
 @app.route('/shift_all', methods=['GET', 'POST'])
 def shift_all():
     emp = session.get('emp')
+    work_day = db.shift_all(emp)
+    work_type = db.work_type(emp)
+    length = len(work_day)
     print(emp)
-    return render_template('shift_all.html')
+    print(work_day)
+    print(work_type)
+    return render_template('shift_all.html', session=session, shift=work_day, worktype=work_type, length=length)
 
 # インセンティブ閲覧
 @app.route('/insentive_view', methods=['GET', 'POST'])
@@ -262,7 +268,7 @@ def insentive_view():
     emp = session.get('emp')
     incentive_today = db.incentive_today(emp)
     incentive_month = db.incentive_month(emp)
-    print(emp)
+    print(emp[0])
     print(incentive_today)
     print(incentive_month)
     return render_template('insentive_view.html', session=session, money1=incentive_today, money2=incentive_month)
@@ -270,7 +276,30 @@ def insentive_view():
 # インセンティブ統計
 @app.route('/insentive_statictics', methods=['GET', 'POST'])
 def insentive_statictics():
-    return render_template('insentive_statictics.html')
+    emp = session.get('emp')
+    print(emp)
+    incentive_view = db.incentive_year(emp)
+    incentive_money = [db.incentive_statictics(emp)]
+    
+    formatted_data = [
+    [
+        (item[0], item[1].strftime('%Y-%m-%d')) 
+        for item in inner_list
+    ] 
+    for inner_list in incentive_money
+    ]
+
+    # formatted_data2 を生成する
+    formatted_data2 = [
+        (value, datetime.datetime.strptime(date_str, '%Y-%m-%d').strftime('%Y-%m-%d'))
+        for inner_list in formatted_data
+        for value, date_str in inner_list
+    ]
+
+    print(formatted_data2)
+    
+# Flask の render_template でデータを渡す
+    return render_template('insentive_statictics.html', session=session, view=incentive_view, money=json.dumps(formatted_data2))
 
 # ログアウト
 @app.route('/logout')

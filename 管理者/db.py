@@ -213,84 +213,164 @@ def employee_delete(id):
 def select_two_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 2"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 2 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
     return rows
   
 def select_three_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 3"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 3 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
-    return rows  
+    
+    cursor.close()
+    connection.close()
+
+    return rows
   
 def select_four_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 4"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 4 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+        
+    cursor.close()
+    connection.close()
+    
     return rows   
   
 def select_five_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 5"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 5 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+        
+    cursor.close()
+    connection.close()
+    
     return rows 
   
 def select_six_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 6"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 6 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
     return rows 
   
 def select_seven_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 7"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 7 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+        
+    cursor.close()
+    connection.close()
+    
     return rows 
   
 def select_eight_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 8"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 8 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+        
+    cursor.close()
+    connection.close()
+    
     return rows    
 
 def select_nine_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 9"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 9 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+        
+    cursor.close()
+    connection.close()
+    
     return rows   
   
 def select_ten_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 10"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 10 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
+        
+    cursor.close()
+    connection.close()
+    
     return rows  
 
 def select_eleven_room():
     connection = get_connection()
     cursor = connection.cursor()
-    sql = "SELECT room_id, status FROM guestroom WHERE floors = 11"
+    sql = "SELECT room_id, status FROM guestroom WHERE floors = 11 ORDER BY guestroom ASC"
+    
     cursor.execute(sql,)
     rows = cursor.fetchall()
-    return rows        
+    
+    return rows   
 
-def update_status(params=None):  
+def employee():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM employee where delete_flag != true"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return rows
+  
+def update_guestroom_all():
+    sql = 'UPDATE guestroom SET status = 0'
+  
+    try :   # 例外処理
+      connection = get_connection()
+      cursor = connection.cursor()
+      cursor.execute(sql)
+
+      count = cursor.rowcount # 更新件数を取得
+      connection.commit()
+
+    except psycopg2.DatabaseError:    # Java でいう catch 失敗した時の処理をここに書く
+      count = 0   # 例外が発生したら 0 を return する。
+
+    finally:  # 成功しようが、失敗しようが、close する。
+      cursor.close()
+      connection.close()
+
+    return count
+
+ def update_status(params=None):  
     connection = get_connection()
     cursor = connection.cursor()
     query = 'UPDATE guestroom SET status = %s WHERE room_id = %s'
@@ -300,4 +380,8 @@ def update_status(params=None):
         cursor.execute(query)
      
     connection.commit()
+    connection.close()
+
+        
+    cursor.close()
     connection.close()

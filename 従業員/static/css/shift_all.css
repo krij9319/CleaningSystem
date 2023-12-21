@@ -15,3 +15,108 @@ header .titlename {
     text-decoration: none;
     font-size: 40px;
 }
+
+.header_title {
+    display: flex;
+}
+
+.main_title {
+    margin-left: 20px;
+}
+
+.sub_title {
+    margin-top: 30px;
+    margin-left: 80px;
+}
+
+.work_type {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.return_menu {
+    text-align: center;
+}
+
+.button1 {
+    margin-top: 30px;
+    width:75px;
+    height: 30px;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: repeat(7, 40px);
+    gap: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#currentMonth {
+    padding-left: 0px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    grid-column: 3 / span 3;
+    text-align: center;
+}
+
+.days {
+    color: red;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 40px);
+    gap: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#currentMonth {
+    background-color: #E6E6E6;
+}
+
+#header {
+    background-color: #EBEBEB;
+}
+
+#calendar {
+    background-color: #F2F2F2;
+}
+
+@media screen and (max-width: 600px) {
+    /* Styles for screens with a width of 600 pixels or less */
+    .title {
+        font-size: 25px;
+    }
+
+    .days {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .calendar,
+    .header {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .day {
+        width: 100%;
+    }
+}
+
+/* CSSで赤色の背景を設定する */
+.registered-date {
+    background-color: red;
+    color: black; /* 必要に応じてテキストの色を変更する */
+}

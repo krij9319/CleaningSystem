@@ -190,7 +190,8 @@ def change_status():
 
 @app.route('/shift')
 def shift_management():
-    return render_template('shift_management.html')  
+    management = db.employee()
+    return render_template('shift_management.html', shifts = management)  
 
 @app.route('/employee')
 def employee_all():
@@ -241,6 +242,11 @@ def complete_delete():
     
     return redirect(url_for('employee_all')) 
 
+@app.route('/update_guestroom_all', methods=['GET','POST'])
+def update_guestroom_all():
+    comp = db.update_guestroom_all()
+    print(comp)
+    return redirect(url_for('room_management'))
   
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,10 @@
         {% endif %}    
     </header>
 
+    {% if emp != [] %}
+    <input type="hidden" value="{{emp}}">
     <a href="{{url_for('insentive_statictics')}}" class="before">これまでの統計</a>
+    {% endif %}
 
     <div class="one">
         <p>本日の</p>
@@ -27,7 +30,7 @@
 
     <div class = "money">
         {% if money1 != []%}
-        <h2 class="incentive_money">{{money1}}円</h2>
+        <p class="incentive_money">{{money1[0]}}円</p>
         {% endif %}
     </div>    
 
@@ -40,7 +43,7 @@
 
     <div class = "money">
         {% if money2 != []%}
-        <h2 class="incentive_money">{{money2}}円</h2>
+        <p class="incentive_money">{{money2[0]}}円</p>
         {% endif %}
     </div>
     <div class="return_menu">
