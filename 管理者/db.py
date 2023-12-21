@@ -185,10 +185,6 @@ def get_user_details(user_name):
     cursor.close()
     connection.close()
     return user_details
-  
-
-def employee_update(name, mail, concat, employee_id):
-  sql = 'UPDATE employee SET name = %s, mail = %s, concat = %s, WHERE employee_id = %s'
 
 def employee_delete(id):
   sql = 'UPDATE employee SET delete_flag = True WHERE employee_id = %s'
@@ -385,3 +381,37 @@ def update_status(params=None):
         
     cursor.close()
     connection.close()
+    
+def select_employee(name):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT employee_id FROM employee WHERE name LIKE %s"
+    
+    searchname = "%" + name + "%"
+    cursor.execute(sql, (searchname,))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    return row
+
+def update_employee(name, email, concat, employee_id):
+    sql = "UPDATE employee SET name = %s, mail = %s, type = %s WHERE employee_id = %s"
+
+    try:
+      connection = get_connection()
+      cursor = connection.cursor()
+      
+      cursor.execute(sql, (name, email, concat, employee_id))
+      count = cursor.rowcount
+      connection.commit()
+    
+    except psycopg2.DatabaseError:
+      count = 0
+    
+    finally:
+      cursor.close()
+      connection.close()
+    
+    return count
