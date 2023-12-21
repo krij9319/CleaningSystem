@@ -345,7 +345,21 @@ def employee():
     connection.close()
     
     return rows
-  
+
+def shift():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT employee_id, holiday_request FROM shift_request"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+        
+    cursor.close()
+    connection.close()
+    
+    return rows
+
 def update_guestroom_all():
     sql = 'UPDATE guestroom SET status = 0'
   
@@ -390,10 +404,7 @@ def select_employee(name):
     searchname = "%" + name + "%"
     cursor.execute(sql, (searchname,))
     row = cursor.fetchone()
-    
-    cursor.close()
-    connection.close()
-    
+
     return row
 
 def update_employee(name, email, concat, employee_id):

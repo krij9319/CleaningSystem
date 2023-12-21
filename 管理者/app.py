@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-import db, string, random, mail, psycopg2
+from datetime import datetime
+import db, string, random, mail, psycopg2, calendar
+
 
 app = Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
@@ -14,7 +16,6 @@ def index():
     else :
         # register_exe() から redirect された場合
         return render_template('index.html', msg=msg)
-
 @app.route('/otpmail')
 def otp_mail():
     return render_template('OTP_mail.html')
@@ -190,7 +191,42 @@ def change_status():
 @app.route('/shift')
 def shift_management():
     management = db.employee()
-    return render_template('shift_management.html', shifts = management)  
+    shift = db.shift()
+    name = []
+    type = []
+    shift_day= []
+    volume = len(management)
+
+    shift_vol = len(shift_day)
+    for i in range(volume):
+        name.append(management[i][1])
+        type.append(management[i][6])
+    current_month = datetime.now().month
+    current_year = datetime.now().year
+    if current_month == 12:
+        current_year += 1
+        current_month = 1
+    else:
+        current_month = current_month + 1
+    month = calendar.monthrange(current_year,current_month)
+    day_list = []
+    sample_cw_list = ['月', '火', '水', '木', '金', '土', '日']
+    cw_list = []
+    for i in range(month[1]):
+        day_list.append(i+1)
+        for j in range(len(sample_cw_list)):
+            cw_list.append(sample_cw_list[j])
+    value = len(day_list)
+    for i in range(value):
+        if len(shift) < i:
+            if shift[1] == i:
+                shift_day.append(shift[i][1])
+            else:
+                shift_day.append(0)
+        else:
+                shift_day.append(1)
+    print(shift_day)
+    return render_template('shift_management.html', shifts = management, request=shift, current_month=current_month, current_year=current_year, day_list=day_list, cw_list=cw_list, value=value, name=name, type=type, volume=volume, shift_day=shift_day, shift_vol=shift_vol)  
 
 @app.route('/employee', methods=['GET', 'POST'])
 def employee_all():
