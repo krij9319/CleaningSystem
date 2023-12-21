@@ -11,6 +11,7 @@
            document.write(year);
         }
     </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <title>インセンティブ</title>
 </head>
 <body>
@@ -45,14 +46,11 @@
 
     <div class="month_statictics">
         {% if view != [] %}
-        <p>月合計：{{view[0]}}円</P>
+        <p>年合計：{{view[0]}}円</P>
         {% endif %}
     </div>
-    
-    {% for money in monenies %}
-        {{money[0]}}
-        {{money[1]}}
-    {% endfor %}
+
+    <div id="barChart"></div>
 
     <div class="return_menu">
     {% if emp != [] %}
@@ -61,6 +59,35 @@
         <button type="submit" class="button1">戻る</button>
     </form>
     {% endif %}
-    </div>
+
+    <script>
+        // Pythonから渡されたデータを取得
+        var moneyData = {{ money | safe }};
+        
+        // x軸の日付データとy軸の値を取得
+        var dates = [];
+        var values = [];
+        
+        moneyData.forEach(function(item) {
+            dates.push(item[1]);
+            values.push(item[0]);
+        });
+        
+        // データの定義
+        var data = [{
+            x: dates,
+            y: values,
+            type: 'bar'
+        }];
+        
+        // レイアウトの定義
+        var layout = {
+            xaxis: { title: '(日)' },
+            yaxis: { title: '(円)' }
+        };
+        
+        // グラフの描画
+        Plotly.newPlot('barChart', data, layout);
+    </script>
 </body>
 </html>

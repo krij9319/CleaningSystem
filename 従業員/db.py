@@ -361,6 +361,21 @@ def incentive_month(employee_id):
     
     cursor.close()
     connection.close()
+    
+    return row
+
+# 年度のインセンティブ
+def incentive_year(employee_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT SUM(incentive)*100 FROM cleaning_history WHERE employee_id = %s AND DATE_PART('YEAR', clean_datetime) = DATE_PART('YEAR', CURRENT_TIMESTAMP)"
+    
+    cursor.execute(sql, (employee_id))
+    row = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
     return row
 
 # インセンティブ統計
