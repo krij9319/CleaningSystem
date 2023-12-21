@@ -289,3 +289,15 @@ def select_eleven_room():
     cursor.execute(sql,)
     rows = cursor.fetchall()
     return rows        
+
+def update_status(params=None):  
+    connection = get_connection()
+    cursor = connection.cursor()
+    query = 'UPDATE guestroom SET status = %s WHERE room_id = %s'
+    if params:
+        cursor.execute(query, params)
+    else:
+        cursor.execute(query)
+     
+    connection.commit()
+    connection.close()
