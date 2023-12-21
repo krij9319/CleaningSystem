@@ -13,145 +13,59 @@
     </header>
     <h3 class="up">出勤日にチェックを入れて更新してください</h3>
     <h3 class="black">希望休には🔳が自動で入ります</h3>
-    <h2 id="currentMonth"></h2>
-    <div class="days-container" id="daysContainer"></div>
-    <div class="box-container" id="boxContainer"></div>
-    <div class="box-container" id="newBoxContainer1"></div>
-    <div class="shift-requests">
-        <ul>
-            {% for shift in shifts %}
-                <p class=name>{{shift[1]}} {{shift[6]}}</p>
-            {% endfor %}
-        </ul>
-        <ul>
-            <p class="A">A 9:00~15:00</p>
-            <p class="A">B 10:00~15:00</p>
-        </ul>
-    </div>
-
-    <div class="center">
-        <button class="size">戻る</button>
-    </div>
-
+   <table border=1>
+    <tr>
+        <td>{{ current_year }}年{{ current_month }}月</td>
+        {% for i in range(value): %}
+            <th>{{ day_list[i] }}<br>{{ cw_list[i] }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for i in range(volume): %}
+            <td>{{ name[i] }}{{ type[i] }}</td>
+        {% endfor %}
+        {% for i in range(1, value+1): %}
+            <td>
+                {% if shift_day[i] %}
+                    {{ shift_day[i] }}
+                    <input type="checkbox" class="custom-checkbox" id="checkbox_{{ i }}" onclick="changeColor(this, {{ i }})">
+                    <script>
+                        window.onload = function() {
+                            const checkbox = document.getElementById('checkbox_{{ i }}');
+                            const td = checkbox.parentElement;
+                            if (checkbox.checked) {
+                                td.classList.add('checked');
+                            } else {
+                                td.classList.add('unchecked');
+                            }
+                        };
+                    </script>
+                {% endif %}
+            </td>
+        {% endfor %}
+    </tr>
+    
     <script>
-        function generateCalendar() {
-            const currentYear = 2024;
-            const currentMonth = 0;
-
-            document.getElementById('currentMonth').innerText = `${currentYear}年 ${currentMonth + 1}月`;
-
-            const daysContainer = document.getElementById('daysContainer');
-            daysContainer.innerHTML = '';
-
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-            const firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
-            
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayWrapper = document.createElement('div');
-                dayWrapper.className = 'day-wrapper';
-
-                const dayElement = document.createElement('div');
-                dayElement.className = 'day';
-                dayElement.innerText = day;
-                dayElement.addEventListener('click', () => toggleSelect(dayElement));
-
-                const weekdayElement = document.createElement('div');
-                weekdayElement.className = 'weekday';
-                weekdayElement.innerText = getWeekday(currentYear, currentMonth, day);
-
-                dayWrapper.appendChild(dayElement);
-                dayWrapper.appendChild(weekdayElement);
-
-                daysContainer.appendChild(dayWrapper);
+        function changeColor(checkbox, dayIndex) {
+            const td = checkbox.parentElement;
+            if (checkbox.checked) {
+                td.classList.remove('unchecked');
+                td.classList.add('checked');
+            } else {
+                td.classList.remove('checked');
+                td.classList.add('unchecked');
             }
+    
+            axios.post('/update_shift_status', { dayIndex: dayIndex, checked: checkbox.checked })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
-
-        function generateBoxes() {
-            const boxContainer = document.getElementById('boxContainer');
-            boxContainer.innerHTML = '';
-    
-            const totalDays = 31;
-            const boxesPerRow = 7; // 1週間の日数
-            const totalRows = Math.ceil(totalDays / boxesPerRow);
-    
-            for (let row = 0; row < totalRows; row++) {
-                const rowContainer = document.createElement('div');
-                rowContainer.className = 'box-row';
-    
-                for (let col = 1; col <= boxesPerRow; col++) {
-                    const day = row * boxesPerRow + col;
-                    if (day > totalDays) {
-                        break; // 31日を超えたら終了
-                    }
-    
-                    const box = document.createElement('div');
-                    box.className = 'box';
-                    box.setAttribute('data-day', day);
-                    box.addEventListener('click', () => changeBoxColor(box));
-                    rowContainer.appendChild(box);
-                }
-    
-                boxContainer.appendChild(rowContainer);
-            }
-        }
-
-        function generateNewBoxes() {
-            const newBoxContainer1 = document.getElementById('newBoxContainer1');
-            boxContainer.innerHTML = '';
-    
-            const totalDays = 31;
-            const boxesPerRow = 7; // 1週間の日数
-            const totalRows = Math.ceil(totalDays / boxesPerRow);
-    
-            for (let row = 0; row < totalRows; row++) {
-                const rowContainer = document.createElement('div');
-                rowContainer.className = 'box-row';
-    
-                for (let col = 1; col <= boxesPerRow; col++) {
-                    const day = row * boxesPerRow + col;
-                    if (day > totalDays) {
-                        break; // 31日を超えたら終了
-                    }
-    
-                    const box = document.createElement('div');
-                    box.className = 'box';
-                    box.setAttribute('data-day', day);
-                    box.addEventListener('click', () => changeBoxColor(box));
-                    rowContainer.appendChild(box);
-                }
-    
-                boxContainer.appendChild(rowContainer);
-            }
-        }
-        
-
-        function dayIsRequested(day) {
-            return day > 0 && day < day.length && day[day] !== "";
-        }
-        function toggleSelect(dayElement) {
-            dayElement.classList.toggle('selected');
-        }
-
-        function changeBoxColor(box) {
-            const colors = ['white','yellowgreen', 'black'];
-            const currentColor = box.style.backgroundColor;
-            const currentIndex = colors.indexOf(currentColor);
-            const nextIndex = (currentIndex + 1) % colors.length;
-            box.style.backgroundColor = colors[nextIndex];
-        }
-
-        function getWeekday(year, month, day) {
-            const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
-            const date = new Date(year, month, day);
-            const weekdayIndex = date.getDay();
-            return weekdays[weekdayIndex];
-        }
-
-        generateCalendar();
-        generateBoxes();
-        generateNewBoxes();
     </script>
+    
+    
 </body>
 </html>

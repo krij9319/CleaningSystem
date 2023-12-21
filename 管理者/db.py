@@ -296,4 +296,21 @@ def employee():
     sql = "SELECT * FROM employee where delete_flag != true"
     cursor.execute(sql)
     rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    return rows
+  
+def shift():
+    connection = get_connection()
+    cursor = connection.cursor()
+    sql = "SELECT employee_id, holiday_request FROM shift_request"
+    
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
     return rows
