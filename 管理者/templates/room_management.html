@@ -220,24 +220,46 @@
             document.getElementById("myModal").style.display = "none";
         });
 
+        // チェックボックスがクリックされたときに呼ばれる関数
+        function handleCheckboxClick(checkbox) {
+            // チェックボックスの状態に応じて色を変更
+            let tdElement = checkbox.closest('td');
+            
+            if (checkbox.checked) {
+                tdElement.style.backgroundColor = '#82DAFA'; // チェックが入ったときの背景色
+            } else {
+                tdElement.style.backgroundColor = ''; // チェックが外れたときは背景色をクリア
+            }
+            
+            if (checkbox.checked) {
+                tdElement.classList.add("selected");
+            } else {
+                tdElement.classList.remove("selected");
+                // モーダルから該当するチェックボックスの要素を削除
+                let existingDiv = document.querySelector(".modaldiv[data-id='" + checkbox.value + "']");
+                if (existingDiv) {
+                    existingDiv.remove();
+                }
+            }
+        }
+
         // チェックされたチェックボックスを表示する処理
         function displayCheckedCheckboxes() {
-            let checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
-            let modalText = "";
+            let selectedElements = document.querySelectorAll("td.selected");
             let modalContent = document.getElementById("modal-content");
-
-            checkboxes.forEach(function (checkbox) {
-            // チェックボックスの親要素であるtd要素を取得
-            let tdElement = checkbox.closest('td');
-
-            // すでに表示されているか確認
-            let existingLabel = modalContent.querySelector(".modaldiv[data-id='" + checkbox.value + "']");
-
-            if (!existingLabel && tdElement) {
+            let changeButtonDiv = document.getElementById("changeButton");
+            // モーダルの内容をクリア
+            modalContent.innerHTML = "";
+            modalContent.appendChild(changeButtonDiv);
+            
+            selectedElements.forEach(function (tdElement) {
+                let checkbox = tdElement.querySelector("input[type=checkbox]");
+                // チェックボックスのvalue属性から部屋の番号を取得
+                let roomNumber = checkbox.value;
                 let div = document.createElement("div");
                 div.className = "modaldiv";
-                div.setAttribute("data-id", checkbox.value);
-
+                div.setAttribute("data-id", roomNumber);
+                
                 if (tdElement.classList.contains("red")) {
                     div.style.backgroundColor = "#FF8F8F";
                 } else if (tdElement.classList.contains("yellow")) {
@@ -245,25 +267,12 @@
                 } else if (tdElement.classList.contains("green")) {
                     div.style.backgroundColor = "#82FA95";
                 }
-
-                div.innerHTML = "<p class='divtext'>" + checkbox.value + "</p>";
+                
+                div.innerHTML = "<p class='divtext'>" + roomNumber + "</p>";
                 modalContent.appendChild(div);
-            }
-        });
+            });
+            modalContent.appendChild(changeButtonDiv);
             document.getElementById("myModal").style.display = "block";
-            document.getElementById("modal-content").appendChild(document.getElementById("changeButton"));
-        }
-
-        // チェックボックスがクリックされたときに呼ばれる関数
-        function handleCheckboxClick(checkbox) {
-            // チェックボックスの状態に応じて色を変更
-            let label = checkbox.closest('td'); // チェックボックスに最も近い label 要素を取得
-            
-            if (checkbox.checked) {
-                label.style.backgroundColor = '#82DAFA'; // チェックが入ったときの背景色
-            } else {
-                label.style.backgroundColor = ''; // チェックが外れたときは背景色をクリア
-            }
         }
 
         function roomchange() {
