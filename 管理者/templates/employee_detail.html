@@ -13,24 +13,32 @@
     </header>  
     <h3>従業員詳細</h3>
         {% for data in user_details %}
+        <p>従業員ID<br>
+            {{ data[0] }}</p>
+        <p>名前<br>
+            {{ data[1] }}</p>
+        <p>メール<br>
+            {{ data[2] }}</p>
+        <p>評価<br>
+            5.0</p>
+        <p>インセンティブ<br>
+            今日:100円&nbsp;&nbsp;今月:2500円</p> 
+        
         <form action="{{url_for('emp_delete')}}" method="post">
-            <p>従業員ID<br>
-                {{ data[0] }}</p>
             <input type="hidden" name="id" value="{{ data[0] }}">
-            <p>名前<br>
-                {{ data[1] }}</p>
             <input type="hidden" name="name" value="{{ data[1] }}">    
-            <p>メール<br>
-                {{ data[2] }}</p>
             <input type="hidden" name="mail" value="{{ data[2] }}">
-            <p>評価<br>
-                5.0</p>
-            <p>インセンティブ<br>
-                今日:100円&nbsp;&nbsp;今月:2500円</p>    
-            <button class="a-btn"><a href="{{url_for('employee_all')}}" class="a-text">戻る</a></button>  
-            <button class="a-btn"><a href="#" class="a-text">編集</a></button>  
             <button type="submit" class="a-btn2">削除</button>
         </form>
+
+        <form action="{{url_for('employee_edit')}}" method="post">
+            <input type="hidden" name="name" value="{{data[1]}}">
+            <button type="submit" class="a-btn2">編集</button>
+        </form>
+        
         {% endfor %}
+        <form action="{{url_for('employee_all')}}" method="post">
+            <button type="submit" class="a-btn2">戻る</button>
+        </form>
 </body>
 </html>

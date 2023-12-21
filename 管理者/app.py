@@ -134,7 +134,6 @@ def con_regi():
     else:
         concat ='10:00~15:00'
     print(concat)
-    
         
     return render_template('confirm_register.html', id=id, name=name, email=email, concat=concat)
     
@@ -176,6 +175,19 @@ def room_management():
     return render_template('room_management.html', room=room, troom=troom, foroom=foroom, firoom=firoom, siroom=siroom,
                            seroom=seroom, eiroom=eiroom, niroom=niroom, teroom=teroom, elroom=elroom)
 
+@app.route('/room', methods=['POST'])
+def change_status():
+    button_value = request.form.get('changebtn')
+    checks = request.form.getlist('room')
+    print(button_value)
+    print(checks)
+    if button_value in ['0', '1', '2']:
+            for checkbox_id in checks:
+                params = (int(button_value), checkbox_id)
+                db.update_status(params)
+    
+    return redirect(url_for('room_management')) 
+
 @app.route('/shift')
 def shift_management():
     management = db.employee()
@@ -216,7 +228,7 @@ def shift_management():
     print(shift_day)
     return render_template('shift_management.html', shifts = management, request=shift, current_month=current_month, current_year=current_year, day_list=day_list, cw_list=cw_list, value=value, name=name, type=type, volume=volume, shift_day=shift_day, shift_vol=shift_vol)  
 
-@app.route('/employee')
+@app.route('/employee', methods=['GET', 'POST'])
 def employee_all():
     employee = db.all_employee()
     return render_template('employee_all.html', employees = employee)  
@@ -228,26 +240,48 @@ def employee_detail():
     user_detail = db.get_user_details(user_name)
     return render_template('employee_detail.html', user_details=user_detail)
 
-@app.route('/emped' , methods=['POST'])
+@app.route('/employee_edit' , methods=['GET' ,'POST'])
 def employee_edit():
-    id = request.form.get('employee_id')
+    name = request.form.get('name')
+    print(name)
+    emp = db.select_employee(name)
+    print(emp)
+    return render_template('employee_edit.html', emp_id=emp)
+
+@app.route('/emp_edit_confirm', methods=['GET', 'POST'])
+def emp_edit_confirm():
+    employee_id = request.form.get('emp')
+    name = request.form.get('name')
+    email = request.form.get('mail')
+    concat = request.form.get('concat')
+    if concat == 'A':
+        concat = '9:00~15:00'
+    else:
+        concat ='10:00~15:00'
+    print(concat)
+    return render_template('confirm_edit.html', employee_id=employee_id, name=name, email=email, concat=concat)
+
+@app.route('/emp_edit_update', methods=['GET', 'POST'])
+def emp_edit_update():
+    employee_id = request.form.get('employee_id')
     name = request.form.get('name')
     email = request.form.get('mail')
     concat = request.form.get('concat')
     
-    if name == '':
-        error = '名前が未入力です'
-        return render_template('employee_edit.html', error=error)
-    if email == '':
-        error = 'メールアドレスが未入力です'
-        return render_template('employee_edit.html', error=error)
-    if concat == '':
-        error = '業務時間が未選択です'
-        return render_template('employee_edit.html', error=error)
+    if concat == '9:00~15:00':
+        concat = 'A'
+    else:
+        concat = 'B'
     
-    return render_template('confirm_edit.html',id=id, name=name, mail=email, concat=concat)
-
- 
+    print(employee_id)
+    print(name)
+    print(email)
+    print(concat)
+    emp_update = db.update_employee(name, email, concat, employee_id)
+    print(emp_update)
+    message = '変更しました'
+    return redirect(url_for('employee_all'))
+    
 @app.route('/delete', methods=['POST'])
 def emp_delete():
     id = request.form.get('id')
@@ -265,6 +299,11 @@ def complete_delete():
     
     return redirect(url_for('employee_all')) 
 
+@app.route('/update_guestroom_all', methods=['GET','POST'])
+def update_guestroom_all():
+    comp = db.update_guestroom_all()
+    print(comp)
+    return redirect(url_for('room_management'))
   
 if __name__ == '__main__':
     app.run(debug=True)

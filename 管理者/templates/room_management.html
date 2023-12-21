@@ -27,18 +27,7 @@
         <button class="btn1">全て未清掃に変更</button>
         <button class="modal-open btn1" onclick="displayCheckedCheckboxes()">更新</button>
     </div>    
-    <div id="myModal">
-        <span id="closeModal">✖</span>
-        <div id="modal-content">
-            <p id="modalText"></p>
-            <div class="stbtn">
-                <button class="m">未清掃に変更</button>
-                <button class="s">清掃中に変更</button>
-                <button class="z">清掃済みに変更</button>
-            </div>
-        </div>    
-    </div>
-    <form id="checkboxForm">
+    <form id="checkboxForm" method="post" action="{{ url_for('change_status') }}">
         <p style="font-size: 20px" class="floor">2F</p>
         <table>
             <tbody>
@@ -46,7 +35,7 @@
                     {% if loop.index % 9 == 1 %}
                         <tr class="flex-row">
                     {% endif %}        
-                        <td id="{{room[1]}}"><label><input type="checkbox" name="room" value="{{room[0]}}" onclick="handleCheckboxClick(this)"><span>{{room[0]}}</span></label></td>   
+                        <td id="{{room[1]}}" class="button_room {% if room[1] == 0 %}red{% endif %} {% if room[1] == 1 %}yellow{% endif %} {% if room[1] == 2 %}green{% endif %}" onclick="changeColor(this)"><label><input type="checkbox" name="room" value="{{room[0]}}" onclick="handleCheckboxClick(this)"><span>{{room[0]}}</span></label></td>   
                     {% if loop.index % 9 == 0 or loop.last %} 
                         {% if loop.index == 13 %}
                             <td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td><td style="opacity: 0.0;"></td> <!-- 2行目の最後に見えない空セルを追加 -->
@@ -210,6 +199,17 @@
                 {% endfor %}          
             </tbody>
         </table>
+        <div id="myModal">
+            <span id="closeModal">✖</span>
+            <div id="modal-content">
+                <p id="modalText"></p>
+                <div class="stbtn">
+                    <button class="m" name="changebtn" value="0" onclick="roomchange()">未清掃に変更</button>
+                    <button class="s" name="changebtn" value="1" onclick="roomchange()">清掃中に変更</button>
+                    <button class="z" name="changebtn" value="2" onclick="roomchange()">清掃済みに変更</button>
+                </div>
+            </div>    
+        </div>
     </form>      
     <br>     
     <div style="text-align: center;">
@@ -244,21 +244,9 @@
                 label.style.backgroundColor = ''; // チェックが外れたときは背景色をクリア
             }
         }
-        let room = document.getElemetById("{{room[2]}}")
-        console.log(room)
-        switch (room) {
-            case 0:
-                room.style.backgroundColor = "red";
-                break;
-            case 1:
-                room.style.backgroundColor = "yellow";
-                break;
-            case 2:
-                room.style.backgroundColor = "green";
-                break;
-            default:
-                room.style.backgroundColor = "white";  // デフォルトの色（変更可能）
-                break;
+
+        function roomchange() {
+            document.getElementById("checkboxForm").submit();
         }
     </script>
 </body>

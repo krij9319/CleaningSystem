@@ -1,7 +1,7 @@
 import json
 from click import DateTime
 from flask import Flask, render_template, request, redirect,url_for,session
-import db,string,random,os,mail,datetime
+import db,string,random,os,mail,datetime,json
 from datetime import datetime as dt
 from datetime import timedelta
 from smtplib import SMTP
@@ -278,9 +278,28 @@ def insentive_view():
 def insentive_statictics():
     emp = session.get('emp')
     print(emp)
-    incentive_view = db.incentive_month(emp)
-    incentive_list = db.incentive_statictics(emp)
-    return render_template('insentive_statictics.html', session=session, view=incentive_view, monenies=incentive_list)
+    incentive_view = db.incentive_year(emp)
+    incentive_money = [db.incentive_statictics(emp)]
+    
+    formatted_data = [
+    [
+        (item[0], item[1].strftime('%Y-%m-%d')) 
+        for item in inner_list
+    ] 
+    for inner_list in incentive_money
+    ]
+
+    # formatted_data2 を生成する
+    formatted_data2 = [
+        (value, datetime.datetime.strptime(date_str, '%Y-%m-%d').strftime('%Y-%m-%d'))
+        for inner_list in formatted_data
+        for value, date_str in inner_list
+    ]
+
+    print(formatted_data2)
+    
+# Flask の render_template でデータを渡す
+    return render_template('insentive_statictics.html', session=session, view=incentive_view, money=json.dumps(formatted_data2))
 
 # ログアウト
 @app.route('/logout')
