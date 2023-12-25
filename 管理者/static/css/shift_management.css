@@ -47,4 +47,11 @@ header p {
     background-color: white; /* チェックが外れているときの背景色 */
 }
 
-
+.button2 {
+    font-size: 20px;
+    width: 150px;
+    padding: 10px;
+    background: linear-gradient(to bottom, #ffffff 0%,#c4c4c4 100%);
+    border: 1px solid #000;
+    transform: translate(100%,100%);
+}

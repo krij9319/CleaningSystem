@@ -5,67 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename='/css/shift_management.css')}}">
     <title>シフト管理</title>
+    <style>
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        }
+        th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        }
+        th {
+        background-color: #F2F2F2;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <a href="#" class="titlename">清掃管理システム</a>
-        <h3>ダイワロイネットホテル</h3>
+        <a href="{{url_for('menu')}}" class="titlename">清掃管理システム</a>
+        <p>ダイワロイネットホテル</p>
     </header>
+
     <h3 class="up">出勤日にチェックを入れて更新してください</h3>
     <h3 class="black">希望休には🔳が自動で入ります</h3>
-   <table border=1>
-    <tr>
-        <td>{{ current_year }}年{{ current_month }}月</td>
-        {% for i in range(value): %}
-            <th>{{ day_list[i] }}<br>{{ cw_list[i] }}</th>
-        {% endfor %}
-    </tr>
-    <tr>
-        {% for i in range(volume): %}
-            <td>{{ name[i] }}{{ type[i] }}</td>
-        {% endfor %}
-        {% for i in range(1, value+1): %}
-            <td>
-                {% if shift_day[i] %}
-                    {{ shift_day[i] }}
-                    <input type="checkbox" class="custom-checkbox" id="checkbox_{{ i }}" onclick="changeColor(this, {{ i }})">
-                    <script>
-                        window.onload = function() {
-                            const checkbox = document.getElementById('checkbox_{{ i }}');
-                            const td = checkbox.parentElement;
-                            if (checkbox.checked) {
-                                td.classList.add('checked');
-                            } else {
-                                td.classList.add('unchecked');
-                            }
-                        };
-                    </script>
-                {% endif %}
-            </td>
-        {% endfor %}
-    </tr>
+
+    <form action="{{url_for('shift_register')}}", method="post">
+        <input type="text" name="emp_id" placeholder="従業員ID">
+        <button type="submit">更新</button>
+        <div id="shiftTable"></div>
+        <input type="hidden" name="shift_work">
+    </form>
+
+    <form action="{{url_for('menu')}}" method="post">
+        <button type="submit" class="button2">戻る</button>
+    </form>
     
     <script>
-        function changeColor(checkbox, dayIndex) {
-            const td = checkbox.parentElement;
-            if (checkbox.checked) {
-                td.classList.remove('unchecked');
-                td.classList.add('checked');
-            } else {
-                td.classList.remove('checked');
-                td.classList.add('unchecked');
+        const employees = [
+            {% for name in name %}
+                {ID: "{{name[0]}}", name: "{{name[1]}}", type: "{{name[2]}}"},
+            {% endfor %}
+        ]
+    
+        function generateDateRange(startDate, endDate) {
+            const dates = [];
+            let currentDate = new Date(startDate.getTime());
+    
+            while (currentDate <= endDate) {
+                dates.push(new Date(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
             }
-    
-            axios.post('/update_shift_status', { dayIndex: dayIndex, checked: checkbox.checked })
-                .then(response => {
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            return dates;
         }
+    
+        function createShiftTable(employees, dates) {
+            const table = document.createElement('table');
+            table.setAttribute('border', '0'); // テーブルの border を 0 に設定
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+            table.appendChild(thead);
+            table.appendChild(tbody);
+    
+            const headerRow = document.createElement('tr');
+            const yearMonthCell = document.createElement('th');
+            yearMonthCell.textContent = `${dates[0].getFullYear()}-${String(dates[0].getMonth() + 1).padStart(2, '0')}`;
+            headerRow.appendChild(yearMonthCell);
+    
+            dates.forEach(date => {
+                const th = document.createElement('th');
+                th.textContent = String(date.getDate()).padStart(2, '0');
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+    
+            const selectedDates = []; // 選択された日付を保持するリスト
+
+            employees.forEach(employee => {
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const employeeName = employee.name.split(" ")[0];
+
+                nameCell.textContent = `${employee.name} (${employee.type})`;
+                nameCell.setAttribute('name', 'name');
+                nameCell.setAttribute('value', employeeName);
+
+                row.appendChild(nameCell);
+
+                dates.forEach(date => {
+                    const cell = document.createElement('td');
+                    const isCurrentMonth = date.getMonth() === dates[0].getMonth() && date.getFullYear() === dates[0].getFullYear();
+        
+                    if (isCurrentMonth) {
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                        checkbox.value = dateString;
+        
+                        checkbox.addEventListener('change', function() {
+                            if (checkbox.checked) {
+                                checkbox.parentElement.style.backgroundColor = 'lightgreen';
+                                const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                                selectedDates.push(dateString); // 日付を文字列に変換してリストに追加
+                            } else {
+                                checkbox.parentElement.style.backgroundColor = '';
+                                const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+                                const index = selectedDates.indexOf(dateString);
+                                if (index !== -1) {
+                                    selectedDates.splice(index, 1); // リストから削除
+                                }
+                            }
+                            console.log(selectedDates);
+                        });
+        
+                        cell.appendChild(checkbox);
+                    } else {
+                        cell.textContent = '';
+                        cell.style.display = 'none';
+                    }
+                    row.appendChild(cell);
+                });
+                tbody.appendChild(row);
+            });
+        
+            // createShiftTable関数内
+            const shiftWorkInput = document.querySelector('input[name="shift_work"]');
+
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // フォームの通常の送信をキャンセル
+                
+                shiftWorkInput.value = selectedDates.join(','); // 日付リストをカンマ区切りの文字列に変換して隠しフィールドに設定
+                form.submit(); // フォームを送信
+            });
+
+            document.getElementById('shiftTable').appendChild(table);
+        }
+    
+        const today = new Date();
+        const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1); // 次の月の最初の日を取得
+        const startDate = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1);
+        const endDate = new Date(nextMonth.getFullYear(), nextMonth.getMonth() + 1, 0);
+        const dateRange = generateDateRange(startDate, endDate);
+
+        createShiftTable(employees, dateRange);
     </script>
-    
-    
+
 </body>
 </html>
